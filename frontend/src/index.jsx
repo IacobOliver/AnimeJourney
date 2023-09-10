@@ -21,3 +21,9 @@ export default function App() {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
+
+//ICON SITE
+//https://fontawesome.com/icons/magnifying-glass?f=classic&s=solid
+
+//LOGO SITE
+//https://app.logo.com/dashboard/logo_6e0425c2-abc0-430f-959a-e9326506b76b/your-logo-files
