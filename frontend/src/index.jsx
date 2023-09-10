@@ -12,7 +12,7 @@ export default function App() {
     <BrowserRouter>
     <Layout/>
       <Routes>
-        <Route path="/" element={<Layout />}> </Route>
+        <Route path="/" element={<div className="text-white">HOME</div>}> </Route>
         <Route path="/explore" element={<Explore />}> </Route>
       </Routes>
     </BrowserRouter>
