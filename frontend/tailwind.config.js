@@ -6,9 +6,9 @@ export default {
       colors:{
         black_first_theme : "#050505",
         black_second_theme : "#171717",
-        light_purple_theme : "#301E67",
-        light_blue_theme : "#5B8FB9",
-        white_blue_theme : "#5B8FB9"
+        third_color_theme : "#ff5349",
+        forth_color_theme: "#5B8FB9",
+        fifth_color_theme : "#F2F3F5"
       },
       width:{
         "9,9/10" : "99%"
