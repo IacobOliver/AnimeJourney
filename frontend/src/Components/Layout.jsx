@@ -19,7 +19,7 @@ export default function Layout() {
 
                 <div className="bg-black_first_theme text-third_color_theme w-1/4 h-5/6 mx-3 rounded-2xl flex items-center">
                 <i class="fa-solid fa-magnifying-glass mx-4"></i>
-                <p className = "text-fifth_color_theme text-sm">Search anime...</p>
+                <input placeholder="Search anime..." className = "text-fifth_color_theme text-sm h-full bg-black_first_theme"></input>
                 </div>
 
             </div>
