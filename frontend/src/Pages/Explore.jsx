@@ -1,5 +1,8 @@
 import React from "react";
+import AnimeCarrousel from "../Components/AnimeCarrousel";
 
-export default function Layout(){
-    return <div>Explore</div>
+export default function Explore(){
+    return(
+        <AnimeCarrousel/>
+    )
 }

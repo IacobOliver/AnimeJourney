@@ -5,7 +5,7 @@ export default {
     extend: {
       colors:{
         black_first_theme : "#050505",
-        black_second_theme : "#171717",
+        black_second_theme : "#191919",
         third_color_theme : "#ff5349",
         forth_color_theme: "#FFA458",
         fifth_color_theme : "#F2F3F5"
