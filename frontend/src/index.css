@@ -2,14 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-.normalDiv {
-  width: 400px;
-  height: 400px;
-  background-color: red;
-}
-
 #root{
   background-color: #050505;
-  height: 100vh;
+  height: min-content;
+}
+
+body{
+  background-color: #050505;
 }
 

@@ -6,7 +6,7 @@ export default function Layout() {
             <div className="flex items-center w-9,9/10 h-16 rounded-xl bg-black_second_theme justify-between">
 
 
-                <div className="flex items-center h-full w-3/4">
+                <div className="flex items-center h-full w-3/4 py-2">
                 <div className="text-third_color_theme ml-7 mr-10">
                     <i
                         className="fas fa-bars text-tc2 text-2xl relative -mr-2 "
@@ -15,11 +15,13 @@ export default function Layout() {
                     ></i>
                 </div>
 
-                <div className="h-5/6">
+        
+                <div className="h-full py-1 mr-4">
                     <img className="h-full" src="\public\animejourney-low-resolution-logo-color-on-transparent-background.png" />
                 </div>
 
-                <div className="bg-black_first_theme text-third_color_theme w-2/5 h-5/6 mx-7 rounded-2xl flex items-center">
+            
+                <div className="bg-black_first_theme text-third_color_theme w-2/5 h-full mx-7 rounded-2xl flex items-center">
                     <i className="fa-solid fa-magnifying-glass mx-4 text-xl"></i>
                     <input placeholder="Search anime..." className="text-fifth_color_theme text-sm h-full bg-black_first_theme rounded-xl w-full focus:outline-none"></input>
                 </div>
