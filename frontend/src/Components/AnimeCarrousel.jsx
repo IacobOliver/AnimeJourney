@@ -13,7 +13,7 @@ export default function CarouselCustomNavigation() {
                 console.log(data);
                 setTopAnime(data.data);
 
-                let randomIndexes = extract10Anime(data.data)
+                let randomIndexes = giveRandomDistinctIndexes(data.data.length, 10)
                 let chosenAnime = []
 
                 for (let i = 0; i < randomIndexes.length; i++) {
@@ -32,7 +32,7 @@ export default function CarouselCustomNavigation() {
 
                             })
                     }, 1000)
-                    
+
                 }
 
             })
@@ -40,37 +40,25 @@ export default function CarouselCustomNavigation() {
     }, [])
 
 
-    const extract10Anime = (animeList) => {
-        let indexArray = []
-        while (indexArray.length < 10) {
-
-            let randomIndex = Math.floor(Math.random() * animeList.length)
-            if (!indexArray.includes(randomIndex)) {
-                indexArray.push(randomIndex);
-            }
-        }
-
-        return indexArray;
-    }
-
-
     const CarouselItem = ({ anime }) => {
-        let randomAnimeImage = anime.images.data[ Math.floor(Math.random() * anime.images.data.length)].jpg.large_image_url
-       
+        let imagesIndexes = giveRandomDistinctIndexes(anime.images.data.length, 2)
+        let firstAnimeImage = anime.images.data[imagesIndexes[0]].jpg.large_image_url
+        let secondtAnimeImage = anime.images.data[imagesIndexes[1]].jpg.large_image_url
+        console.log(anime.anime)
 
         return (
             <div className="h-full w-full grid grid-cols-10 ">
-                <div className="bg-black_second_theme w-full h-full col-span-4">
-                    {anime.anime.title}
+                <div className=" w-full h-full col-span-3 flex justify-center overflow-hidden">
+                    <div className="w-96 h-9,9/10 rounded-3xl bg-cover bg-center bg-brown-500" style={{ backgroundImage: `url(${firstAnimeImage})` }}> </div>
                 </div>
-                <div className="bg-gray-900 w-full h-full col-span-6 flex justify-center overflow-hidden">
-                    <div className="w-9,9/10 h-9,9/10 rounded-3xl overflow-hidden">
-                        <img
-                            src={randomAnimeImage}
-                            alt="image 3"
-                            className="rounded-3xl"
-                        />
-                    </div>
+
+                <div className="text-fifth_color_theme w-full h-full col-span-4  font-fantasy pt-4">
+                   <h1 className="text-3xl text-center " >{anime.anime.title}</h1> 
+                   <p className = "text-center mt-5 font-serif px-2 line-clamp-5">{anime.anime.synopsis}</p>
+                </div>
+
+                <div className="w-full h-full col-span-3 flex justify-center overflow-hidden">
+                    <div className="w-96 h-9,9/10 rounded-3xl bg-cover bg-center bg-brown-500" style={{ backgroundImage: `url(${secondtAnimeImage})` }}> </div>
                 </div>
 
             </div>
@@ -78,9 +66,27 @@ export default function CarouselCustomNavigation() {
         )
     }
 
+    const giveRandomDistinctIndexes = (length, howMany) => {
+        if (howMany > length) {
+            console.error("cant request more than length")
+            return;
+        }
+
+        let result = [];
+        while (howMany > 0) {
+            let randomNumber = Math.floor(Math.random() * length)
+            if (!result.includes(randomNumber)) {
+                result.push(randomNumber);
+                howMany--;
+            }
+        }
+
+        return result;
+    }
+
 
     return (
-        topAnime ? <div className="w-screen h-134 px-5 flex justify-center mt-3">
+        topAnime ? <div className="w-screen h-134 px-5 flex justify-center mt-4">
             <Carousel
                 className="rounded-xl w-9,9/10"
                 autoplay={true}
@@ -99,7 +105,28 @@ export default function CarouselCustomNavigation() {
                     </div>
                 )}
                 prevArrow={({ handlePrev }) => (
-                    <div></div>
+                    <IconButton
+                    variant="text"
+                    color="white"
+                    size="lg"
+                    onClick={handlePrev}
+                    className="!absolute top-2/4 left-4 -translate-y-2/4"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={2}
+                      stroke="currentColor"
+                      className="h-6 w-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                      />
+                    </svg>
+                  </IconButton>
                 )}
                 nextArrow={({ handleNext }) => (
                     <IconButton
@@ -129,7 +156,7 @@ export default function CarouselCustomNavigation() {
             >
 
 
-                {randomAnime ? randomAnime.map((anime, index) => <CarouselItem key={index} anime={anime}/> ) : <></>}
+                {randomAnime ? randomAnime.map((anime, index) => <CarouselItem key={index} anime={anime} />) : <></>}
 
                 {/* <CarouselItem key={index} anime={anime}/> */}
 

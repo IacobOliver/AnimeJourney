@@ -41,7 +41,18 @@ module.exports = withMT({
       },
       width:{
         "9,9/10" : "99%"
-      }
+      },
+      fontFamily: {
+        'sans': ['ui-sans-serif', 'system-ui', 'Helvetica', 'Arial', 'sans'],
+        'serif': ['ui-serif', 'Georgia', 'Times', 'serif'],
+        'mono': ['ui-monospace', 'SFMono-Regular', 'Monaco', 'monospace'],
+        'display': ['Oswald', 'sans'],
+        'body': ['"Open Sans"', 'sans'],
+        'thick': ['"Your-Thick-Font"', 'sans'], // Add your thick font here
+        'cursive': ['"Pacifico"', 'cursive'], // Add a cursive font
+        'fantasy': ['"Impact"', 'fantasy'], // Add a fantasy font
+        // Add more custom font families here as needed
+      },
       
     },
   },
