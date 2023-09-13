@@ -36,7 +36,8 @@ module.exports = withMT({
         fifth_color_theme : "#F2F3F5"
       },
       height: {
-        "134" : "36rem"
+        "134" : "36rem",
+        "9,9/10" : "99%"
       },
       width:{
         "9,9/10" : "99%"

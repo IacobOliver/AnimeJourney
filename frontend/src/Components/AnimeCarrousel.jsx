@@ -1,32 +1,86 @@
-import { Carousel} from "@material-tailwind/react";
+import { Carousel, IconButton } from "@material-tailwind/react";
+import { useEffect, useState } from "react"
 
 export default function CarouselCustomNavigation() {
+    const [topAnime, setTopAnime] = useState(null)
+    const [randomAnime, setRandomAnime] = useState(null)
 
 
-    const CarouselItem = ({imgSrc}) => {
-        return (
-          <div className = "h-full w-full grid grid-cols-10 ">
-            <div className="bg-black_second_theme w-full h-full col-span-4">
+    useEffect(() => {
+        fetch("https://api.jikan.moe/v4/top/anime")
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setTopAnime(data.data);
 
-            </div>
-            <div className="bg-gray-900 w-full h-full col-span-6 flex justify-center">
-                <div className="w-9,9/10 h-5/6 bg-yellow-100 mt-3 rounded-3xl">
-                {/* <img
-                    src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
-                    alt="image 3"
-                    className="max-width-full max-h-full object-cover rounded-3xl"
-                /> */}
-                </div>
-            </div>
+                let randomIndexes = extract10Anime(data.data)
+                let chosenAnime = []
 
-          </div>
+                for (let i = 0; i < randomIndexes.length; i++) {
+                    setTimeout(() => {
+                        fetch(`https://api.jikan.moe/v4/anime/${data.data[randomIndexes[i]].mal_id}/pictures`)
+                            .then(res => res.json())
+                            .then(animeImages => {
+                                chosenAnime.push({
+                                    anime: data.data[randomIndexes[i]],
+                                    images: animeImages
+                                })
+                                if (i == randomIndexes.length - 1) {
+                                    setRandomAnime(chosenAnime)
+                                }
+
+
+                            })
+                    }, 1000)
+                    
+                }
+
+            })
+
+    }, [])
+
+
+    const extract10Anime = (animeList) => {
+        let indexArray = []
+        while (indexArray.length < 10) {
+
+            let randomIndex = Math.floor(Math.random() * animeList.length)
+            if (!indexArray.includes(randomIndex)) {
+                indexArray.push(randomIndex);
+            }
+        }
+
+        return indexArray;
+    }
+
+
+    const CarouselItem = ({ anime }) => {
+        let randomAnimeImage = anime.images.data[ Math.floor(Math.random() * anime.images.data.length)].jpg.large_image_url
        
+
+        return (
+            <div className="h-full w-full grid grid-cols-10 ">
+                <div className="bg-black_second_theme w-full h-full col-span-4">
+                    {anime.anime.title}
+                </div>
+                <div className="bg-gray-900 w-full h-full col-span-6 flex justify-center overflow-hidden">
+                    <div className="w-9,9/10 h-9,9/10 rounded-3xl overflow-hidden">
+                        <img
+                            src={randomAnimeImage}
+                            alt="image 3"
+                            className="rounded-3xl"
+                        />
+                    </div>
+                </div>
+
+            </div>
+
         )
     }
 
 
     return (
-        <div className="w-screen h-134 px-5 flex justify-center mt-3">
+        topAnime ? <div className="w-screen h-134 px-5 flex justify-center mt-3">
             <Carousel
                 className="rounded-xl w-9,9/10"
                 autoplay={true}
@@ -48,32 +102,40 @@ export default function CarouselCustomNavigation() {
                     <div></div>
                 )}
                 nextArrow={({ handleNext }) => (
-                    <div></div>
+                    <IconButton
+                        variant="text"
+                        color="white"
+                        size="lg"
+                        onClick={handleNext}
+                        className="!absolute top-2/4 !right-4 -translate-y-2/4"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2}
+                            stroke="currentColor"
+                            className="h-6 w-6"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                            />
+                        </svg>
+                    </IconButton>
                 )}
-                
+
             >
-                 <CarouselItem imgSrc="\public\animejourney-low-resolution-logo-color-on-transparent-background.png"/>
-                
-                
-                {/* <img
-                    src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
-                    alt="image 2"
-                    className="h-full w-full object-cover"
-                />
-                <img
-                    src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
-                    alt="image 3"
-                    className="h-full w-full object-cover"
-                />
-                <img
-                    src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
-                    alt="image 3"
-                    className="h-full w-full object-cover"
-                /> */}
-               
+
+
+                {randomAnime ? randomAnime.map((anime, index) => <CarouselItem key={index} anime={anime}/> ) : <></>}
+
+                {/* <CarouselItem key={index} anime={anime}/> */}
+
 
             </Carousel>
-        </div>
+        </div> : null
     );
 }
 
