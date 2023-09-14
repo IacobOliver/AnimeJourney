@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 
 export default function CarouselCustomNavigation() {
     const [topAnime, setTopAnime] = useState(null)
-    const [randomAnime, setRandomAnime] = useState(null)
+    const [randomAnime, setRandomAnime] = useState([])
 
 
     useEffect(() => {
@@ -16,25 +16,41 @@ export default function CarouselCustomNavigation() {
                 let randomIndexes = giveRandomDistinctIndexes(data.data.length, 10)
                 let chosenAnime = []
 
-                for (let i = 0; i < randomIndexes.length; i++) {
-                    setTimeout(() => {
-                        fetch(`https://api.jikan.moe/v4/anime/${data.data[randomIndexes[i]].mal_id}/pictures`)
-                            .then(res => res.json())
-                            .then(animeImages => {
-                                chosenAnime.push({
-                                    anime: data.data[randomIndexes[i]],
-                                    images: animeImages
-                                })
-                                if (i == randomIndexes.length - 1) {
-                                    setRandomAnime(chosenAnime)
-                                }
 
+                const makeRequestWithDelay = (index) => {
+                    if (index < randomIndexes.length) {
+                      const mal_id = data.data[randomIndexes[index]].mal_id;
+                      fetch(`https://api.jikan.moe/v4/anime/${mal_id}/pictures`)
+                        .then((res) => res.json())
+                        .then((animeImages) => {
+                          // Update state with the new result
+                          setRandomAnime((prevResults) => [
+                            ...prevResults,
+                            {
+                              anime: data.data[randomIndexes[index]],
+                              images: animeImages,
+                            },
+                          ]);
 
-                            })
-                    }, 1000)
+                        // chosenAnime.push(  {
+                        //     anime: data.data[randomIndexes[index]],
+                        //     images: animeImages,
+                        //   },)
+            
+                          // Make the next request after a delay
+                          setTimeout(() => {
+                            makeRequestWithDelay(index + 1);
+                          }, 1000 / 3); // 3 requests per second
+                        });
+                     }
+                     //else{
+                    //     setRandomAnime(chosenAnime)
+                    // }
+                  };
 
-                }
-
+                  // Start making requests
+                   setRandomAnime([])
+                  makeRequestWithDelay(0);
             })
 
     }, [])
@@ -44,7 +60,6 @@ export default function CarouselCustomNavigation() {
         let imagesIndexes = giveRandomDistinctIndexes(anime.images.data.length, 2)
         let firstAnimeImage = anime.images.data[imagesIndexes[0]].jpg.large_image_url
         let secondtAnimeImage = anime.images.data[imagesIndexes[1]].jpg.large_image_url
-        console.log(anime.anime)
 
         return (
             <div className="h-full w-full grid grid-cols-10 ">
@@ -52,9 +67,22 @@ export default function CarouselCustomNavigation() {
                     <div className="w-96 h-9,9/10 rounded-3xl bg-cover bg-center bg-brown-500" style={{ backgroundImage: `url(${firstAnimeImage})` }}> </div>
                 </div>
 
-                <div className="text-fifth_color_theme w-full h-full col-span-4  font-fantasy pt-4">
-                   <h1 className="text-3xl text-center " >{anime.anime.title}</h1> 
+                <div className="text-fifth_color_theme w-full h-full col-span-4   pt-4">
+                   <h1 className="text-3xl text-center font-fantasy" >{anime.anime.title}</h1> 
+
                    <p className = "text-center mt-5 font-serif px-2 line-clamp-5">{anime.anime.synopsis}</p>
+
+                    <div className="flex justify-center">
+                   <button className="relative inline-flex items-center justify-center mr-2 overflow-hidden font-medium rounded-lg group 
+                                bg-gradient-to-br from-orange-500 to-red-600 group-hover:from-orange-500 group-hover:to-red-600
+                                 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 text-black_first_theme text-md ">
+                    <span className=" flex items-center relative px-5 py-1.5 transition-all ease-in duration-75 dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 bg-forth_color_theme">
+                       <p> TRAVEL </p>
+        
+                    </span>  
+                </button>
+                </div>
+                  
                 </div>
 
                 <div className="w-full h-full col-span-3 flex justify-center overflow-hidden">
@@ -155,11 +183,7 @@ export default function CarouselCustomNavigation() {
 
             >
 
-
-                {randomAnime ? randomAnime.map((anime, index) => <CarouselItem key={index} anime={anime} />) : <></>}
-
-                {/* <CarouselItem key={index} anime={anime}/> */}
-
+                {randomAnime != [] ? randomAnime.map((anime, index) => <CarouselItem key={index} anime={anime} />) : <></>}
 
             </Carousel>
         </div> : null
