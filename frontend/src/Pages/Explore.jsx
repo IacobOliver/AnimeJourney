@@ -18,7 +18,7 @@ export default function Explore(){
     return( 
     <div className="">
     <AnimeCarrousel/>
-    {/* <Loading/> */}
+    <Loading/>
     
 
     <div className="grid grid-cols-10">

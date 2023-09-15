@@ -140,7 +140,6 @@ export default function CarouselCustomNavigation() {
   }
 
   const giveRandomDistinctIndexes = (length, howMany) => {
-    console.log("length ", length)
     if (howMany > length) {
       console.error("cant request more than length")
       return;
