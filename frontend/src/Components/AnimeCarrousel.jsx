@@ -4,18 +4,17 @@ import { useEffect, useState } from "react"
 export default function CarouselCustomNavigation() {
   const [topAnime, setTopAnime] = useState(null)
   const [randomAnime, setRandomAnime] = useState([])
-
+  const [randomPage, setRandomPage] = useState( Math.ceil(Math.random() * (20-1) + 1 ))
 
   useEffect(() => {
-    fetch("https://api.jikan.moe/v4/top/anime")
+    fetch(`https://api.jikan.moe/v4/top/anime?page=${randomPage}`)
       .then(res => res.json())
       .then(data => {
         console.log(data);
         setTopAnime(data.data);
 
         let randomIndexes = giveRandomDistinctIndexes(data.data.length, 10)
-        let chosenAnime = []
-
+       // let chosenAnime = []
 
         const makeRequestWithDelay = (index) => {
           if (index < randomIndexes.length) {
@@ -40,27 +39,23 @@ export default function CarouselCustomNavigation() {
                 // Make the next request after a delay
                 setTimeout(() => {
                   makeRequestWithDelay(index + 1);
-                }, 1000 / 2); // 3 requests per second
+                }, 900); // 3 requests per second
               });
           }
           //else{
           //     setRandomAnime(chosenAnime)
           // }
         };
-
         // Start making requests
         setRandomAnime([])
         makeRequestWithDelay(0);
       })
-
   }, [])
-
 
   const CarouselItem = ({ anime }) => {
     let imagesIndexes = giveRandomDistinctIndexes(anime.images.data.length, 2)
     let firstAnimeImage = anime.images.data[imagesIndexes[0]].jpg.large_image_url
     let secondtAnimeImage = anime.images.data[imagesIndexes[1]].jpg.large_image_url
-
 
     const StartElement = () => {
       return (
@@ -145,6 +140,7 @@ export default function CarouselCustomNavigation() {
   }
 
   const giveRandomDistinctIndexes = (length, howMany) => {
+    console.log("length ", length)
     if (howMany > length) {
       console.error("cant request more than length")
       return;
