@@ -17,7 +17,7 @@ export default function Layout() {
 
         
                 <div className="h-full py-1 mr-4">
-                    <img className="h-full" src="\public\animejourney-low-resolution-logo-color-on-transparent-background.png" />
+                    <img draggable="false" className="h-full" src="\public\animejourney-low-resolution-logo-color-on-transparent-background.png" />
                 </div>
 
             
@@ -33,7 +33,7 @@ export default function Layout() {
                                 bg-gradient-to-br from-orange-500 to-red-600 group-hover:from-orange-500 group-hover:to-red-600
                                  hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 text-black_first_theme text-md ">
                     <span className=" flex items-center relative px-5 py-1.5 transition-all ease-in duration-75 dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 bg-forth_color_theme font-medium">
-                       <p> Sign in </p>
+                       <p aria-disabled="true"> Sign in </p>
                         <i className="fa-solid fa-arrow-right-to-bracket ml-2 text-xl"></i>
                     </span>  
                 </button>

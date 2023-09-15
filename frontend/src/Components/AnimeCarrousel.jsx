@@ -95,7 +95,7 @@ export default function CarouselCustomNavigation() {
         {pointDifference >= 0.5  ? <HalfStartElement/> : null} 
         </div>
 
-        <p className="text-gray-500 font-bold-">{anime.anime.score} from {anime.anime.members} reviews</p>
+        <p className="text-gray-500 font-semibold ml-3">{anime.anime.score} from {anime.anime.members} reviews</p>
 
       </div>)
     }
@@ -115,7 +115,7 @@ export default function CarouselCustomNavigation() {
 
           <RatingStarts rating={anime.anime.score}/>
 
-          <p className="text-center text-lg mt-8 font-serif px-2 line-clamp-5">{anime.anime.synopsis}</p>
+          <p  className="text-center text-lg mt-8 font-serif px-2 line-clamp-5">{anime.anime.synopsis}</p>
           </div>
 
 
@@ -239,26 +239,3 @@ export default function CarouselCustomNavigation() {
     </div> : null
   );
 }
-
-{/* <IconButton
-          variant="text"
-          color="white"
-          size="lg"
-          onClick={handleNext}
-          className="!absolute top-2/4 !right-4 -translate-y-2/4"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="h-6 w-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-            />
-          </svg>
-        </IconButton> */}
