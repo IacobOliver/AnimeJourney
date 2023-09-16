@@ -8,11 +8,11 @@ import {useState, useEffect} from "react"
 export default function Explore(){
     const [animeSeasons, setAnimeSeasons] = useState("null")
 
-    useEffect(() =>{
-        fetch("https://api.jikan.moe/v4/seasons/now?page=2")
-        .then(res => res.json())
-        .then(data => console.log(data))
-     },[])
+    // useEffect(() =>{
+    //     fetch("https://api.jikan.moe/v4/seasons/now?page=2")
+    //     .then(res => res.json())
+    //     .then(data => console.log(data))
+    //  },[])
 
 
     return( 
