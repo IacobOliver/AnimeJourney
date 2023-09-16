@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/topAnime")
+@RestController
+@RequestMapping("/topAnime")
 @RequiredArgsConstructor
 public class TopAnimeController {
     private final TopAnimeService topAnimeService;
@@ -21,9 +22,8 @@ public class TopAnimeController {
 
     @PostMapping("/addAnime")
     public void addTopAnime(@RequestBody List<TopAnime> topAnime) {
-        System.out.println("in controller");
         System.out.println(topAnime.size());
-        topAnime.stream().forEach(anime -> System.out.println(anime.toString()));
+
     }
 
 

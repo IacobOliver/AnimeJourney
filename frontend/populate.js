@@ -7,7 +7,7 @@ const populateTopAnime = () => {
 
     const getTopAnimePages = (index) => {
         if (index > 0) {
-            fetch(`https://api.jikan.moe/v4/top/anime?page=${1}`)
+            fetch(`https://api.jikan.moe/v4/top/anime?page=${index}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(anime.length)
@@ -27,6 +27,7 @@ const populateTopAnime = () => {
                 getTopAnimePages(index - 1)
             }, 1000)
         } else {
+            console.log("fetch")
             fetch("http://localhost:8080/topAnime/addAnime", {
                 method : "POST",
                 headers : {
@@ -36,6 +37,7 @@ const populateTopAnime = () => {
             })
             .then(res => res.json())
             .then(data => console.log(data))
+            .catch(err => console.error(err))
         }
     }
 

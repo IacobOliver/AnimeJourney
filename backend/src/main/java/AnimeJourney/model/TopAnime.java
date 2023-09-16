@@ -24,7 +24,7 @@ public class TopAnime {
     private long numberOfReviews;
 
     @Column(length = 10000)
-    private long animeDescription;
+    private String animeDescription;
 
     @ElementCollection
     private List<String> images;
