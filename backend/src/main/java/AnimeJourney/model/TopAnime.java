@@ -1,5 +1,6 @@
 package AnimeJourney.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +15,6 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-//@Proxy(lazy = false)
 public class TopAnime {
     @Id
     @GeneratedValue
@@ -28,6 +28,6 @@ public class TopAnime {
     @Column(length = 10000)
     private String animeDescription;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> images;
 }

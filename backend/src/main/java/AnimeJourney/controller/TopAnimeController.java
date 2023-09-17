@@ -17,8 +17,7 @@ public class TopAnimeController {
 
     @GetMapping("/getRandomAnime/{howMany}")
     public ResponseEntity<List<TopAnime>> getRandomAnime(@PathVariable int howMany){
-        System.out.println("in get");
-        return ResponseEntity.ok(topAnimeService.getRandomAnime());
+        return ResponseEntity.ok(topAnimeService.getRandomAnime(howMany));
     }
 
     @PostMapping("/addAnime")

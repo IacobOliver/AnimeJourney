@@ -1,6 +1,6 @@
 
 
-let numberOfPages = 2;
+let numberOfPages = 10;
 let anime = []
 
 
@@ -15,8 +15,8 @@ const populateTopAnime = () => {
             fetch(`https://api.jikan.moe/v4/top/anime?page=${numberOfPages}`)
                 .then(res => res.json())
                 .then(data => {
-                    console.log("NEW PAGE -------------------------------------------------------")
-                    
+                    console.log("NEW PAGE -------------------------------------------------------", numberOfPages)
+
                     const getImagesForAnime = (animeObjectIndex) =>{
                         if(animeObjectIndex >= 0){
                             fetch(`https://api.jikan.moe/v4/anime/${data.data[animeObjectIndex].mal_id}/pictures`)
