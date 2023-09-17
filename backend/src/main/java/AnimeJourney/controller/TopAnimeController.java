@@ -17,13 +17,13 @@ public class TopAnimeController {
 
     @GetMapping("/getRandomAnime/{howMany}")
     public ResponseEntity<List<TopAnime>> getRandomAnime(@PathVariable int howMany){
+        System.out.println("in get");
         return ResponseEntity.ok(topAnimeService.getRandomAnime());
     }
 
     @PostMapping("/addAnime")
-    public void addTopAnime(@RequestBody List<TopAnime> topAnime) {
-        System.out.println(topAnime.size());
-
+    public String addTopAnime(@RequestBody List<TopAnime> topAnime) {
+       return topAnimeService.postAnimeList(topAnime);
     }
 
 

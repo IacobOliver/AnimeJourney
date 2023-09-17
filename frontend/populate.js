@@ -1,31 +1,56 @@
 
 
-let numberOfPages = 1;
+let numberOfPages = 2;
 let anime = []
+
+
+const extractImages = (imagesObject) =>{
+   return imagesObject.data.map( item => item.jpg.large_image_url)
+}
 
 const populateTopAnime = () => {
 
-    const getTopAnimePages = (index) => {
-        if (index > 0) {
-            fetch(`https://api.jikan.moe/v4/top/anime?page=${index}`)
+    const getTopAnimePages = (numberOfPages) => {
+        if (numberOfPages > 0) {
+            fetch(`https://api.jikan.moe/v4/top/anime?page=${numberOfPages}`)
                 .then(res => res.json())
                 .then(data => {
-                    console.log(anime.length)
+                    console.log("NEW PAGE -------------------------------------------------------")
                     
-                    data.data.map( item => anime.push({
-                        animeId : item.mal_id,
-                        name : item.title,
-                        rating : item.score,
-                        numberOfReviews : item.scored_by,
-                        animeDescription : item.synopsis,
-                        images : null
-                    }))
+                    const getImagesForAnime = (animeObjectIndex) =>{
+                        if(animeObjectIndex >= 0){
+                            fetch(`https://api.jikan.moe/v4/anime/${data.data[animeObjectIndex].mal_id}/pictures`)
+                            .then(res => res.json())
+                            .then(animeImages =>{
+                                console.log(extractImages(animeImages), " from anime " , data.data[animeObjectIndex].title)
+                                anime.push({
+                                    animeId : data.data[animeObjectIndex].mal_id,
+                                    name : data.data[animeObjectIndex].title,
+                                    rating : data.data[animeObjectIndex].score,
+                                    numberOfReviews : data.data[animeObjectIndex].scored_by,
+                                    animeDescription : data.data[animeObjectIndex].synopsis,
+                                    images : extractImages(animeImages)
+                                })
+                            })
+                            .catch(err => comsole.error(err))
+
+                            setTimeout(() =>{
+                                getImagesForAnime(animeObjectIndex -1)
+                            },1000)
+
+                        }else{
+                            setTimeout(() => {
+                                getTopAnimePages(numberOfPages - 1)
+                            }, 1000)
+                        }
+                    }
+
+                    getImagesForAnime(data.data.length -1)
+
                 })
                 .catch(err => console.error(err))
 
-            setTimeout(() => {
-                getTopAnimePages(index - 1)
-            }, 1000)
+           
         } else {
             console.log("fetch")
             fetch("http://localhost:8080/topAnime/addAnime", {
