@@ -22,7 +22,7 @@ const populateTopAnime = () => {
                             fetch(`https://api.jikan.moe/v4/anime/${data.data[animeObjectIndex].mal_id}/pictures`)
                             .then(res => res.json())
                             .then(animeImages =>{
-                                console.log(extractImages(animeImages), " from anime " , data.data[animeObjectIndex].title)
+                                console.log(extractImages(animeImages), " from anime " , data.data[animeObjectIndex].title, " " ,data.data[animeObjectIndex].rank )
                                 anime.push({
                                     animeId : data.data[animeObjectIndex].mal_id,
                                     name : data.data[animeObjectIndex].title,

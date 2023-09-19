@@ -15,11 +15,13 @@ public class TopAnimeController {
     private final TopAnimeService topAnimeService;
 
 
+@CrossOrigin("http://localhost:5173/")
     @GetMapping("/getRandomAnime/{howMany}")
     public ResponseEntity<List<TopAnime>> getRandomAnime(@PathVariable int howMany){
         return ResponseEntity.ok(topAnimeService.getRandomAnime(howMany));
     }
 
+    @CrossOrigin("http://localhost:5173/")
     @PostMapping("/addAnime")
     public String addTopAnime(@RequestBody List<TopAnime> topAnime) {
        return topAnimeService.postAnimeList(topAnime);

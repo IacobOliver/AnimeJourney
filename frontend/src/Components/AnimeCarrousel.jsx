@@ -6,95 +6,59 @@ export default function CarouselCustomNavigation() {
   const [randomAnime, setRandomAnime] = useState([])
   const [randomPage, setRandomPage] = useState( Math.ceil(Math.random() * (20-1) + 1 ))
 
-  useEffect(() => {
-    fetch(`https://api.jikan.moe/v4/top/anime?page=${randomPage}`)
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        setTopAnime(data.data);
+  useEffect(() =>{
+    fetch("http://localhost:8080/topAnime/getRandomAnime/10")
+    .then(res => res.json())
+    .then(data => {
+      console.log("RANDOM ANIME: ",data)
+      setTopAnime(data);
+    })
+  },[])
 
-        let randomIndexes = giveRandomDistinctIndexes(data.data.length, 10)
-       // let chosenAnime = []
+  const StartElement = () => {
+    return (
+      <div className="h-5 w-5 relative ">
+        <div className="h-full w-full flex items-center justify-center">
+          <i className="fa-solid fa-star"></i>
+        </div>
+      </div>
+    )
+  }
+ 
+  const HalfStartElement = () => {
+    return (
+      <div className="h-5 w-5 relative ">
+        <div className="h-full w-full flex items-center justify-center"> <i className="fa-solid fa-star"></i></div>
+        <div className="z-10 w-1/2 h-full right-0 top-0 absolute bg-black_first_theme"></div>
+      </div>
+    )
+  }
 
-        const makeRequestWithDelay = (index) => {
-          if (index < randomIndexes.length) {
-            const mal_id = data.data[randomIndexes[index]].mal_id;
-            fetch(`https://api.jikan.moe/v4/anime/${mal_id}/pictures`)
-              .then((res) => res.json())
-              .then((animeImages) => {
-                // Update state with the new result
-                setRandomAnime((prevResults) => [
-                  ...prevResults,
-                  {
-                    anime: data.data[randomIndexes[index]],
-                    images: animeImages,
-                  },
-                ]);
+  const RatingStarts = ({ rating, members }) => {
+    let ratingArray = []
+    for (let i = 1; i <= Math.floor(rating); i++) {
+      ratingArray.push(i)
+    }
+    let pointDifference = (ratingArray.length - rating) * (-1)
+    //console.log(Math.floor(pointDifference * 100))
 
-                // chosenAnime.push(  {
-                //     anime: data.data[randomIndexes[index]],
-                //     images: animeImages,
-                //   },)
+    return (<div className="flex items-center justify-center my-1">
 
-                // Make the next request after a delay
-                setTimeout(() => {
-                  makeRequestWithDelay(index + 1);
-                }, 900); // 3 requests per second
-              });
-          }
-          //else{
-          //     setRandomAnime(chosenAnime)
-          // }
-        };
-        // Start making requests
-        setRandomAnime([])
-        makeRequestWithDelay(0);
-      })
-  }, [])
+      <div className="text-forth_color_theme flex">
+      {ratingArray.map(item => <StartElement key={item}/>)}
+      {pointDifference >= 0.5  ? <HalfStartElement/> : null} 
+      </div>
+
+      <p className="text-gray-500 font-semibold ml-3">{rating} from {members} reviews</p>
+
+    </div>)
+  }
 
   const CarouselItem = ({ anime }) => {
-    let imagesIndexes = giveRandomDistinctIndexes(anime.images.data.length, 2)
-    let firstAnimeImage = anime.images.data[imagesIndexes[0]].jpg.large_image_url
-    let secondtAnimeImage = anime.images.data[imagesIndexes[1]].jpg.large_image_url
+    let imagesIndexes = giveRandomDistinctIndexes(anime.images.length, 2)
+    let firstAnimeImage = anime.images[imagesIndexes[0]]
+    let secondtAnimeImage = anime.images[imagesIndexes[1]]
 
-    const StartElement = () => {
-      return (
-        <div className="h-5 w-5 relative ">
-          <div className="h-full w-full flex items-center justify-center">
-            <i className="fa-solid fa-star"></i>
-          </div>
-        </div>
-      )
-    }
-
-    const HalfStartElement = () => {
-      return (
-        <div className="h-5 w-5 relative ">
-          <div className="h-full w-full flex items-center justify-center"> <i className="fa-solid fa-star"></i></div>
-          <div className="z-10 w-1/2 h-full right-0 top-0 absolute bg-black_first_theme"></div>
-        </div>
-      )
-    }
-
-    const RatingStarts = ({ rating }) => {
-      let ratingArray = []
-      for (let i = 1; i <= Math.floor(rating); i++) {
-        ratingArray.push(i)
-      }
-      let pointDifference = (ratingArray.length - rating) * (-1)
-      //console.log(Math.floor(pointDifference * 100))
-
-      return (<div className="flex items-center justify-center my-1">
-
-        <div className="text-forth_color_theme flex">
-        {ratingArray.map(item => <StartElement key={item}/>)}
-        {pointDifference >= 0.5  ? <HalfStartElement/> : null} 
-        </div>
-
-        <p className="text-gray-500 font-semibold ml-3">{anime.anime.score} from {anime.anime.members} reviews</p>
-
-      </div>)
-    }
 
     return (
       <div className="h-full w-full grid grid-cols-10 ">
@@ -107,11 +71,11 @@ export default function CarouselCustomNavigation() {
         {/* Center */}
         <div className="text-fifth_color_theme w-full h-full col-span-4 pt-4 flex flex-col justify-around ">
           <div>
-          <h1 className="titleSize text-center font-fantasy" >{anime.anime.title}</h1>
+          <h1 className="titleSize text-center font-fantasy line-clamp-3" >{anime.name}</h1>
 
-          <RatingStarts rating={anime.anime.score}/>
+          <RatingStarts rating={anime.rating} members={anime.numberOfReviews}/>
 
-          <p  className="text-center text-lg mt-8 font-serif px-2 line-clamp-5">{anime.anime.synopsis}</p>
+          <p  className="text-center text-lg mt-8 font-serif px-2 line-clamp-5">{anime.animeDescription}</p>
           </div>
 
 
@@ -238,7 +202,8 @@ export default function CarouselCustomNavigation() {
 
       >
 
-        {randomAnime != [] ? randomAnime.map((anime, index) => <CarouselItem key={index} anime={anime} />) : <></>}
+        {/* {randomAnime != [] ? randomAnime.map((anime, index) => <CarouselItem key={index} anime={anime} />) : <></>} */}
+        {topAnime ? topAnime.map( (item, index) =><CarouselItem key={index} anime={item} />) : <></> }
 
       </Carousel>
     </div> : null

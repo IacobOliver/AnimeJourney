@@ -22,7 +22,7 @@ public class TopAnimeService {
         Random random = new Random();
 
         while(howMany > 0){
-            int randomNumber = random.nextInt(20) + 1;
+            int randomNumber = random.nextInt(250) + 1;
             if(!indexToken.contains(randomNumber)){
                 System.out.println(randomNumber);
                 indexToken.add((long) randomNumber);
