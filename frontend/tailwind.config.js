@@ -30,14 +30,15 @@ module.exports = withMT({
     extend: {
       colors:{
         black_first_theme : "#050505",
-        black_second_theme : "#191919",
+        black_second_theme : "#292929",
         third_color_theme : "#ff5349",
         forth_color_theme: "#FFA458",
-        fifth_color_theme : "#F2F3F5"
+        fifth_color_theme : "#E2E5DE"
       },
       height: {
         "134" : "36rem",
-        "9,9/10" : "99%"
+        "9,9/10" : "99%",
+        "9/10" : "90%"
       },
       width:{
         "9,9/10" : "99%"

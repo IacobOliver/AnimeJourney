@@ -1,10 +1,9 @@
 import { Carousel, IconButton } from "@material-tailwind/react";
 import { useEffect, useState } from "react"
+import Loading from "./Loading";
 
 export default function CarouselCustomNavigation() {
   const [topAnime, setTopAnime] = useState(null)
-  const [randomAnime, setRandomAnime] = useState([])
-  const [randomPage, setRandomPage] = useState( Math.ceil(Math.random() * (20-1) + 1 ))
 
   useEffect(() =>{
     fetch("http://localhost:8080/topAnime/getRandomAnime/10")
@@ -202,8 +201,7 @@ export default function CarouselCustomNavigation() {
 
       >
 
-        {/* {randomAnime != [] ? randomAnime.map((anime, index) => <CarouselItem key={index} anime={anime} />) : <></>} */}
-        {topAnime ? topAnime.map( (item, index) =><CarouselItem key={index} anime={item} />) : <></> }
+        {topAnime ? topAnime.map( (item, index) =><CarouselItem key={index} anime={item} />) : <Loading/> }
 
       </Carousel>
     </div> : null
