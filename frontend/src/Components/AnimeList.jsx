@@ -18,6 +18,7 @@ export default function AnimeList({animes}){
     }
 
     return(<div className="text-white col-span-7 h-auto p-3">
+        <div className="bg-white h-12"></div>
         <div className="h-full w-full grid grid-cols-6 gap-4">
 
         {animes?.map((anime, index) => <AnimeCard key={index} image={anime.images.jpg.image_url} title={anime.title}/>)}
