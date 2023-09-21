@@ -1,10 +1,10 @@
 import React from "react";
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 export default function AnimeList() {
     const [animeNewSeasons, setAnimeNewSeasons] = useState(null)
-    // const [refreshForNewSeasons, setRefreshForNewSeasons] = useState(0)
-    const [newSeasonPage, setNewSeasonPage] = useState(0);
+    const [newSeasonPage, setNewSeasonPage] = useState(0.1);
+    const [[filter, filterValue], setFilter] = useState([null,"All"])
 
     useEffect(() => {
         fetch(`http://localhost:8080/newAnimeSeasons/getAnime`, {
@@ -15,7 +15,8 @@ export default function AnimeList() {
             body: JSON.stringify({
                 page: newSeasonPage,
                 numberOfItems: 12,
-                filter: "none"
+                filter: filter,
+                filterValue : filterValue
             })
         })
             .then(res => res.json())
@@ -43,16 +44,44 @@ export default function AnimeList() {
         )
     }
 
+    const FilterButton = ({name}) =>{
+        return <button onClick={(e) => selectFilter(e.target.textContent)} className={`${filterValue == name ? "bg-black_second_theme text-white" : ""} text-md text-gray-500 font-fantasy tracking-wide p-3 mx-1 rounded-lg`}>{name}</button>
+    } 
+
+    const selectFilter = (fValue) =>{
+        console.log(Math.random())
+        if(fValue == "Special"){
+            setFilter(["anime_type", "Special"])
+            setNewSeasonPage(Math.random())
+        }else if(fValue == "ONA"){
+            setFilter(["anime_type", "ONA"])
+            setNewSeasonPage(Math.random())
+        }else if(fValue == "TV"){
+            setFilter(["anime_type", "TV"])
+            setNewSeasonPage(Math.random())
+        }else if(fValue == "Movie"){
+            setFilter(["anime_type", "Movie"])
+            setNewSeasonPage(Math.random())
+        }else if(fValue == "Most Recent"){
+            setFilter(["aired_from", "Most Recent"])
+            setNewSeasonPage(Math.random())
+        }else if(fValue == "All"){
+            setFilter([null, "All"])
+            setNewSeasonPage(Math.random())
+        }
+        console.log(filter, " ", filterValue)
+    }
+
+    
 
     const nextPage = (e) => {
-        console.log(animeNewSeasons.length)
         if (animeNewSeasons.length < 12) {
             return
         }
         setNewSeasonPage(newSeasonPage + 1);
     }
 
-    const previosPage = () => {
+    const previosPage = (e) => {
         if (newSeasonPage == 0) {
             console.log("no room ");
             return
@@ -67,17 +96,17 @@ export default function AnimeList() {
                 <p className="text-2xl text-fifth_color_theme font-fantasy tracking-wide p-4">New Anime Seasons</p>
 
                 <i onClick={previosPage} className="fa-solid fa-angle-left text-2xl cursor-pointer"></i>
-                <p className="p-4 text-lg font-fantasy">{newSeasonPage + 1}</p>
+                <p className="p-4 text-lg font-fantasy">{Math.ceil(newSeasonPage)}</p>
                 <i onClick={nextPage} className="fa-solid fa-angle-right text-2xl  cursor-pointer"></i>
                 </div>
 
                 <div className="flex items-center mr-5">
-                <button className="text-md text-gray-500 font-fantasy tracking-wide p-4 focus:text-gray-300">All</button>
-                <button className="text-md text-gray-500 font-fantasy tracking-wide p-4 focus:text-gray-300">Special</button>
-                <button className="text-md text-gray-500 font-fantasy tracking-wide p-4 focus:text-gray-300">ONA</button>
-                <button className="text-md text-gray-500 font-fantasy tracking-wide p-4 focus:text-gray-300">TV</button>
-                <button className="text-md text-gray-500 font-fantasy tracking-wide p-4 focus:text-gray-300">Movie</button>
-                <button className="text-md text-gray-500 font-fantasy tracking-wide p-4 focus:text-gray-300">Most Recent</button>
+                <FilterButton name="All"/>
+                <FilterButton name="Special"/>
+                <FilterButton name="ONA"/>
+                <FilterButton name="TV"/>
+                <FilterButton name="Movie"/>
+                <FilterButton name="Most Recent"/>
                 </div>
             </div>
 

@@ -12,4 +12,7 @@ public interface NewAnimeSeasonRepository extends JpaRepository<NewAnimeSeason, 
     @Query("SELECT a FROM NewAnimeSeason a")
     List<NewAnimeSeason> getSomeAnime(Pageable pageable);
 
+    @Query("SELECT a FROM NewAnimeSeason a " +
+            "WHERE :filter = :value")
+    List<NewAnimeSeason> getFilteredAnime(Pageable pageable, String filter, String value);
 }
