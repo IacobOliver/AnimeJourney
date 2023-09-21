@@ -24,7 +24,6 @@ public class TopAnimeService {
         while(howMany > 0){
             int randomNumber = random.nextInt(250) + 1;
             if(!indexToken.contains(randomNumber)){
-                System.out.println(randomNumber);
                 indexToken.add((long) randomNumber);
                 howMany--;
             }

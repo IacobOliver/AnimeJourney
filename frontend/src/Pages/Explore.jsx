@@ -7,15 +7,27 @@ import {useState, useEffect} from "react"
 
 export default function Explore(){
     const [animeNewSeasons, setAnimeNewSeasons] = useState(null)
+    // const [refreshForNewSeasons, setRefreshForNewSeasons] = useState(0)
+    const [newSeasonPage, setNewSeasonPage] = useState(0);
 
     useEffect(() =>{
-        fetch(`https://api.jikan.moe/v4/seasons/now?page=1`)
+        fetch(`http://localhost:8080/newAnimeSeasons/getAnime`, {
+            method : "POST",
+            headers : {
+                "Content-Type" : "application/json",
+            },
+            body: JSON.stringify({
+                page : newSeasonPage,
+                numberOfItems : 12,
+                filter : "none"
+            })
+        })
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            setAnimeNewSeasons(data.data)
+            setAnimeNewSeasons(data)
         })
-     },[])
+     },[newSeasonPage])
 
 
     return( 
@@ -25,7 +37,7 @@ export default function Explore(){
     
 
     <div className="grid grid-cols-10">
-     {animeNewSeasons? <AnimeList animes={animeNewSeasons}/> : <Loading/>}
+     {animeNewSeasons? <AnimeList animes={animeNewSeasons} page={newSeasonPage} setPage={setNewSeasonPage}/> : <Loading/>}
     <AnimeListVertical/>
     </div>
 

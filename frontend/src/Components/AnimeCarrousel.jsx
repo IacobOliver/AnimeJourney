@@ -114,8 +114,6 @@ export default function CarouselCustomNavigation() {
 
     let result = []
     if(howMany == 2 && howMany > length){
-      console.log("length ", length)
-      console.log("how manu",  howMany)
        result = [0,0];
     }else{
       while (howMany > 0) {
