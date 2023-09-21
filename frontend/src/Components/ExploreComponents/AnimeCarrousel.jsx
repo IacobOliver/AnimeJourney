@@ -1,6 +1,6 @@
 import { Carousel, IconButton } from "@material-tailwind/react";
 import { useEffect, useState } from "react"
-import Loading from "./Loading";
+import Loading from "../Loading";
 
 export default function CarouselCustomNavigation() {
   const [topAnime, setTopAnime] = useState(null)
@@ -60,7 +60,7 @@ export default function CarouselCustomNavigation() {
 
 
     return (
-      <div className="h-full w-full grid grid-cols-10 ">
+      <div className="h-full w-full grid grid-cols-10">
         {/* Left Image */}
         <div className=" w-full h-full col-span-3 flex justify-center overflow-hidden">
           <div className="w-96 h-9,9/10 rounded-3xl bg-cover bg-center bg-brown-500" style={{ backgroundImage: `url(${firstAnimeImage})` }}> </div>
