@@ -6,6 +6,7 @@ import AnimeJourney.repository.NewAnimeSeasonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,11 +23,27 @@ public class NewAnimeSeasonService {
 
     public List<NewAnimeSeason> getAnimeForPagination(PaginationResponse paginationResponse){
         Pageable pageable = PageRequest.of(paginationResponse.getPage(), paginationResponse.getNumberOfItems());
-        return newAnimeSeasonRepository.getSomeAnime(pageable);
+        //All
+        if(paginationResponse.getFilter().equals("")){
+            return newAnimeSeasonRepository.getSomeAnime(pageable);
+        }
+
+        if(paginationResponse.getFilter().equals("anime_type")){
+            return newAnimeSeasonRepository.getFilteredAnime(pageable, paginationResponse.getFilterValue());
+        }
+
+        if(paginationResponse.getFilter().equals("aired_from")){
+            Pageable pageable1 = PageRequest.of(paginationResponse.getPage(), paginationResponse.getNumberOfItems(), Sort.by("airedFrom"));
+            return newAnimeSeasonRepository.getSomeAnime(pageable1);
+        }
+
+
+        return null;
+
     }
 
-    public List<NewAnimeSeason> getFilteredAnime(PaginationResponse parameters) {
-        Pageable pageable = PageRequest.of(parameters.getPage(), parameters.getNumberOfItems());
-        return newAnimeSeasonRepository.getFilteredAnime(pageable, parameters.getFilter(), parameters.getFilterValue());
-    }
+//    public List<NewAnimeSeason> getFilteredAnime(PaginationResponse parameters) {
+//        Pageable pageable = PageRequest.of(parameters.getPage(), parameters.getNumberOfItems());
+//        return newAnimeSeasonRepository.getFilteredAnime(pageable, parameters.getFilter(), parameters.getFilterValue());
+//    }
 }

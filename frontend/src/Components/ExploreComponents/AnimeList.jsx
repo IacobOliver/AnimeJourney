@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react"
 export default function AnimeList() {
     const [animeNewSeasons, setAnimeNewSeasons] = useState(null)
     const [newSeasonPage, setNewSeasonPage] = useState(0.1);
-    const [[filter, filterValue], setFilter] = useState([null,"All"])
+    const [[filter, filterValue], setFilter] = useState(["","All"])
 
     useEffect(() => {
         fetch(`http://localhost:8080/newAnimeSeasons/getAnime`, {
@@ -66,7 +66,7 @@ export default function AnimeList() {
             setFilter(["aired_from", "Most Recent"])
             setNewSeasonPage(Math.random())
         }else if(fValue == "All"){
-            setFilter([null, "All"])
+            setFilter(["", "All"])
             setNewSeasonPage(Math.random())
         }
         console.log(filter, " ", filterValue)
