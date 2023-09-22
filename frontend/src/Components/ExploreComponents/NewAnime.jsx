@@ -21,7 +21,6 @@ export default function AnimeList() {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 setAnimeNewSeasons(data)
             })
     }, [newSeasonPage])
@@ -49,7 +48,6 @@ export default function AnimeList() {
     } 
 
     const selectFilter = (fValue) =>{
-        console.log(Math.random())
         if(fValue == "Special"){
             setFilter(["anime_type", "Special"])
             setNewSeasonPage(Math.random())
@@ -69,7 +67,6 @@ export default function AnimeList() {
             setFilter(["", "All"])
             setNewSeasonPage(Math.random())
         }
-        console.log(filter, " ", filterValue)
     }
 
     
@@ -82,7 +79,7 @@ export default function AnimeList() {
     }
 
     const previosPage = (e) => {
-        if (newSeasonPage == 0) {
+        if (Math.floor(newSeasonPage) == 0) {
             console.log("no room ");
             return
         }

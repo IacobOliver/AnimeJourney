@@ -41,9 +41,5 @@ public class NewAnimeSeasonService {
         return null;
 
     }
-
-//    public List<NewAnimeSeason> getFilteredAnime(PaginationResponse parameters) {
-//        Pageable pageable = PageRequest.of(parameters.getPage(), parameters.getNumberOfItems());
-//        return newAnimeSeasonRepository.getFilteredAnime(pageable, parameters.getFilter(), parameters.getFilterValue());
-//    }
+    
 }

@@ -1,6 +1,7 @@
 import { Carousel, IconButton } from "@material-tailwind/react";
 import { useEffect, useState } from "react"
 import Loading from "../Loading";
+import { Utils } from "../Utils";
 
 export default function CarouselCustomNavigation() {
   const [topAnime, setTopAnime] = useState(null)
@@ -54,7 +55,7 @@ export default function CarouselCustomNavigation() {
   }
 
   const CarouselItem = ({ anime }) => {
-    let imagesIndexes = giveRandomDistinctIndexes(anime.images.length, 2)
+    let imagesIndexes = Utils.giveRandomDistinctIndexes(anime.images.length, 2)
     let firstAnimeImage = anime.images[imagesIndexes[0]]
     let secondtAnimeImage = anime.images[imagesIndexes[1]]
 
@@ -103,30 +104,30 @@ export default function CarouselCustomNavigation() {
     )
   }
 
-  const giveRandomDistinctIndexes = (length, howMany) => {
+  // const giveRandomDistinctIndexes = (length, howMany) => {
    
-    if (howMany > length && howMany != 2) {
-      console.error("cant request more than length")
-      console.log("length ", length)
-      console.log("how manu",  howMany)
-      return;
-    }
+  //   if (howMany > length && howMany != 2) {
+  //     console.error("cant request more than length")
+  //     console.log("length ", length)
+  //     console.log("how manu",  howMany)
+  //     return;
+  //   }
 
-    let result = []
-    if(howMany == 2 && howMany > length){
-       result = [0,0];
-    }else{
-      while (howMany > 0) {
-        let randomNumber = Math.floor(Math.random() * length)
-        if (!result.includes(randomNumber)) {
-          result.push(randomNumber);
-          howMany--;
-        }
-      }
-    }
+  //   let result = []
+  //   if(howMany == 2 && howMany > length){
+  //      result = [0,0];
+  //   }else{
+  //     while (howMany > 0) {
+  //       let randomNumber = Math.floor(Math.random() * length)
+  //       if (!result.includes(randomNumber)) {
+  //         result.push(randomNumber);
+  //         howMany--;
+  //       }
+  //     }
+  //   }
 
-    return result;
-  }
+  //   return result;
+  // }
 
 
   return (
