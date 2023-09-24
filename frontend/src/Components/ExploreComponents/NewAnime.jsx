@@ -44,7 +44,7 @@ export default function AnimeList() {
     }
 
     const FilterButton = ({name}) =>{
-        return <button onClick={(e) => selectFilter(e.target.textContent)} className={`${filterValue == name ? "bg-black_second_theme text-white" : ""} text-md text-gray-500 font-fantasy tracking-wide p-3 mx-1 rounded-lg`}>{name}</button>
+        return <button onClick={(e) => selectFilter(e.target.textContent)} className={`${filterValue == name ? "bg-black_second_theme text-white" : ""} text-md text-gray-500 hover:text-fifth_color_theme font-fantasy tracking-wide p-3 mx-1 rounded-lg`}>{name}</button>
     } 
 
     const selectFilter = (fValue) =>{
@@ -90,11 +90,11 @@ export default function AnimeList() {
         <div className="text-white h-auto col-span-7 p-3">
             <div className="  h-14 flex items-center justify-between">
             <div className="flex items-center">
+                
                 <p className="text-2xl text-fifth_color_theme font-fantasy tracking-wide p-4">New Anime Seasons</p>
 
-                <i onClick={previosPage} className="fa-solid fa-angle-left text-2xl cursor-pointer"></i>
-                <p className="p-4 text-lg font-fantasy">{Math.ceil(newSeasonPage)}</p>
-                <i onClick={nextPage} className="fa-solid fa-angle-right text-2xl  cursor-pointer"></i>
+                <i onClick={previosPage} className="fa-solid fa-angle-left text-2xl cursor-pointer hover:bg-black_second_theme p-3 rounded-lg h-10 w-10 flex items-center justify-center"></i>
+                <i onClick={nextPage} className="fa-solid fa-angle-right text-2xl  cursor-pointer  hover:bg-black_second_theme p-3 rounded-lg  h-10 w-10 flex items-center justify-center"></i>
                 </div>
 
                 <div className="flex items-center mr-5">
