@@ -4,16 +4,24 @@ import { Utils } from "../Utils";
 
 export default function UpcomingAnime() {
     const [upcomingAnime, setUpcomingAnime] = useState(null);
+    const [nextPage, setNextPage] = useState(1)
+    const [last_visible_page , setLast_visible_page] = useState(0)
 
     useEffect(() => {
-        fetch("https://api.jikan.moe/v4/seasons/upcoming?page=1")
+        fetch(`https://api.jikan.moe/v4/seasons/upcoming?page=${nextPage}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data)
+                setLast_visible_page(data.pagination.last_visible_page)
                 let random = Utils.giveRandomDistinctIndexes(data.data.length, 9)
                 setUpcomingAnime(data.data.filter((anime, index) => random.includes(index)))
             })
-    }, [])
+    }, [nextPage])
+
+    const lol = () =>{
+
+        setNextPage(Math.floor(Math.random() * last_visible_page + 1))
+    }
 
     const AnimeCard = ({ anime }) => {
 
@@ -42,6 +50,7 @@ export default function UpcomingAnime() {
     return (<div className="col-span-3 max-h-full">
         <div className="flex items-center justify-center">
             <p className="text-2xl text-fifth_color_theme font-fantasy tracking-wide p-4">Upcoming Anime</p>
+            <button onClick={lol}>lol</button>
         </div>
 
         <div className="px-7">

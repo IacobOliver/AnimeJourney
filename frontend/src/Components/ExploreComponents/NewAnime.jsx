@@ -32,6 +32,7 @@ export default function AnimeList() {
                 <div className=" h-60 rounded-t-lg bg-center bg-cover p-2" style={{ backgroundImage: `url(${image})` }}></div>
                 <div className="text-gray-400 bg-black_second_theme font-semibold tracking-wide font-serif text-center text-xs mt-0 rounded-b-lg flex justify-around">
                     <div> {airedFrom}</div>
+                    <div>•</div>
                     <div>{type}</div>
                 </div>
 
