@@ -2,19 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-#root{
+#root {
   background-color: #050505;
   height: min-content;
 }
 
-body{
+body {
   background-color: #050505;
   height: 100vh;
 }
 
 .titleSize {
-  font-size: 4rem/* 30px */;
-  line-height: 4rem/* 36px */;
+  font-size: 4rem
+    /* 30px */
+  ;
+  line-height: 4rem
+    /* 36px */
+  ;
 }
 
 /* width */
@@ -40,4 +44,9 @@ body{
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.coolGradient {
+  background: rgb(5,5,5);
+  background: linear-gradient(0deg, rgba(5,5,5,1) 39%, rgba(255,83,73,1) 100%);
 }

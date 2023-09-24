@@ -18,17 +18,20 @@ export default function UpcomingAnime() {
     const AnimeCard = ({anime}) => {
        
         return (
-            <div className=" bg-black_second_theme h-16 my-2 rounded-lg flex">
-                 <p className=" text-fifth_color_theme font-serif font-semibold text-left text-sm">{anime.type}</p>
+            <div className="  h-16 my-2 rounded-lg flex">
+                 
 
                 <div className="h-full w-16 rounded-lg bg-center bg-cover p-2" style={{ backgroundImage: `url(${anime.images.jpg.image_url})` }}></div>
 
-                <div className="text-fifth_color_theme ml-3 font-fantasy w-72 flex flex-col ">
-                <p className=" text-fifth_color_theme font-serif font-semibold text-left text-md line-clamp-2 tracking-normal">{anime.title}</p>
+                {/* <p className=" text-fifth_color_theme font-serif font-semibold text-left text-md w-72 ml-3 mt-1 line-clamp-1">{anime.title}</p> */}
+                <div className=" text-fifth_color_theme font-serif font-semibold text-left text-md  w-72 mx-2 mt-1 ">
+                   <div className="line-clamp-2">{anime.title}</div>
                 </div>
-               
-                <p className=" text-gray-400 font-serif font-semibold text-left text-xs tracking-normal">{anime.aired.string.split("to")[0]}</p>
 
+                <div className="flex flex-col w-28 coolGradient rounded-t-lg rounded-b-xl">
+                <p className=" text-black_first_theme font-serif font-semibold text-sm h-1/2 flex items-center justify-center rounded-b-lg">{anime.type}</p>
+                <p className=" text-fifth_color_theme font-semibold text-xs tracking-normal h-1/2  flex items-center justify-center ">{anime.aired.string.split("to")[0]}</p>
+                </div>
             </div>)
     }
 
