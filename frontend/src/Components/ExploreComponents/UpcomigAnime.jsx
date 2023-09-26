@@ -47,13 +47,13 @@ export default function UpcomingAnime() {
             </div>)
     }
 
-    return (<div className="col-span-3 max-h-full">
+    return (<div className="col-span-3 max-h-full ">
         <div className="flex items-center justify-center">
             <p className="text-2xl text-fifth_color_theme font-fantasy tracking-wide p-4">Upcoming Anime</p>
             <button onClick={lol}>lol</button>
         </div>
 
-        <div className="px-7">
+        <div className="px-7 border-l-4 border-l-black_second_theme">
             {upcomingAnime?.map((item, index) => <AnimeCard key={index} anime={item} />)}
         </div>
     </div>)
