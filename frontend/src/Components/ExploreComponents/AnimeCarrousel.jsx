@@ -1,10 +1,12 @@
 import { Carousel, IconButton } from "@material-tailwind/react";
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom";
 import Loading from "../Loading";
 import { Utils } from "../Utils";
 
 export default function CarouselCustomNavigation() {
   const [topAnime, setTopAnime] = useState(null)
+  const navigate = useNavigate();
 
   useEffect(() =>{
     fetch("http://localhost:8080/topAnime/getRandomAnime/10")
@@ -40,7 +42,6 @@ export default function CarouselCustomNavigation() {
       ratingArray.push(i)
     }
     let pointDifference = (ratingArray.length - rating) * (-1)
-    //console.log(Math.floor(pointDifference * 100))
 
     return (<div className="flex items-center justify-center my-1">
 
@@ -80,7 +81,9 @@ export default function CarouselCustomNavigation() {
 
 
           <div className="flex justify-center">
-            <button className="relative inline-flex items-center justify-center mr-2 overflow-hidden font-medium rounded-lg group 
+            <button 
+            onClick={() => navigate(`/anime/${anime.animeId}`)}
+            className="relative inline-flex items-center justify-center mr-2 overflow-hidden font-medium rounded-lg group 
                                 bg-gradient-to-br from-orange-500 to-red-600 group-hover:from-orange-500 group-hover:to-red-600
                                  hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 text-black_first_theme text-md
                                  w-1/3 h-12 ">
@@ -103,31 +106,6 @@ export default function CarouselCustomNavigation() {
 
     )
   }
-
-  // const giveRandomDistinctIndexes = (length, howMany) => {
-   
-  //   if (howMany > length && howMany != 2) {
-  //     console.error("cant request more than length")
-  //     console.log("length ", length)
-  //     console.log("how manu",  howMany)
-  //     return;
-  //   }
-
-  //   let result = []
-  //   if(howMany == 2 && howMany > length){
-  //      result = [0,0];
-  //   }else{
-  //     while (howMany > 0) {
-  //       let randomNumber = Math.floor(Math.random() * length)
-  //       if (!result.includes(randomNumber)) {
-  //         result.push(randomNumber);
-  //         howMany--;
-  //       }
-  //     }
-  //   }
-
-  //   return result;
-  // }
 
 
   return (

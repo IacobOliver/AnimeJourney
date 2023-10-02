@@ -41,7 +41,7 @@ export default function Layout() {
                 <div className="text-fifth_color_theme  text-left text-lg  w-72 mx-2 mt-1 ">
                     <div className=" line-clamp-1 font-fantasy tracking-wide truncate">{anime.title}</div>
 
-                    <div className="font-semibold text-gray-500 text-xs tracking-normal h-1/2 text-left mt-1 flex items-center">
+                    <div className=" text-gray-500 text-xs h-1/2 text-left mt-1 flex items-center font-bold">
                         <p>{anime.type}</p>
                          <p className="mx-2 text-lg">•</p>
                         <i className="fa-solid fa-star text-forth_color_theme"></i>
@@ -90,7 +90,7 @@ export default function Layout() {
                             resultStringKeyName="title"
                             fuseOptions={{ keys: ["title", "title_english"] }}
                             placeholder="Search anime... "
-                            className=" rounded-xl w-full z-10 "
+                            className=" rounded-xl w-full z-10"
                             styling={{
                                 backgroundColor: "black",
                                 border: "0px",
@@ -98,7 +98,9 @@ export default function Layout() {
                                 color: "#E2E5DE",
                                 position: "relative",
                                 hoverBackgroundColor: "#292929",
-                            
+                                
+                
+                                
                             }}
                         />
                     </div>

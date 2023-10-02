@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Explore  from "./Pages/Explore"
 import Layout from "./Components/Layout";
 import Redirect from "./Components/Redirect";
+import ShowAnime from "./Pages/ShowAnime";
 
 
 
@@ -15,6 +16,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Redirect/>}> </Route>
         <Route path="/home" element={<Explore />}> </Route>
+        <Route path="/anime/:id" element ={<ShowAnime/>}/>
       </Routes>
     </BrowserRouter>
   );
