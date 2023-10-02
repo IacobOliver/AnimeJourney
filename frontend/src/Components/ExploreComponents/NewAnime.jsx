@@ -1,10 +1,12 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react"
+import { useNavigate } from "react-router-dom";
 
 export default function AnimeList() {
     const [animeNewSeasons, setAnimeNewSeasons] = useState(null)
     const [newSeasonPage, setNewSeasonPage] = useState(0.1);
     const [[filter, filterValue], setFilter] = useState(["","All"])
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(`http://localhost:8080/newAnimeSeasons/getAnime`, {
@@ -25,10 +27,15 @@ export default function AnimeList() {
             })
     }, [newSeasonPage])
 
+    const Test = () =>{
+        return  <div className="w-full h-full top-0 left-0 absolute bg-white "></div>
+    }
 
-    const AnimeCard = ({ image, title, airedFrom, type }) => {
+
+    const AnimeCard = ({ image, title, airedFrom, type, animeId }) => {
         return (
-            <div className="h-9/10 w-44 rounded-lg flex flex-col">
+            <div className="h-9/10 w-44 rounded-lg flex flex-col relative">
+                <div className="w-full h-full top-0 left-0 absolute hover:bg-[rgba(0,0,0,0.5)]"  onClick={() => navigate(`/anime/${animeId}`)}/>
                 <div className=" h-60 rounded-t-lg bg-center bg-cover p-2" style={{ backgroundImage: `url(${image})` }}></div>
                 <div className="text-gray-400 bg-black_second_theme font-semibold tracking-wide font-serif text-center text-xs mt-0 rounded-b-lg flex justify-around">
                     <div> {airedFrom}</div>
@@ -111,7 +118,7 @@ export default function AnimeList() {
 
             <div className="h-full w-full grid grid-cols-6 gap-4 mt-2">
 
-                {animeNewSeasons?.map((anime, index) => <AnimeCard key={index} image={anime.image} title={anime.name} airedFrom={anime.airedFrom} type={anime.animeType}/>)}
+                {animeNewSeasons?.map((anime, index) => <AnimeCard key={index} image={anime.image} title={anime.name} airedFrom={anime.airedFrom} type={anime.animeType} animeId={anime.animeId}/>)}
 
             </div>
         </div>)

@@ -1,11 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react"
 import { Utils } from "../Utils";
+import { useNavigate } from "react-router-dom";
 
 export default function UpcomingAnime() {
     const [upcomingAnime, setUpcomingAnime] = useState(null);
     const [nextPage, setNextPage] = useState(1)
     const [last_visible_page , setLast_visible_page] = useState(0)
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(`https://api.jikan.moe/v4/seasons/upcoming?page=${nextPage}`)
@@ -26,12 +28,11 @@ export default function UpcomingAnime() {
     const AnimeCard = ({ anime }) => {
 
         return (
-            <div className="h-16 my-2 rounded-lg flex ">
-
+            <div className="h-16 my-2 rounded-lg flex relative">
+                 <div className="w-full h-full top-0 left-0 absolute hover:bg-[rgba(0,0,0,0.5)]"  onClick={() => navigate(`/anime/${anime.mal_id}`)}/>
 
                 <div className="h-full w-16 rounded-lg bg-center bg-cover p-2" style={{ backgroundImage: `url(${anime.images.jpg.image_url})` }}></div>
 
-                {/* <p className=" text-fifth_color_theme font-serif font-semibold text-left text-md w-72 ml-3 mt-1 line-clamp-1">{anime.title}</p> */}
                 <div className="text-fifth_color_theme font-serif text-left text-md  w-72 mx-2 mt-1 ">
                     <div className=" line-clamp-1 font-fantasy tracking-wide">{anime.title}</div>
                     <p className="  font-semibold text-xs tracking-normal h-1/2 text-left mt-1 ">Release Date ‎ • ‎ {anime.aired.string.split("to")[0]}</p>

@@ -1,12 +1,16 @@
 import React from "react";
 
 import { useState, useRef } from "react"
+import { useNavigate } from "react-router-dom";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+import { useAtom } from "jotai";
+import state from "./Atom"
 
 
 export default function Layout() {
     const [items, setItems] = useState([])
-    const search = useRef(null);
+    const navigate = useNavigate();
+    const [refresh, setRefresh] = useAtom(state.refreshAnime)
 
     const handleOnSearch = (string, results) => {
         fetch(`https://api.jikan.moe/v4/anime?q=${string}&sfw=true`)
@@ -25,6 +29,8 @@ export default function Layout() {
     const handleOnSelect = (item) => {
         // the item selected
         console.log(item)
+        setRefresh( refresh + 1)
+        navigate(`/anime/${item.mal_id}`)
     }
 
     const handleOnFocus = () => {
@@ -33,8 +39,7 @@ export default function Layout() {
 
     const formatResult = (anime) => {
         return (
-            <div className="h-16 my-1 px-2 rounded-lg flex group-hover">
-
+            <div className="h-16 my-1 px-2 rounded-lg flex group-hover relative">
 
                 <div className="h-full w-16 rounded-lg bg-center bg-cover p-2" style={{ backgroundImage: `url(${anime.images.jpg.image_url})` }}></div>
 
@@ -70,15 +75,13 @@ export default function Layout() {
                     </div>
 
 
-                    <div className="h-full py-1 mr-4">
+                    <div className="h-full py-1 mr-4 cursor-pointer" onClick={() => navigate("/home")}>
                         <img draggable="false" className="h-full" src="\public\animejourney-low-resolution-logo-color-on-transparent-background.png" />
                     </div>
-                    {/* e.target.nextSibling.focus() */}
 
                     <div className="bg-black_first_theme text-third_color_theme w-2/5 h-full mx-7 rounded-2xl flex items-center">
                         <i onClick={(e) => e.target.nextSibling.firstChild.firstChild.firstChild.focus()} className="fa-solid fa-magnifying-glass mx-4 text-xl"></i>
                         <ReactSearchAutocomplete
-                            ref={search}
                             items={items}
                             onSearch={handleOnSearch}
                             onHover={handleOnHover}
