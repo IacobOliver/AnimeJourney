@@ -11,6 +11,8 @@ export default function Layout() {
     const [items, setItems] = useState([])
     const navigate = useNavigate();
     const [refresh, setRefresh] = useAtom(state.refreshAnime)
+    const [play, setPlay] = useAtom(state.play);
+    const [mute , setMute] = useAtom(state.mute)
 
     const handleOnSearch = (string, results) => {
         fetch(`https://api.jikan.moe/v4/anime?q=${string}&sfw=true`)
@@ -30,6 +32,8 @@ export default function Layout() {
         // the item selected
         console.log(item)
         setRefresh( refresh + 1)
+        setPlay(true)
+        setMute(false)
         navigate(`/anime/${item.mal_id}`)
     }
 
