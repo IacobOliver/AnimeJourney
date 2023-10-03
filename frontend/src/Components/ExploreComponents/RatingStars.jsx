@@ -27,14 +27,14 @@ export default function RatingStarts({ rating, members }) {
     }
     let pointDifference = (ratingArray.length - rating) * (-1)
 
-    return (<div className="flex items-center justify-center my-1">
+    return (<div className="flex items-center justify-center my-2 font-sans flex-col">
 
         <div className="text-forth_color_theme flex">
             {ratingArray.map(item => <StartElement key={item} />)}
             {pointDifference >= 0.5 ? <HalfStartElement /> : null}
         </div>
 
-        <p className="text-gray-500 font-semibold ml-3">{rating} from {members} reviews</p>
+        <p className="text-gray-500 font-semibold ml-3">{rating ? rating : "N/A"} from {members ? members : " - "} reviews</p>
 
     </div>)
 }
