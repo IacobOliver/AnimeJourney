@@ -1,11 +1,17 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom";
+import { useAtom } from "jotai";
+import state from "../Atom";
 
 export default function AnimeList() {
     const [animeNewSeasons, setAnimeNewSeasons] = useState(null)
     const [newSeasonPage, setNewSeasonPage] = useState(0.1);
     const [[filter, filterValue], setFilter] = useState(["","All"])
+
+    const [play, setPlay] = useAtom(state.play);
+    const [mute , setMute] = useAtom(state.mute)
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -27,15 +33,12 @@ export default function AnimeList() {
             })
     }, [newSeasonPage])
 
-    const Test = () =>{
-        return  <div className="w-full h-full top-0 left-0 absolute bg-white "></div>
-    }
 
 
     const AnimeCard = ({ image, title, airedFrom, type, animeId }) => {
         return (
             <div className="h-9/10 w-44 rounded-lg flex flex-col relative">
-                <div className="w-full h-full top-0 left-0 absolute hover:bg-[rgba(0,0,0,0.5)]"  onClick={() => navigate(`/anime/${animeId}`)}/>
+                <div className="w-full h-full top-0 left-0 absolute hover:bg-[rgba(0,0,0,0.5)]"  onClick={() => handleAnimeCardEvent(animeId)}/>
                 <div className=" h-60 rounded-t-lg bg-center bg-cover p-2" style={{ backgroundImage: `url(${image})` }}></div>
                 <div className="text-gray-400 bg-black_second_theme font-semibold tracking-wide font-serif text-center text-xs mt-0 rounded-b-lg flex justify-around">
                     <div> {airedFrom}</div>
@@ -49,6 +52,12 @@ export default function AnimeList() {
 
             </div>
         )
+    }
+
+    const handleAnimeCardEvent = (animeId) =>{
+        setPlay(true)
+        setMute(false)
+        navigate(`/anime/${animeId}`)
     }
 
     const FilterButton = ({name}) =>{

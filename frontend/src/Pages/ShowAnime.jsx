@@ -24,9 +24,6 @@ export default function ShowAnime() {
 
    
 
-
-    
-
     const DetailComp = ({ detail }) => {
         return (
             <div className=" bg-black_second_theme rounded-lg w-full flex items-center justify-center">
