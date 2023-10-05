@@ -57,3 +57,12 @@
       npm install
       ```
       (Alternatively, you can use `pnpm install`.)
+
+## How to Use 
+
+- in the top layout you can search for anime and login or create your account
+- you can navigate through the top anime carrousel using the arrows or let it flow
+- you have the section of the new seasons anime where you use the arrows to select the next or previous, and also you can select your wanted filter
+- in the bottom right corner you have a list with 9 random upcoming anime, you can see more by pressing on the refresh button
+- when you enter on an anime you can control the trailer setting and in the future i will fill this page with more info and a formular to add the anime to you list with the status that you want
+  
