@@ -31,4 +31,29 @@
 - maybe if i have the resouces to stream some anime on it
 - maybe some premium options that you will ne to pay for
 
+## Setup 
+- i i know this part is a little hard, but i didn't have a choice, the api that i used forced me to do this. In the future i want to make a script that automaticaly creates a db in your postgre application and doind all by itself the populate
 
+ ### Backend Setup
+
+1. Prerequisites:
+ - Ensure you have the latest LTS (Long Term Support) version of Java Development Kit (JDK) installed on your system.
+ - If needed, reload Maven dependencies by right-clicking the pom.xml file and selecting "Maven -> Reload Project."
+ - have PostreSQL installed and make a db for this project to store the data
+
+2. Run the server :
+   - start the backend server by runnning the AnimeJourney class
+  
+
+### Frontend Setup
+
+1. Prerequisites:
+- Make sure Node.js is installed and properly configured on your system.
+
+2. Install the dependecies
+- Navigate to the Frontend directory in your terminal with ``` cd ./frontend```
+- - Run the following command to install the necessary dependencies:
+      ```
+      npm install
+      ```
+      (Alternatively, you can use `pnpm install`.)
