@@ -23,7 +23,11 @@
  ![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/1270ac60-e807-498c-9e43-4e455642898e)
 
 - implementing users with spring security
-- making the search page and adding filters for searching the anime
+- making the search page and adding filters for searching the anime, now i have just the autocomplete
+
+  ![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/7474b41a-4c02-4265-87e5-bdb3d93afb25)
+
+  
 - maybe if i have the resouces to stream some anime on it
 - maybe some premium options that you will ne to pay for
 
