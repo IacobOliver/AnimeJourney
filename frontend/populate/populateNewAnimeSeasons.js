@@ -53,7 +53,7 @@ const populateNewSesonAnime = () => {
                 body: JSON.stringify(anime)
             })
                 .then(res => res.json())
-                .then(data => console.log(data))
+                .then(data => console.log("POPULATE DONE"))
                 .catch(err => console.error(err))
         }
     }

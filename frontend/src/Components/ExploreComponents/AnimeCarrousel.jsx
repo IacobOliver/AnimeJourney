@@ -4,57 +4,24 @@ import { useNavigate } from "react-router-dom";
 import Loading from "../Loading";
 import { Utils } from "../Utils";
 import RatingStarts from "./RatingStars";
+import { useAtom } from "jotai";
+import state from "../Atom";
 
 export default function CarouselCustomNavigation() {
   const [topAnime, setTopAnime] = useState(null)
+  const [play, setPlay] = useAtom(state.play);
+  const [mute, setMute] = useAtom(state.mute)
   const navigate = useNavigate();
 
-  useEffect(() =>{
+  useEffect(() => {
     fetch("http://localhost:8080/topAnime/getRandomAnime/10")
-    .then(res => res.json())
-    .then(data => {
-      console.log("RANDOM ANIME: ",data)
-      setTopAnime(data);
-    })
-  },[])
+      .then(res => res.json())
+      .then(data => {
+        console.log("RANDOM ANIME: ", data)
+        setTopAnime(data);
+      })
+  }, [])
 
-  // const StartElement = () => {
-  //   return (
-  //     <div className="h-5 w-5 relative ">
-  //       <div className="h-full w-full flex items-center justify-center">
-  //         <i className="fa-solid fa-star"></i>
-  //       </div>
-  //     </div>
-  //   )
-  // }
- 
-  // const HalfStartElement = () => {
-  //   return (
-  //     <div className="h-5 w-5 relative ">
-  //       <div className="h-full w-full flex items-center justify-center"> <i className="fa-solid fa-star"></i></div>
-  //       <div className="z-10 w-1/2 h-full right-0 top-0 absolute bg-black_first_theme"></div>
-  //     </div>
-  //   )
-  // }
-
-  // const RatingStarts = ({ rating, members }) => {
-  //   let ratingArray = []
-  //   for (let i = 1; i <= Math.floor(rating); i++) {
-  //     ratingArray.push(i)
-  //   }
-  //   let pointDifference = (ratingArray.length - rating) * (-1)
-
-  //   return (<div className="flex items-center justify-center my-1">
-
-  //     <div className="text-forth_color_theme flex">
-  //     {ratingArray.map(item => <StartElement key={item}/>)}
-  //     {pointDifference >= 0.5  ? <HalfStartElement/> : null} 
-  //     </div>
-
-  //     <p className="text-gray-500 font-semibold ml-3">{rating} from {members} reviews</p>
-
-  //   </div>)
-  // }
 
   const CarouselItem = ({ anime }) => {
     let imagesIndexes = Utils.giveRandomDistinctIndexes(anime.images.length, 2)
@@ -69,22 +36,22 @@ export default function CarouselCustomNavigation() {
           <div className="w-96 h-9,9/10 rounded-3xl bg-cover bg-center bg-brown-500" style={{ backgroundImage: `url(${firstAnimeImage})` }}> </div>
         </div>
 
-       
+
         {/* Center */}
         <div className="text-fifth_color_theme w-full h-full col-span-4 pt-4 flex flex-col justify-around ">
           <div>
-          <h1 className="titleSize text-center font-fantasy line-clamp-3" >{anime.name}</h1>
+            <h1 className="titleSize text-center font-fantasy line-clamp-3" >{anime.name}</h1>
 
-          <RatingStarts rating={anime.rating} members={anime.numberOfReviews}/>
+            <RatingStarts rating={anime.rating} members={anime.numberOfReviews} />
 
-          <p  className="text-center text-lg mt-8 font-serif px-2 line-clamp-5">{anime.animeDescription}</p>
+            <p className="text-center text-lg mt-8 font-serif px-2 line-clamp-5">{anime.animeDescription}</p>
           </div>
 
 
           <div className="flex justify-center">
-            <button 
-            onClick={() => navigate(`/anime/${anime.animeId}`)}
-            className="relative inline-flex items-center justify-center mr-2 overflow-hidden font-medium rounded-lg group 
+            <button
+              onClick={() => handleTravel(anime.animeId)}
+              className="relative inline-flex items-center justify-center mr-2 overflow-hidden font-medium rounded-lg group 
                                 bg-gradient-to-br from-orange-500 to-red-600 group-hover:from-orange-500 group-hover:to-red-600
                                  hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 text-black_first_theme text-md
                                  w-1/3 h-12 ">
@@ -106,6 +73,12 @@ export default function CarouselCustomNavigation() {
       </div>
 
     )
+  }
+
+  const handleTravel = (animeId) => {
+    setPlay(true)
+    setMute(false)
+    navigate(`/anime/${animeId}`)
   }
 
 
@@ -179,7 +152,7 @@ export default function CarouselCustomNavigation() {
 
       >
 
-        {topAnime ? topAnime.map( (item, index) =><CarouselItem key={index} anime={item} />) : <Loading/> }
+        {topAnime ? topAnime.map((item, index) => <CarouselItem key={index} anime={item} />) : <Loading />}
 
       </Carousel>
     </div> : null
