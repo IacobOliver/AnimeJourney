@@ -57,6 +57,11 @@
       npm install
       ```
       (Alternatively, you can use `pnpm install`.)
+3. Populate the database
+- Navigate to the populate folder in frontend with ``` cd./frontend/populate```
+- here you need to run the command ```node populateNewAnimeSeasons``` and when it says "POPULATE DONE" run ```node populateTopAnime``` and wait for it to finish
+- you are now setup, navigate back in the frontend folder with ```cd ..``` and run ``` npm run dev``` then ```Ctrl + Click``` on the first link
+- make sure you have both the frontend and the backend :)
 
 ## How to Use 
 
