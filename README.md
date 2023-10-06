@@ -1,6 +1,6 @@
 # AnimeJourney
 ## Project Descriptoin
- It's a solo project, where you an track you favorite animes, newest anime and upcoming anime. If you make an account you will be able to make your own anime list by marking them as watching, on-hold, drop and plan to watch, you can give it a score from 1-10 and leave a review if you want. It's not a streaming application, but maybe in the future will be, this project is still work in progress.
+ It's a solo project, where you can track you favorite animes, newest anime and upcoming anime. If you make an account you will be able to make your own anime list by marking them as watching, on-hold, drop and plan to watch, you can give it a score from 1-10 and leave a review if you want. It's not a streaming application, but maybe in the future will be, this project is still work in progress.
 
 ![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/7ffbb2af-cc30-4dfe-9a2f-7682486e25a6)
 
