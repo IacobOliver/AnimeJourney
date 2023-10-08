@@ -15,7 +15,7 @@
 ## Challenges
 
 - For now, the biggest challenge is to make the page look more and more professional and to decide how the page will look on different sizes
-- One more challenge that i think i will have when implementing users it's to save their anime list, because i want to make it efficient. Currently I am using jikan api, and i saved some data form the api in my db, the biggest flaw of this api is that it has a limit of 3 requests per second, so i need to think twice as much about what i save and how i save in my db.
+- making the users to customize their own list with an efficient strategy
 
 ## Future Plans
 
@@ -23,16 +23,15 @@
  ![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/1270ac60-e807-498c-9e43-4e455642898e)
 
 - implementing users with spring security
-- making the search page and adding filters for searching the anime, now i have just the autocomplete
+- making the search page and adding filters for searching the anime
 
   ![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/7474b41a-4c02-4265-87e5-bdb3d93afb25)
 
   
-- maybe if i have the resouces to stream some anime on it
-- maybe some premium options that you will ne to pay for
+- if i have the resouces, I'll stream some anime on it
+- implementing some premium options that you will ne to pay for
 
 ## Setup 
-- i i know this part is a little hard, but i didn't have a choice, the api that i used forced me to do this. In the future i want to make a script that automaticaly creates a db in your postgre application and doind all by itself the populate
 
  ### Backend Setup
 
