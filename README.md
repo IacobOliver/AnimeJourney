@@ -56,9 +56,11 @@
       npm install
       ```
       (Alternatively, you can use `pnpm install`.)
-3. Populate the database
+    
+3. Populate the database on local db (OPTIONAL)
+  For a beeter performance you can save the animes on your local db : 
 - Navigate to the populate folder in frontend with ``` cd./frontend/populate```
-- here you need to run the command ```node populateNewAnimeSeasons``` and when it says "POPULATE DONE" run ```node populateTopAnime``` and wait for it to finish
+- here you need to run the command ```node populateNewAnimeSeasons``` and when it says "POPULATE DONE" and  run ```node populateTopAnime``` and wait for it to show the same message
 - you are now setup, navigate back in the frontend folder with ```cd ..``` and run ``` npm run dev``` then ```Ctrl + Click``` on the first link
 - make sure you have both the frontend and the backend :)
 
