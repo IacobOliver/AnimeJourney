@@ -58,7 +58,13 @@
       (Alternatively, you can use `pnpm install`.)
     
 3. Populate the database on local db (OPTIONAL)
-  For a beeter performance you can save the animes on your local db : 
+- For a beeter performance you can save the animes on your local db, you need to have postgreSQL installed and create a db in pgAdmin, then in the project in backend/src/main/resources/application.properties
+- you need to modify this with your info
+   ```
+     spring.datasource.url=jdbc:postgresql://jdbc:postgresql://localhost:5432/  YOUR DATABASE NAME
+    spring.datasource.username= YOUR USERNAME
+    spring.datasource.password=  YOUR PASSWORD
+   ```
 - Navigate to the populate folder in frontend with ``` cd./frontend/populate```
 - here you need to run the command ```node populateNewAnimeSeasons``` and when it says "POPULATE DONE" and  run ```node populateTopAnime``` and wait for it to show the same message
 - you are now setup, navigate back in the frontend folder with ```cd ..``` and run ``` npm run dev``` then ```Ctrl + Click``` on the first link
