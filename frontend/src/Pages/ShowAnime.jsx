@@ -31,12 +31,18 @@ export default function ShowAnime() {
             </div>)
     }
 
+
+    const Option = ({text, id}) =>{
+        return (<option className="bg-gray-800">{text}</option>)
+    }
+
     return (
         <>
             {anime ?
                 <div className="w-full mt-5 px-2">
 
-                    <div className="flex">
+                    {/* IMAGE INFO AND TRAILER */}
+                    <div className="flex p-2">
                         <div className="h-134 w-96 bg-cover bg-center rounded-l-lg flex" style={{ backgroundImage: `url(${anime.images.jpg.large_image_url})` }}></div>
 
                         <div className="h-134 w-96 bg-cover bg-center rounded-r-lg flex flex-col font-fantasy text-fifth_color_theme tracking-wide ml-3 p-2">
@@ -55,7 +61,7 @@ export default function ShowAnime() {
                             <div className="flex flex-col items-center mt-5">
                                 <p className="text-2xl">~  Genres  ~</p>
                                 <div className="flex flex-wrap mt-3">
-                                    {anime.genres ? anime.genres.map(gen => <div className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 p-1 rounded-xl mx-[0.3rem] mt-[0.3rem] text-black_first_theme">{gen.name}</div>) : <div>No specified genres</div>}
+                                    {anime.genres ? anime.genres.map((gen, index) => <div key={index} className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 p-1 rounded-xl mx-[0.3rem] mt-[0.3rem] text-black_first_theme">{gen.name}</div>) : <div>No specified genres</div>}
                                 </div>
 
                             </div>
@@ -70,11 +76,46 @@ export default function ShowAnime() {
                         </div>
 
                         <TrailerComponent anime={anime}/>
+                    </div>
 
+                    <div className=" h-14 flex justify-center items-center">
+                        <select className="bg-transparent rounded-lg mx-5">
+                            <Option text={"Plan To Watch"}/>
+                            <Option text={"Watching"}/>
+                            <Option text={"Completed"}/>
+                            <Option text={"On-Hold"}/>
+                            <Option text={"Dropped"}/>
+                        </select>
+
+                        <select className="bg-transparent rounded-lg mx-5">
+                        <Option text={"SELECT"}/>
+                            <Option text={1}/>
+                            <Option text={2}/>
+                            <Option text={3}/>
+                            <Option text={4}/>
+                            <Option text={5}/>
+                            <Option text={6}/>
+                            <Option text={7}/>
+                            <Option text={8}/>
+                            <Option text={9}/>
+                            <Option text={10}/>
+                            
+                        </select>
+
+                        <div className="flex mx-5 items-center border bottom-5">
+                            <p>Episodes : </p>
+                            <input className="bg-transparent border-0 focus:border-0 w-16" type="number"/>
+                            <p>/{anime.episodes}</p>
+                        </div>
 
                     </div>
 
-                    <p className="">{anime.synopsis}</p>
+                    <div className="mt-3 p-2">
+                    <p className="ml-3 text-3xl font-fantasy" >Description </p>
+                    <p className=" text-md font-bold ">{anime.synopsis}</p>
+                    </div>
+
+                   
 
 
                 </div> : null}

@@ -72,8 +72,8 @@ export default function TrailerComponent({anime}){
                     
                 ></iframe>
                 <div className="flex bg-[rgba(0,0,0,0.5)] text-forth_color_theme z-30 rounded-b-lg">
-                    <div  className="mx-2 w-5 h-7 flex items-center justify-center" onClick={handlePlay} >{play  ? <i class="fa-solid fa-pause"/> : <i class="fa-solid fa-play"/>}</div>
-                    <div  className="mx-2 w-5  h-7 flex items-center justify-center" onClick={handleMute}>{mute  ? <i class="fa-solid fa-volume-high"></i> : <i class="fa-solid fa-volume-xmark"></i>}</div>
+                    <div  className="mx-2 w-5 h-7 flex items-center justify-center" onClick={handlePlay} >{play  ? <i className="fa-solid fa-pause"/> : <i className="fa-solid fa-play"/>}</div>
+                    <div  className="mx-2 w-5  h-7 flex items-center justify-center" onClick={handleMute}>{mute  ? <i className="fa-solid fa-volume-high"></i> : <i className="fa-solid fa-volume-xmark"></i>}</div>
                 </div>
             </>
             :

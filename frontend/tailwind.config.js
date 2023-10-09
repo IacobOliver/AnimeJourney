@@ -49,7 +49,7 @@ module.exports = withMT({
         'mono': ['ui-monospace', 'SFMono-Regular', 'Monaco', 'monospace'],
         'display': ['Oswald', 'sans'],
         'body': ['"Open Sans"', 'sans'],
-        'thick': ['semibold', 'sans'], // Add your thick font here
+        'thick': ['semibold♦', 'sans'], // Add your thick font here
         'cursive': ['"Pacifico"', 'cursive'], // Add a cursive font
         'fantasy': ['"Impact"', 'fantasy'], // Add a fantasy font
         // Add more custom font families here as needed
