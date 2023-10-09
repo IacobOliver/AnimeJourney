@@ -1,6 +1,7 @@
 package AnimeJourney.controller;
 
 import AnimeJourney.model.NewAnimeSeason;
+import AnimeJourney.service.FetchResponse;
 import AnimeJourney.service.NewAnimeSeasonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ public class NewAnimeSeasonController {
 
     @CrossOrigin("http://localhost:5173/")
     @PostMapping("/addAnimes")
-    public ResponseEntity<String> addAnimeList(@RequestBody List<NewAnimeSeason> newAnimeSeasons){
+    public ResponseEntity<FetchResponse> addAnimeList(@RequestBody List<NewAnimeSeason> newAnimeSeasons){
         return ResponseEntity.ok(newAnimeSeasonService.addNewAnimeList(newAnimeSeasons));
     }
 

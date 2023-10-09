@@ -16,9 +16,9 @@ import java.util.List;
 public class NewAnimeSeasonService {
     private final NewAnimeSeasonRepository newAnimeSeasonRepository;
 
-    public String addNewAnimeList(List<NewAnimeSeason> newAnimeSeasons){
+    public FetchResponse addNewAnimeList(List<NewAnimeSeason> newAnimeSeasons){
         newAnimeSeasonRepository.saveAll(newAnimeSeasons);
-        return "done";
+        return FetchResponse.builder().response("POPULATE DONE").build();
     }
 
     public List<NewAnimeSeason> getAnimeForPagination(PaginationResponse paginationResponse){

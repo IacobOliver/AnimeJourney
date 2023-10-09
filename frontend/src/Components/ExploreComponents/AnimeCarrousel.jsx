@@ -155,6 +155,6 @@ export default function CarouselCustomNavigation() {
         {topAnime ? topAnime.map((item, index) => <CarouselItem key={index} anime={item} />) : <Loading />}
 
       </Carousel>
-    </div> : null
+    </div> : <Loading/>
   );
 }

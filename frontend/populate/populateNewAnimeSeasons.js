@@ -44,7 +44,6 @@ const populateNewSesonAnime = () => {
                 })
                 .catch(err => console.error(err))
         } else {
-            console.log("fetch")
             fetch("http://localhost:8080/newAnimeSeasons/addAnimes", {
                 method: "POST",
                 headers: {

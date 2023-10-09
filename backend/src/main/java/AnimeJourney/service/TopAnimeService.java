@@ -31,8 +31,8 @@ public class TopAnimeService {
         return topAnimeRepository.findAllById(indexToken);
     }
 
-    public String postAnimeList(List<TopAnime> topAnime){
+    public FetchResponse postAnimeList(List<TopAnime> topAnime){
         topAnimeRepository.saveAll(topAnime);
-        return "done";
+        return FetchResponse.builder().response("POPULATE DONE").build();
     }
 }

@@ -52,7 +52,6 @@ const populateTopAnime = () => {
 
            
         } else {
-            console.log("fetch")
             fetch("http://localhost:8080/topAnime/addAnime", {
                 method : "POST",
                 headers : {

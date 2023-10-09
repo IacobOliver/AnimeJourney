@@ -1,6 +1,7 @@
 package AnimeJourney.controller;
 
 import AnimeJourney.model.TopAnime;
+import AnimeJourney.service.FetchResponse;
 import AnimeJourney.service.TopAnimeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +24,8 @@ public class TopAnimeController {
 
     @CrossOrigin("http://localhost:5173/")
     @PostMapping("/addAnime")
-    public String addTopAnime(@RequestBody List<TopAnime> topAnime) {
-       return topAnimeService.postAnimeList(topAnime);
+    public ResponseEntity<FetchResponse> addTopAnime(@RequestBody List<TopAnime> topAnime) {
+       return ResponseEntity.ok(topAnimeService.postAnimeList(topAnime));
     }
 
 
