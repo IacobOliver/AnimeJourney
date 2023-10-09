@@ -6,8 +6,8 @@ import state from "../Atom";
 
 export default function AnimeList() {
     const [animeNewSeasons, setAnimeNewSeasons] = useState(null)
-    const [newSeasonPage, setNewSeasonPage] = useState(0.1);
-    const [[filter, filterValue], setFilter] = useState(["","All"])
+     const [newSeasonPage, setNewSeasonPage] = useAtom(state.newSeasonPage);
+    const [[filter, filterValue], setFilter] = useAtom(state.newSeasonFilter)
 
     const [play, setPlay] = useAtom(state.play);
     const [mute , setMute] = useAtom(state.mute)
