@@ -6,13 +6,13 @@ import state from "../Components/Atom";
 import RatingStarts from "../Components/ExploreComponents/RatingStars";
 import TrailerComponent from "../Components/ShowAnimeComponents/TrailerComponent"
 import EditAnimeStatus from "../Components/ShowAnimeComponents/EditAnimeStatus";
+import AnimeRecomandation from "../Components/ShowAnimeComponents/AnimeRecomandation";
 
 export default function ShowAnime() {
     const [anime, setAnime] = useState(null);
     const params = useParams();
     const [refresh, setRefresh] = useAtom(state.refreshAnime)
     
-   
 
     useEffect(() => {
         fetch(`https://api.jikan.moe/v4/anime/${params.id}/full`)
@@ -47,7 +47,7 @@ export default function ShowAnime() {
                             <p className=" font-fantasy text-3xl tracking-wide text-center mt-5">{anime.title}</p>
                             <div className="my-1"><RatingStarts rating={anime.score} members={anime.scored_by} /></div>
 
-                            <div className="flex justify-around  my-5">
+                            <div className="flex justify-around  my-3">
                                 <DetailComp detail={anime.type ? anime.type : "Unknown"} />
                                 <p className=" font-extrabold p-2">|</p>
                                 <DetailComp detail={anime.rank ? `Rank #${anime.rank}` : "Unranked"} />
@@ -56,7 +56,7 @@ export default function ShowAnime() {
                             </div>
 
 
-                            <div className="flex flex-col items-center mt-5">
+                            <div className="flex flex-col items-center mt-3">
                                 <p className="text-2xl">~  Genres  ~</p>
                                 <div className="flex flex-wrap mt-3">
                                     {anime.genres ? anime.genres.map((gen, index) => <div key={index} className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 p-1 rounded-xl mx-[0.3rem] mt-[0.3rem] text-black_first_theme">{gen.name}</div>) : <div>No specified genres</div>}
@@ -70,6 +70,7 @@ export default function ShowAnime() {
                                 <p className="my-1">Status - {anime.status ? anime.status : "Unknown"}</p>
                                 <p className="my-1">Season - {anime.season ? anime.season.toUpperCase() : "Unknown"}</p>
                             </div>
+                             {/* <EditAnimeStatus numberOfEpisodes={anime.episodes}/> */}
 
                         </div>
 
@@ -78,9 +79,13 @@ export default function ShowAnime() {
 
                    <EditAnimeStatus numberOfEpisodes={anime.episodes}/>
 
-                    <div className="mt-3 p-2">
+                    <div className="mt-7 p-2 grid grid-cols-10 text-fifth_color_theme">
+                        <div className="col-span-3">
                         <p className="ml-3 text-3xl font-fantasy" >Description </p>
-                        <p className=" text-md font-bold ">{anime.synopsis}</p>
+                        <p className=" text-md font-bold p-3">{anime.synopsis}</p>
+                        </div>
+
+                        <AnimeRecomandation />
                     </div>
 
 

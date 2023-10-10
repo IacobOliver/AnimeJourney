@@ -3,16 +3,13 @@ import { useState, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import state from "../Atom";
+import AnimeCard from "./AnimeCard";
 
 export default function AnimeList() {
     const [animeNewSeasons, setAnimeNewSeasons] = useState(null)
      const [newSeasonPage, setNewSeasonPage] = useAtom(state.newSeasonPage);
     const [[filter, filterValue], setFilter] = useAtom(state.newSeasonFilter)
 
-    const [play, setPlay] = useAtom(state.play);
-    const [mute , setMute] = useAtom(state.mute)
-
-    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(`http://localhost:8080/newAnimeSeasons/getAnime`, {
@@ -32,33 +29,7 @@ export default function AnimeList() {
                 setAnimeNewSeasons(data)
             })
     }, [newSeasonPage])
-
-
-
-    const AnimeCard = ({ image, title, airedFrom, type, animeId }) => {
-        return (
-            <div className="h-9/10 w-44 rounded-lg flex flex-col relative">
-                <div className="w-full h-full top-0 left-0 absolute hover:bg-[rgba(0,0,0,0.5)]"  onClick={() => handleAnimeCardEvent(animeId)}/>
-                <div className=" h-60 rounded-t-lg bg-center bg-cover p-2" style={{ backgroundImage: `url(${image})` }}></div>
-                <div className="text-gray-400 bg-black_second_theme font-semibold tracking-wide font-serif text-center text-xs mt-0 rounded-b-lg flex justify-around">
-                    <div> {airedFrom}</div>
-                    <div>•</div>
-                    <div>{type}</div>
-                </div>
-
-                <div className=" text-fifth_color_theme font-serif font-semibold text-left text-md mx-2 mt-2 line-clamp-2 tracking-normal">
-                    {title}
-                </div>
-
-            </div>
-        )
-    }
-
-    const handleAnimeCardEvent = (animeId) =>{
-        setPlay(true)
-        setMute(false)
-        navigate(`/anime/${animeId}`)
-    }
+    
 
     const FilterButton = ({name}) =>{
         return <button onClick={(e) => selectFilter(e.target.textContent)} className={`${filterValue == name ? "bg-black_second_theme text-white" : ""} text-md text-gray-500 hover:text-fifth_color_theme font-fantasy tracking-wide p-3 mx-1 rounded-lg`}>{name}</button>
