@@ -54,6 +54,28 @@ module.exports = withMT({
         'fantasy': ['"Impact"', 'fantasy'], // Add a fantasy font
         // Add more custom font families here as needed
       },
+      keyframes: {
+        wave: {
+          '0%': { transform: 'rotate(0.0deg)' },
+          '10%': { transform: 'rotate(14deg)' },
+          '20%': { transform: 'rotate(-8deg)' },
+          '30%': { transform: 'rotate(14deg)' },
+          '40%': { transform: 'rotate(-4deg)' },
+          '50%': { transform: 'rotate(10.0deg)' },
+          '60%': { transform: 'rotate(0.0deg)' },
+          '100%': { transform: 'rotate(0.0deg)' },
+        },
+        popIn : {
+          '0%': { width : "3.5rem", height : "3.5rem"},
+          '50%': { width : "6.5rem", height : "6.5rem" },
+          '100%': { width : "3.5rem", height : "3.5rem"},
+         
+        }
+      },
+      animation: {
+        'waving-hand': 'wave 2s linear infinite',
+         'icon-pop-in' : "popIn 0.5s ease-in-out 1",
+      },
       
     },
   },

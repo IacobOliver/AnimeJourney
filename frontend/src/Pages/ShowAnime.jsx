@@ -1,16 +1,18 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useAtom } from "jotai";
 import state from "../Components/Atom";
 import RatingStarts from "../Components/ExploreComponents/RatingStars";
 import TrailerComponent from "../Components/ShowAnimeComponents/TrailerComponent"
+import EditAnimeStatus from "../Components/ShowAnimeComponents/EditAnimeStatus";
 
 export default function ShowAnime() {
     const [anime, setAnime] = useState(null);
     const params = useParams();
     const [refresh, setRefresh] = useAtom(state.refreshAnime)
- 
+    
+   
 
     useEffect(() => {
         fetch(`https://api.jikan.moe/v4/anime/${params.id}/full`)
@@ -22,7 +24,7 @@ export default function ShowAnime() {
 
     }, [refresh])
 
-   
+
 
     const DetailComp = ({ detail }) => {
         return (
@@ -31,10 +33,6 @@ export default function ShowAnime() {
             </div>)
     }
 
-
-    const Option = ({text, id}) =>{
-        return (<option className="bg-gray-800">{text}</option>)
-    }
 
     return (
         <>
@@ -75,47 +73,17 @@ export default function ShowAnime() {
 
                         </div>
 
-                        <TrailerComponent anime={anime}/>
+                        <TrailerComponent anime={anime} />
                     </div>
 
-                    <div className=" h-14 flex justify-center items-center">
-                        <select className="bg-transparent rounded-lg mx-5">
-                            <Option text={"Plan To Watch"}/>
-                            <Option text={"Watching"}/>
-                            <Option text={"Completed"}/>
-                            <Option text={"On-Hold"}/>
-                            <Option text={"Dropped"}/>
-                        </select>
-
-                        <select className="bg-transparent rounded-lg mx-5">
-                        <Option text={"SELECT"}/>
-                            <Option text={1}/>
-                            <Option text={2}/>
-                            <Option text={3}/>
-                            <Option text={4}/>
-                            <Option text={5}/>
-                            <Option text={6}/>
-                            <Option text={7}/>
-                            <Option text={8}/>
-                            <Option text={9}/>
-                            <Option text={10}/>
-                            
-                        </select>
-
-                        <div className="flex mx-5 items-center border bottom-5">
-                            <p>Episodes : </p>
-                            <input className="bg-transparent border-0 focus:border-0 w-16" type="number"/>
-                            <p>/{anime.episodes}</p>
-                        </div>
-
-                    </div>
+                   <EditAnimeStatus numberOfEpisodes={anime.episodes}/>
 
                     <div className="mt-3 p-2">
-                    <p className="ml-3 text-3xl font-fantasy" >Description </p>
-                    <p className=" text-md font-bold ">{anime.synopsis}</p>
+                        <p className="ml-3 text-3xl font-fantasy" >Description </p>
+                        <p className=" text-md font-bold ">{anime.synopsis}</p>
                     </div>
 
-                   
+
 
 
                 </div> : null}

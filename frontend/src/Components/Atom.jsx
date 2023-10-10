@@ -8,8 +8,7 @@ play : atom(true),
 mute :atom(false), 
 
 newSeasonFilter : atom(["","All"]),
-newSeasonPage : atom(0.1)
-
+newSeasonPage : atom(0.1),
 
 };
 export default state;
