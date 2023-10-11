@@ -27,7 +27,7 @@ export default function AnimeCard({ image, title, airedFrom, type, animeId }){
                 <div>{type}</div>
             </div>
 
-            <div className=" text-fifth_color_theme font-serif font-semibold text-left text-md mx-2 mt-2 line-clamp-2 tracking-normal">
+            <div className=" text-fifth_color_theme font-serif font-semibold text-left text-md mx-2 mt-2 line-clamp-2 h-[3.2rem]">
                 {title}
             </div>
 

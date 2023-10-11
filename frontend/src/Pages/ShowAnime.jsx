@@ -12,17 +12,23 @@ export default function ShowAnime() {
     const [anime, setAnime] = useState(null);
     const params = useParams();
     const [refresh, setRefresh] = useAtom(state.refreshAnime)
-    
+
 
     useEffect(() => {
-        fetch(`https://api.jikan.moe/v4/anime/${params.id}/full`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                setAnime(data.data)
-            })
-
-    }, [refresh])
+        Promise.all([
+          fetch(`https://api.jikan.moe/v4/anime/${params.id}/full`),
+          fetch(`https://api.jikan.moe/v4/anime/${params.id}/characters`),
+        ])
+          .then(([anime, characters]) => 
+            Promise.all([anime.json(), characters.json()])
+          )
+          .then(([anime, characters]) => {
+            setAnime(anime.data);
+            console.log(anime)
+            console.log("Characters : " , characters)
+           
+          });
+      }, [refresh]);
 
 
 
@@ -64,25 +70,28 @@ export default function ShowAnime() {
 
                             </div>
 
-                            <div className="p-3 flex flex-col items-center">
+                            {/* <div className="p-3 flex flex-col items-center">
                                 <p className="text-2xl mt-5 mb-3"> ~  Other Details  ~</p>
                                 <p className="my-1 line-clamp-1">Rating :  {anime.rating ? anime.rating : " - "}</p>
                                 <p className="my-1">Status - {anime.status ? anime.status : "Unknown"}</p>
                                 <p className="my-1">Season - {anime.season ? anime.season.toUpperCase() : "Unknown"}</p>
-                            </div>
-                             {/* <EditAnimeStatus numberOfEpisodes={anime.episodes}/> */}
+                            </div> */}
+                            <EditAnimeStatus numberOfEpisodes={anime.episodes}/>
 
                         </div>
 
                         <TrailerComponent anime={anime} />
                     </div>
 
-                   <EditAnimeStatus numberOfEpisodes={anime.episodes}/>
+                    
+
+                    {/* <EditAnimeStatus numberOfEpisodes={anime.episodes} /> */}
 
                     <div className="mt-7 p-2 grid grid-cols-10 text-fifth_color_theme">
-                        <div className="col-span-3">
-                        <p className="ml-3 text-3xl font-fantasy" >Description </p>
-                        <p className=" text-md font-bold p-3">{anime.synopsis}</p>
+
+                        <div className="col-span-2 bg-black_second_theme rounded-xl p-2 mr-2">
+                            <p className="ml-3 mb-1 text-3xl font-fantasy" >Description </p>
+                            <p className=" text-md font-bold">{anime.synopsis}</p>
                         </div>
 
                         <AnimeRecomandation />
