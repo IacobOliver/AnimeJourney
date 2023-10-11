@@ -97,7 +97,7 @@ export default function Layout() {
                             resultStringKeyName="title"
                             fuseOptions={{ keys: ["title", "title_english"] }}
                             placeholder="Search anime... "
-                            className=" rounded-xl w-full z-10"
+                            className=" rounded-xl w-full z-30"
                             styling={{
                                 backgroundColor: "black",
                                 border: "0px",

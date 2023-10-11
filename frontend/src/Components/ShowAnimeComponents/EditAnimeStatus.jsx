@@ -36,7 +36,7 @@ export default function EditAnimeStatus({numberOfEpisodes}){
         </div>
 
         <div className="flex">
-        <select value={status} onChange={(e) =>  setStatus(e.target.value)} className="mr-1 hover:bg-black_first_theme bg-black_second_theme mb-2 border border-black_second_theme rounded-lg h-14 focus:border-black_second_theme focus:ring-0 w-1/2">
+        <select value={status} onChange={(e) =>  setStatus(e.target.value)} className="mr-1 hover:bg-black_first_theme bg-black_second_theme mb-2 border border-black_second_theme rounded-lg h-14 focus:border-black_second_theme focus:ring-0 w-full">
             <Option id={0} text={"Plan To Watch"} />
             <Option id={1} text={"Watching"} />
             <Option id={2} text={"Completed"} />
@@ -44,7 +44,7 @@ export default function EditAnimeStatus({numberOfEpisodes}){
             <Option id={4} text={"Dropped"} />
         </select>
 
-        <div className="bg-black_second_theme group hover:bg-black_first_theme flex w-1/2 h-14 items-center border border-black_second_theme rounded-xl px-3 ">
+        <div className="bg-black_second_theme group hover:bg-black_first_theme flex w-full h-14 items-center border border-black_second_theme rounded-xl px-3 ">
             <p>Episodes : </p>
             <input className="bg-black_second_theme group-hover:bg-black_first_theme borber border-0 focus:border-none focus:ring-0 w-5 text-right p-1" type="number" defaultValue={0} />
             <p className="flex"> / {numberOfEpisodes ? numberOfEpisodes : "?"}</p>

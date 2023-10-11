@@ -29,13 +29,13 @@ export default function AnimeRecomandation() {
         <div className="col-span-8 grid grid-cols-6">
             
 
-            <p className="col-span-7 text-3xl font-fantasy mb-3">Recomended if you like this anime ♥</p>
+            <p className="col-span-7 text-3xl font-fantasy mb-3 ml-3">Recommended if you like this anime ♥</p>
 
             {animeRec.length != 0 ? 
            animeRec.map((anime, index) => <AnimeCard key={index} image={anime.entry.images.jpg.image_url} title={anime.entry.title} animeId={anime.entry.mal_id}/>)
             : 
             <div className="col-span-7">
-                <p className="text-center text-3xl font-fantasy tracking-wide">Can't find any recomandation</p>
+                <p className="text-center text-3xl font-fantasy tracking-wide">Can't find any recommandation</p>
                 <Loading />
                 </div>
         
