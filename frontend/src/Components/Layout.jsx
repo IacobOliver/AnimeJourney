@@ -9,10 +9,12 @@ import state from "./Atom"
 
 export default function Layout() {
     const [items, setItems] = useState([])
-    const navigate = useNavigate();
     const [refresh, setRefresh] = useAtom(state.refreshAnime)
     const [play, setPlay] = useAtom(state.play);
     const [mute , setMute] = useAtom(state.mute)
+    
+    const navigate = useNavigate();
+
 
     const handleOnSearch = (string, results) => {
         fetch(`https://api.jikan.moe/v4/anime?q=${string}&sfw=true`)
@@ -24,13 +26,10 @@ export default function Layout() {
     }
 
     const handleOnHover = (result) => {
-        // the item hovered
         console.log(result)
     }
 
     const handleOnSelect = (item) => {
-        // the item selected
-        console.log(item)
         setRefresh( refresh + 1)
         setPlay(true)
         setMute(false)
@@ -65,7 +64,7 @@ export default function Layout() {
 
 
     return (
-        <div className="flex justify-center w-screen h-16 rounded-xl py-2">
+        <div className="flex justify-center w-screen h-16 rounded-xl py-2 z-10">
             <div className="flex items-center w-9,9/10 h-16 rounded-xl bg-black_second_theme justify-between">
 
 
@@ -105,9 +104,6 @@ export default function Layout() {
                                 color: "#E2E5DE",
                                 position: "relative",
                                 hoverBackgroundColor: "#292929",
-                                
-                
-                                
                             }}
                         />
                     </div>
@@ -115,7 +111,7 @@ export default function Layout() {
 
 
                 <div className="flex items-center h-full w-1/4 justify-end">
-                    <button className="relative inline-flex items-center justify-center mr-2 overflow-hidden font-medium rounded-lg group 
+                    <button onClick={() => navigate("/logIn")} className="relative inline-flex items-center justify-center mr-2 overflow-hidden font-medium rounded-lg group 
                                 bg-gradient-to-br from-orange-500 to-red-600 group-hover:from-orange-500 group-hover:to-red-600
                                  hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 text-black_first_theme text-md ">
                         <span className=" flex items-center relative px-5 py-1.5 transition-all ease-in duration-75 dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 bg-forth_color_theme font-medium">
