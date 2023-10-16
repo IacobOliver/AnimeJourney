@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import CostumInput from "./CostumInput";
 import { useRef } from "react";
-
+import { checking } from "../../Components/Utils";
 
 
 
@@ -11,13 +11,32 @@ export default function LogIn() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
+  const onSubmit = () =>{
+    let authResponse = {
+      email : emailRef.current.value,
+      password : passwordRef.current.value,
+    }
+
+    checking.email(emailRef)  
+    checking.password(passwordRef)
+    
+    if(
+    checking.email(emailRef) && 
+    checking.password(passwordRef)
+    ){
+      console.log('Ok')
+    }
+
+  
+  }
+
 
   return (
-    <div className="bg-gray-900 w-full h-screen flex justify-center bg-center bg-cover mt-5" style={{ backgroundImage: `url(../../../public/zoro.jpg)` }}>
+    <div className="w-full h-screen flex justify-center bg-center bg-cover mt-3" style={{ backgroundImage: `url(../../../public/zoro.jpg)` }}>
 
-      <div className="w-fit bg-black_second_theme h-[30rem] mt-20 rounded-xl text-fifth_color_theme font-fantasy tracking-wide p-3 flex">
+      <div className=" bg-black_second_theme w-fit h-fit mt-20 rounded-xl text-fifth_color_theme font-fantasy tracking-wide p-3 flex">
 
-        <img src="../../../public/form/luffy1.png" />
+        <img className="h-[30rem]" src="../../../public/form/luffy1.png" />
 
         <div className="w-96 flex flex-col justify-evenly">
 
@@ -26,12 +45,12 @@ export default function LogIn() {
             <p className="text-center"> Hehe , Nice to see you !  </p>
 
             <div className="mt-10">
-              <CostumInput placeHolder={"Email"} reff={emailRef} />
-              <CostumInput placeHolder={"Password"} reff={passwordRef} />
+              <CostumInput placeHolder={"Email"} reff={emailRef} icon = "user"/>
+              <CostumInput placeHolder={"Password"} reff={passwordRef} icon = "lock" isPassword={1}/>
             </div>
 
             <div className="flex justify-center mt-5">
-              <button className="relative inline-flex items-center justify-center mr-2 overflow-hidden font-medium rounded-lg group 
+              <button onClick = {onSubmit} className="relative inline-flex items-center justify-center mr-2 overflow-hidden font-medium rounded-lg group 
                                 bg-gradient-to-br from-orange-500 to-red-600 group-hover:from-orange-500 group-hover:to-red-600
                                  hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 text-black_first_theme text-md ">
                 <span className=" flex items-center relative px-5 py-1.5 transition-all ease-in duration-75 dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 bg-forth_color_theme font-medium">
@@ -40,7 +59,7 @@ export default function LogIn() {
               </button>
             </div>
 
-            <p className="mt-40 text-right">Don't have an account? <button className="text-forth_color_theme text-lg" onClick={() => navigate("/singIn")}>Register </button></p>
+            <p className="mt-20 text-right">Don't have an account? <button className="text-forth_color_theme text-lg" onClick={() => navigate("/singIn")}>Register </button></p>
           </div>
         </div>
 

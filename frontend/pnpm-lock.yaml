@@ -8,6 +8,9 @@ dependencies:
   '@material-tailwind/react':
     specifier: ^2.1.1
     version: 2.1.1(react-dom@18.2.0)(react@18.2.0)
+  email-validator:
+    specifier: ^2.0.4
+    version: 2.0.4
   flowbite:
     specifier: ^1.8.1
     version: 1.8.1
@@ -1156,6 +1159,11 @@ packages:
 
   /electron-to-chromium@1.4.510:
     resolution: {integrity: sha512-xPfLIPFcN/WLXBpQ/K4UgE98oUBO5Tia6BD4rkSR0wE7ep/PwBVlgvPJQrIBpmJGVAmUzwPKuDbVt9XV6+uC2g==}
+
+  /email-validator@2.0.4:
+    resolution: {integrity: sha512-gYCwo7kh5S3IDyZPLZf6hSS0MnZT8QmJFqYvbqlDZSbwdZlY6QZWxJ4i/6UhITOJ4XzyI647Bm2MXKCLqnJ4nQ==}
+    engines: {node: '>4.0'}
+    dev: false
 
   /es-abstract@1.22.1:
     resolution: {integrity: sha512-ioRRcXMO6OFyRpyzV3kE1IIBd4WG5/kltnzdxSCqoP8CMGs/Li+M1uF5o7lOkZVFjDs+NLesthnF66Pg/0q0Lw==}
