@@ -26,7 +26,7 @@ public class SavedAnimeUserDetails {
     @JsonManagedReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
-    private SavedAnimeFrontDetails savedAnimeFrontDetails;
+    private SavedFrontAnimeDetails savedAnimeFrontDetails;
 
     @JsonManagedReference
     @ManyToOne(fetch = FetchType.EAGER)
