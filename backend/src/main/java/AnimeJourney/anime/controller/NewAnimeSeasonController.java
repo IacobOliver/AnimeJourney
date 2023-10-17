@@ -1,8 +1,8 @@
-package AnimeJourney.controller;
+package AnimeJourney.anime.controller;
 
-import AnimeJourney.model.NewAnimeSeason;
-import AnimeJourney.service.FetchResponse;
-import AnimeJourney.service.NewAnimeSeasonService;
+import AnimeJourney.anime.model.NewAnimeSeason;
+import AnimeJourney.anime.service.FetchResponse;
+import AnimeJourney.anime.service.NewAnimeSeasonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package AnimeJourney.service;
+package AnimeJourney.anime.service;
 
 import lombok.Builder;
 import lombok.Data;

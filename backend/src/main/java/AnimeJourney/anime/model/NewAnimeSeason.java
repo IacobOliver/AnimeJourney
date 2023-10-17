@@ -1,4 +1,4 @@
-package AnimeJourney.model;
+package AnimeJourney.anime.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

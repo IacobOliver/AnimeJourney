@@ -1,8 +1,8 @@
-package AnimeJourney.service;
+package AnimeJourney.anime.service;
 
-import AnimeJourney.controller.PaginationResponse;
-import AnimeJourney.model.NewAnimeSeason;
-import AnimeJourney.repository.NewAnimeSeasonRepository;
+import AnimeJourney.anime.controller.PaginationResponse;
+import AnimeJourney.anime.repository.NewAnimeSeasonRepository;
+import AnimeJourney.anime.model.NewAnimeSeason;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

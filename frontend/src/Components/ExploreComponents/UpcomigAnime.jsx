@@ -51,7 +51,7 @@ export default function UpcomingAnime() {
     return (<div className="col-span-3 max-h-full ">
         <div className="flex items-center justify-center text-fifth_color_theme font-fantasy tracking-wide">
             <p className="text-2xl p-4">Upcoming Anime</p>
-            <button className="p-1 text-lg hover:animate-spin" onClick={moreAnime}><i class="fa-solid fa-arrows-rotate"></i></button>
+            <button className="p-1 text-lg hover:animate-spin" onClick={moreAnime}><i className="fa-solid fa-arrows-rotate"></i></button>
         </div>
 
         <div className="px-7 border-l-4 border-l-black_second_theme">

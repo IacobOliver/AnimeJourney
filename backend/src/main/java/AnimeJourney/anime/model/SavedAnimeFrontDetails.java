@@ -1,33 +1,34 @@
 package AnimeJourney.anime.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SavedAnime {
+public class SavedAnimeFrontDetails {
 
     @Id
     @GeneratedValue
     private long id;
-
-    private String status;
-    private int myScore;
-    private int episodesCount;
-    private int watchedEpisodes;
 
     private long animeId;
     private String title;
     private String animeScore;
     private String type;
     private String image;
+    private int episodesCount;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "savedAnimeFrontDetails", fetch = FetchType.LAZY)
+    private List<SavedAnimeUserDetails> savedAnimeUserDetails;
 }

@@ -1,4 +1,4 @@
-package AnimeJourney.model;
+package AnimeJourney.anime.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import jakarta.persistence.*;

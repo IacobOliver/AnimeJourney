@@ -1,6 +1,6 @@
-package AnimeJourney.repository;
+package AnimeJourney.anime.repository;
 
-import AnimeJourney.model.NewAnimeSeason;
+import AnimeJourney.anime.model.NewAnimeSeason;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

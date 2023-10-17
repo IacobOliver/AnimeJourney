@@ -1,7 +1,7 @@
-package AnimeJourney.service;
+package AnimeJourney.anime.service;
 
-import AnimeJourney.model.TopAnime;
-import AnimeJourney.repository.TopAnimeRepository;
+import AnimeJourney.anime.repository.TopAnimeRepository;
+import AnimeJourney.anime.model.TopAnime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
