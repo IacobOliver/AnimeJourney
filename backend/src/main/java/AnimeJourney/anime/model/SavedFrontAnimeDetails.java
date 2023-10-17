@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SavedAnimeFrontDetails {
+public class SavedFrontAnimeDetails {
 
     @Id
     @GeneratedValue
@@ -23,12 +23,12 @@ public class SavedAnimeFrontDetails {
 
     private long animeId;
     private String title;
-    private String animeScore;
+    private double animeScore;
     private String type;
     private String image;
     private int episodesCount;
 
     @JsonBackReference
     @OneToMany(mappedBy = "savedAnimeFrontDetails", fetch = FetchType.LAZY)
-    private List<SavedAnimeUserDetails> savedAnimeUserDetails;
+    private List<SavedUserAnimeDetails> savedAnimeUserDetails;
 }

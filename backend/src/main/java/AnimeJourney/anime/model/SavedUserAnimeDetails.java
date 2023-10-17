@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SavedAnimeUserDetails {
+public class SavedUserAnimeDetails {
     @Id
     @GeneratedValue
     private long id;
@@ -23,12 +23,12 @@ public class SavedAnimeUserDetails {
     private int myScore;
     private int watchedEpisodes;
 
-    @JsonManagedReference
+//    @JsonManagedReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
     private SavedFrontAnimeDetails savedAnimeFrontDetails;
 
-    @JsonManagedReference
+//    @JsonManagedReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
     private User user;
