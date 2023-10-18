@@ -49,7 +49,6 @@ export const checking = {
   },
 
   email: (e) => {
-    console.log("in email")
     if (validate(e.current.value)) {
       makeGreen(e)
       return true
@@ -60,7 +59,6 @@ export const checking = {
   },
 
   password: (e) => {
-    console.log("inPass")
     if (e.current.value.length < 7) {
       makeRed(e)
       return false

@@ -3,6 +3,7 @@ package AnimeJourney.auth.model;
 
 import AnimeJourney.anime.model.SavedUserAnimeDetails;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,6 +30,8 @@ public class User implements UserDetails {
 
     private String username;
     private String email;
+
+    @JsonIgnore
     private String password;
 
     @Enumerated(EnumType.STRING)

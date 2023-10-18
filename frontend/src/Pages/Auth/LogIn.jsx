@@ -24,11 +24,21 @@ export default function LogIn() {
     checking.email(emailRef) && 
     checking.password(passwordRef)
     ){
-      console.log('Ok')
+      fetch("http://localhost:8080/users/auth/authenticate",{
+        method : "POST",
+        headers: {
+          "Content-Type" : "application/json"
+        },
+        body : JSON.stringify(authResponse)
+      })
+      .then(res => res.json())
+      .then(data => {
+        localStorage.setItem("token", data.token)
+        console.log(localStorage.getItem("token"))
+      })
+      .catch( err => console.error(err))
     }
-
-  
-  }
+    }
 
 
   return (
@@ -45,8 +55,8 @@ export default function LogIn() {
             <p className="text-center"> Hehe , Nice to see you !  </p>
 
             <div className="mt-10">
-              <CostumInput placeHolder={"Email"} reff={emailRef} icon = "user"/>
-              <CostumInput placeHolder={"Password"} reff={passwordRef} icon = "lock" isPassword={1}/>
+              <CostumInput placeHolder={"Email"} reff={emailRef} icon = "user" value={"oli@gmail.com"}/>
+              <CostumInput placeHolder={"Password"} reff={passwordRef} icon = "lock" isPassword={1} value = {1234567}/>
             </div>
 
             <div className="flex justify-center mt-5">

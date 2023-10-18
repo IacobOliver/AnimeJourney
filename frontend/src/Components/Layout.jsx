@@ -10,6 +10,7 @@ import state from "./Atom"
 export default function Layout() {
     const [items, setItems] = useState([])
     const [refresh, setRefresh] = useAtom(state.refreshAnime)
+    const [isLoggedIn, setIsLoggedIn] = useAtom(state.isLoggedIn)
     const [play, setPlay] = useAtom(state.play);
     const [mute , setMute] = useAtom(state.mute)
     
@@ -111,6 +112,9 @@ export default function Layout() {
 
 
                 <div className="flex items-center h-full w-1/4 justify-end">
+                    {isLoggedIn ? <div className="w-5 h-5 bg-white mr-5"></div> 
+                    :
+                    
                     <button onClick={() => navigate("/logIn")} className="relative inline-flex items-center justify-center mr-2 overflow-hidden font-medium rounded-lg group 
                                 bg-gradient-to-br from-orange-500 to-red-600 group-hover:from-orange-500 group-hover:to-red-600
                                  hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 text-black_first_theme text-md ">
@@ -119,6 +123,10 @@ export default function Layout() {
                             <i className="fa-solid fa-arrow-right-to-bracket ml-2 text-xl"></i>
                         </span>
                     </button>
+                    
+                    
+                    }
+
                 </div>
 
             </div>

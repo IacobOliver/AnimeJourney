@@ -14,7 +14,13 @@ export default function CarouselCustomNavigation() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:8080/topAnime/getRandomAnime/10")
+    fetch("http://localhost:8080/topAnime/getRandomAnime/10", {
+      method : "GET",
+      headers : {
+        "Content-Type": "application/json",
+        Authorization : `Bearer ${localStorage.getItem("token")}`
+      }
+    })
       .then(res => res.json())
       .then(data => {
         console.log("RANDOM ANIME: ", data)

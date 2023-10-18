@@ -30,7 +30,19 @@ export default function SignIn() {
     checking.passwordConf(passwordRef, passwordConfRef)
     
     ){
-      console.log('Ok')
+      fetch("http://localhost:8080/users/auth/register",{
+        method : "POST",
+        headers: {
+          "Content-Type" : "application/json"
+        },
+        body : JSON.stringify(authResponse)
+      })
+      .then(res => res.json())
+      .then(data => {
+        localStorage.setItem("token", data.token)
+        console.log(localStorage.getItem("token"))
+      })
+      .catch( err => console.error(err))
     }
 
   
@@ -47,10 +59,10 @@ export default function SignIn() {
         <p className="text-center"> Welcome Aboard </p>
 
         <div className="mt-10">
-          <CostumInput placeHolder={"Username"} reff={userNameRef} icon = "user"/>
-          <CostumInput placeHolder={"Email"} reff={emailRef} icon = "envelope"/>
-          <CostumInput placeHolder={"Password"} reff={passwordRef} icon = "lock" isPassword={1} />
-          <CostumInput placeHolder={"Password Confirmation"} reff={passwordConfRef}  icon = "lock" isPassword={1}/>
+          <CostumInput placeHolder={"Username"} reff={userNameRef} icon = "user" value={"oli"}/>
+          <CostumInput placeHolder={"Email"} reff={emailRef} icon = "envelope" value= {"oli@gmail.com"}/>
+          <CostumInput placeHolder={"Password"} reff={passwordRef} icon = "lock" isPassword={1} value={1234567}/>
+          <CostumInput placeHolder={"Password Confirmation"} reff={passwordConfRef}  icon = "lock" isPassword={1} value={1234567}/>
         </div>
 
 
