@@ -27,8 +27,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth.requestMatchers(
                         "users/auth/**",
-                        "newAnimeSeasons/getAnime"
-//                        "topAnime/getRandomAnime/**"
+                        "newAnimeSeasons/getAnime",
+                        "topAnime/getRandomAnime/**"
                         )
                         .permitAll()
                         .anyRequest()

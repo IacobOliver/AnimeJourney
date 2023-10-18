@@ -1,6 +1,7 @@
 package AnimeJourney.anime.model;
 
 import AnimeJourney.auth.model.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,8 +24,8 @@ public class SavedUserAnimeDetails {
     private int myScore;
     private int watchedEpisodes;
 
-//    @JsonManagedReference
-    @ManyToOne(fetch = FetchType.EAGER)
+
+    @ManyToOne
     @JoinColumn
     private SavedFrontAnimeDetails savedAnimeFrontDetails;
 

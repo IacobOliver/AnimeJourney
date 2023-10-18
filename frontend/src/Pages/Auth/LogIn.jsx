@@ -33,10 +33,12 @@ export default function LogIn() {
       })
       .then(res => res.json())
       .then(data => {
-        localStorage.setItem("token", data.token)
+        localStorage.setItem("token", data.response)
         console.log(localStorage.getItem("token"))
       })
-      .catch( err => console.error(err))
+      .catch( err => {
+        console.log("nene")
+        console.error(err)})
     }
     }
 

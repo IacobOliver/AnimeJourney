@@ -39,7 +39,7 @@ export default function SignIn() {
       })
       .then(res => res.json())
       .then(data => {
-        localStorage.setItem("token", data.token)
+        localStorage.setItem("token", data.response)
         console.log(localStorage.getItem("token"))
       })
       .catch( err => console.error(err))
