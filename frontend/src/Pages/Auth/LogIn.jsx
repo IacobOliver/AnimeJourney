@@ -4,7 +4,7 @@ import CostumInput from "./CostumInput";
 import { useRef } from "react";
 import state from "../../Components/Atom";
 import { useAtom } from "jotai";
-import { checking } from "../../Components/Utils";
+import { checking, Utils } from "../../Components/Utils";
 import Alert from "./Alert";
 
 
@@ -16,6 +16,7 @@ export default function LogIn() {
   const alertRef = useRef(null);
 
   const [isLoggedIn, setIsLoggedIn] = useAtom(state.isLoggedIn)
+  const [user, setUser] = useAtom(state.user)
 
   const onSubmit = () =>{
     alertRef.current.classList.remove("hidden")
@@ -45,7 +46,10 @@ export default function LogIn() {
       .then(data => {
         localStorage.setItem("token", data.response)
         console.log(localStorage.getItem("token"))
+        
         setIsLoggedIn(true);
+        Utils.logInWithToken({setUser, setIsLoggedIn});
+
         navigate("/home")
       })
       .catch( err => {
@@ -56,6 +60,8 @@ export default function LogIn() {
         console.error(err)})
     }
     }
+
+    
 
 
   return (

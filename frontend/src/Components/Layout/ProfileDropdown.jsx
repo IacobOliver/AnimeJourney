@@ -10,48 +10,25 @@ import {
     ListItemPrefix,
     popover,
   } from "@material-tailwind/react";
-
-
-  const theme = {
-    popover: {
-      defaultProps: {
-        placement: "top",
-        offset: 5,
-        dismiss: {},
-        animate: {
-          unmount: {},
-          mount: {},
-        },
-        className: "",
-      },
-      styles: {
-        base: {
-          bg: "bg-white",
-          p: "p-4",
-          border: "border border-blue-gray-50",
-          borderRadius: "rounded-lg",
-          boxShadow: "shadow-lg shadow-blue-gray-500/10",
-          fontFamily: "font-sans",
-          fontSize: "text-sm",
-          fontWeight: "font-normal",
-          color: "text-blue-gray-500",
-          outline: "focus:outline-none",
-          overflowWrap: "break-words",
-          whiteSpace: "whitespace-normal",
-        },
-      },
-    },
-  };
+  import state from "../Atom";
+  import { useAtom } from "jotai";
 
 
 export default function ProfileDropdown() {
+    const [user, setUset] = useAtom(state.user)
+
+  const signOut = () =>{
+    localStorage.removeItem("token");
+  }
+
+
   return (
     <div className="mr-10">
     <Popover placement="bottom-end">
     <PopoverHandler>
     
     <Typography variant="h6" color="white" className="flex items-center">
-            <p className="mr-3">Tania Andrew</p>
+            <p className="mr-3">{user ?  user.memberName : ""}</p>
             <Avatar src="/icons/9.jpg"/>
           </Typography>
     </PopoverHandler>
@@ -61,22 +38,22 @@ export default function ProfileDropdown() {
         <Avatar src="/icons/9.jpg"/>
         <div>
           <Typography variant="h6" color="white">
-            Tania Andrew
+          {user ?  user.memberName : ""}
           </Typography>
           
         </div>
       </div>
       <List className="p-0 bg-black_second_theme">
-        <a href="#" className="text-initial font-medium text-fifth_color_theme">
+        <div className="text-initial font-medium text-fifth_color_theme">
           <ListItem>
             <ListItemPrefix>
             <i className="fa-solid fa-user-large text-forth_color_theme"></i>
             </ListItemPrefix>
            Profile
           </ListItem>
-        </a>
+        </div>
        
-        <a href="#" className="text-initial font-medium text-fifth_color_theme">
+        <div className="text-initial font-medium text-fifth_color_theme">
           <ListItem>
             <ListItemPrefix>
               <svg
@@ -98,10 +75,10 @@ export default function ProfileDropdown() {
             </ListItemPrefix>
             Contact
           </ListItem>
-        </a>
+        </div>
 
         <a href="http://localhost:5173/home" className=" font-medium text-fifth_color_theme ">
-          <ListItem className="flex justify-center">
+          <ListItem className="flex justify-center" onClick={signOut}>
             <ListItemPrefix>
             <i className="fa-solid fa-arrow-right-from-bracket text-forth_color_theme"></i>
             </ListItemPrefix>

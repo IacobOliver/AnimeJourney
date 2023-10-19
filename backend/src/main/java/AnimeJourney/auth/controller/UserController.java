@@ -25,9 +25,13 @@ public class UserController {
 
     @CrossOrigin("http://localhost:5173")
     @PostMapping("/auth/authenticate")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody AuthenticationRequest authenticationRequest){
+    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest authenticationRequest){
         return ResponseEntity.ok(userService.authenticate(authenticationRequest));
     }
 
-    
+    @CrossOrigin("http://localhost:5173")
+    @GetMapping("/getUserWithToken")
+    public ResponseEntity<User> getUserWithToken(@RequestHeader("Authorization") String authHeader){
+        return ResponseEntity.ok(userService.getUserWithToken(authHeader));
+    }
 }

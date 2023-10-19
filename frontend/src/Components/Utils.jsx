@@ -1,6 +1,5 @@
 import { validate } from "email-validator"
 
-
 export const Utils = {
   giveRandomDistinctIndexes: (length, howMany) => {
     if (howMany > length && howMany != 2) {
@@ -26,8 +25,22 @@ export const Utils = {
     return result;
   },
 
-  loginWithToken: (token) =>{
+  logInWithToken: ({setUser, setIsLoggedIn}) =>{
     
+    fetch("http://localhost:8080/users/getUserWithToken", {
+      method : "GET",
+      headers : {
+        "Content-Type" : "application/json",
+        Authorization : `Bearer ${localStorage.getItem("token")}`
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      setUser(data);
+      setIsLoggedIn(true)
+    })
+    .catch(err => console.error(err))
   }
 }
 

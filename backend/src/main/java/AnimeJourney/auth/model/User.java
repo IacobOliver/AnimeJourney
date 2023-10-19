@@ -30,7 +30,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String username;
+    private String memberName;
     private String email;
 
     @JsonIgnore

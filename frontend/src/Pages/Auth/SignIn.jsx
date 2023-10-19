@@ -6,6 +6,7 @@ import { useRef } from "react";
 import { checking } from "../../Components/Utils";
 import state from "../../Components/Atom";
 import { useAtom } from "jotai";
+import { Utils } from "../../Components/Utils";
 
 
 
@@ -19,6 +20,7 @@ export default function SignIn() {
   const alertRef = useRef(null);
 
   const [isLoggedIn, setIsLoggedIn] = useAtom(state.isLoggedIn)
+  const [user, setUser] = useAtom(state.user);
 
 
   const onSubmit = () => {
@@ -27,7 +29,7 @@ export default function SignIn() {
     alertRef.current.classList.add("animate-jump-in")
 
     let authResponse = {
-      username: userNameRef.current.value,
+      memberName : userNameRef.current.value,
       email: emailRef.current.value,
       password: passwordRef.current.value,
     }
@@ -54,6 +56,7 @@ export default function SignIn() {
         .then(res => res.json())
         .then(data => {
           localStorage.setItem("token", data.response)
+          console.log(authResponse)
           console.log(data.response)
 
           if(data.response == 3){
@@ -67,7 +70,7 @@ export default function SignIn() {
             checking.invalidField(userNameRef)
             alertRef.current.firstChild.textContent = "Username allready in use"
           }else{
-            setIsLoggedIn(true);
+            Utils.logInWithToken({setIsLoggedIn, setUser})
             navigate("/home")
           }
         })

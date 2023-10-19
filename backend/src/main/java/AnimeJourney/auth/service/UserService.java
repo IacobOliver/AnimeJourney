@@ -20,8 +20,9 @@ public class UserService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest registerRequest) {
+        System.out.println(registerRequest.getMemberName());
         boolean emailExists =  userRepository.existsByEmail(registerRequest.getEmail());
-        boolean usernameExists = userRepository.existsByUsername(registerRequest.getUsername());
+        boolean usernameExists = userRepository.existsByMemberName(registerRequest.getMemberName());
 
         if(usernameExists && emailExists){
             return AuthenticationResponse.builder().response("3").build();
@@ -32,7 +33,7 @@ public class UserService {
         }
 
         var user = User.builder()
-                .username(registerRequest.getUsername())
+                .memberName(registerRequest.getMemberName())
                 .email(registerRequest.getEmail())
                 .password( passwordEncoder.encode(registerRequest.getPassword()))
                 .role(Role.USER)
@@ -54,5 +55,13 @@ public class UserService {
 
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder().response(jwtToken).build();
+    }
+
+    public User getUserWithToken(String authHeader) {
+        String token = authHeader.substring(7);
+
+        User user = userRepository.findByEmail(jwtService.extractUsername(token)).orElse(null);
+
+        return user;
     }
 }

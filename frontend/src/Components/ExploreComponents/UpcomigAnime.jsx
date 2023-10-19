@@ -13,7 +13,6 @@ export default function UpcomingAnime() {
         fetch(`https://api.jikan.moe/v4/seasons/upcoming?page=${nextPage}`)
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 setLast_visible_page(data.pagination.last_visible_page)
                 let random = Utils.giveRandomDistinctIndexes(data.data.length, 9)
                 setUpcomingAnime(data.data.filter((anime, index) => random.includes(index)))
