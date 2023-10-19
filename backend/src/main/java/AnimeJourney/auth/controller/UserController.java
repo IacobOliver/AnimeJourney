@@ -28,4 +28,6 @@ public class UserController {
     public ResponseEntity<AuthenticationResponse> register(@RequestBody AuthenticationRequest authenticationRequest){
         return ResponseEntity.ok(userService.authenticate(authenticationRequest));
     }
+
+    
 }

@@ -4,7 +4,8 @@ import { useState, useRef } from "react"
 import { useNavigate } from "react-router-dom";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import { useAtom } from "jotai";
-import state from "./Atom"
+import state from "../Atom"
+import ProfileDropdown from "./ProfileDropdown";
 
 
 export default function Layout() {
@@ -112,7 +113,7 @@ export default function Layout() {
 
 
                 <div className="flex items-center h-full w-1/4 justify-end">
-                    {isLoggedIn ? <div className="w-5 h-5 bg-white mr-5"></div> 
+                    {isLoggedIn ? <ProfileDropdown /> 
                     :
                     
                     <button onClick={() => navigate("/logIn")} className="relative inline-flex items-center justify-center mr-2 overflow-hidden font-medium rounded-lg group 

@@ -3,7 +3,7 @@ import "./index.css"
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Explore  from "./Pages/Explore"
-import Layout from "./Components/Layout";
+import Layout from "./Components/Layout/Layout";
 import Redirect from "./Components/Redirect";
 import ShowAnime from "./Pages/ShowAnime";
 import SignIn from "./Pages/Auth/SignIn";

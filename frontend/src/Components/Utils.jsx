@@ -24,6 +24,10 @@ export const Utils = {
     }
 
     return result;
+  },
+
+  loginWithToken: (token) =>{
+    
   }
 }
 
@@ -76,6 +80,10 @@ export const checking = {
       makeGreen(passConf)
       return true;
     }
+  },
+
+  invalidField : (e) =>{
+    makeRed(e)
   }
 
 }

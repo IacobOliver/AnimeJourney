@@ -2,8 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import CostumInput from "./CostumInput";
 import { useRef } from "react";
+import state from "../../Components/Atom";
+import { useAtom } from "jotai";
 import { checking } from "../../Components/Utils";
-
+import Alert from "./Alert";
 
 
 export default function LogIn() {
@@ -11,7 +13,15 @@ export default function LogIn() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
+  const alertRef = useRef(null);
+
+  const [isLoggedIn, setIsLoggedIn] = useAtom(state.isLoggedIn)
+
   const onSubmit = () =>{
+    alertRef.current.classList.remove("hidden")
+    alertRef.current.classList.remove("animate-jump-out")
+    alertRef.current.classList.add("animate-jump-in")
+
     let authResponse = {
       email : emailRef.current.value,
       password : passwordRef.current.value,
@@ -35,23 +45,28 @@ export default function LogIn() {
       .then(data => {
         localStorage.setItem("token", data.response)
         console.log(localStorage.getItem("token"))
+        setIsLoggedIn(true);
+        navigate("/home")
       })
       .catch( err => {
-        console.log("nene")
+        checking.invalidField(emailRef)
+        checking.invalidField(passwordRef)
+        alertRef.current.firstChild.textContent = "The email or password is wrong"
+      
         console.error(err)})
     }
     }
 
 
   return (
-    <div className="w-full h-screen flex justify-center bg-center bg-cover mt-3" style={{ backgroundImage: `url(../../../public/zoro.jpg)` }}>
+    <div className="w-full h-screen flex justify-start flex-col items-center bg-center bg-cover mt-3" style={{ backgroundImage: `url(../../../public/zoro.jpg)` }}>
 
-      <div className=" bg-black_second_theme w-fit h-fit mt-20 rounded-xl text-fifth_color_theme font-fantasy tracking-wide p-3 flex">
+      <Alert refference={alertRef}/>
 
+
+      <div className=" bg-black_second_theme w-fit h-fit mt-20 rounded-xl text-fifth_color_theme font-fantasy tracking-wide p-3 flex animate-jump-in ">
         <img className="h-[30rem]" src="../../../public/form/luffy1.png" />
-
         <div className="w-96 flex flex-col justify-evenly">
-
           <div>
             <p className="text-center text-3xl">Log In</p>
             <p className="text-center"> Hehe , Nice to see you !  </p>
