@@ -33,8 +33,8 @@ export default function ProfileDropdown() {
           </Typography>
     </PopoverHandler>
 
-    <PopoverContent className="w-72 bg-black_second_theme border-black_first_theme border-2 z-30">
-      <div className="mb-4 flex items-center gap-4 border-b-2 border-b-third_color_theme  pb-4">
+    <PopoverContent className="w-72 transparentBackground backdrop-blur-md border-black_first_theme border-2 z-30">
+      <div className="mb-4 flex items-center gap-4 border-b-2 border-b-black_second_theme  pb-4">
         <Avatar src="/icons/9.jpg"/>
         <div>
           <Typography variant="h6" color="white">
@@ -50,18 +50,27 @@ export default function ProfileDropdown() {
           
         </div>
       </div>
-      <List className="p-0 bg-black_second_theme">
-        <div className="text-initial font-medium text-fifth_color_theme">
-          <ListItem>
+      <List className="p-0 ">
+        <div className="text-initial font-medium text-fifth_color_theme  rounded-lg">
+          <ListItem className="hover:bg-black_first_theme hover:text-fifth_color_theme">
             <ListItemPrefix>
             <i className="fa-solid fa-user-large text-forth_color_theme"></i>
             </ListItemPrefix>
            Profile
           </ListItem>
         </div>
+
+        <div className="text-initial font-medium text-fifth_color_theme  rounded-lg">
+          <ListItem className="hover:bg-black_first_theme hover:text-fifth_color_theme">
+            <ListItemPrefix>
+            <i class="fa-solid fa-list  text-forth_color_theme"></i>
+            </ListItemPrefix>
+           Anime List
+          </ListItem>
+        </div>
        
         <div className="text-initial font-medium text-fifth_color_theme">
-          <ListItem>
+          <ListItem  className="hover:bg-black_first_theme hover:text-fifth_color_theme">
             <ListItemPrefix>
               <svg
                 width="20"
@@ -84,8 +93,17 @@ export default function ProfileDropdown() {
           </ListItem>
         </div>
 
+        <div className="text-initial font-medium text-fifth_color_theme  rounded-lg">
+          <ListItem className="hover:bg-black_first_theme hover:text-fifth_color_theme">
+            <ListItemPrefix>
+            <i class="fa-solid fa-gear  text-forth_color_theme"></i>
+            </ListItemPrefix>
+           Settings
+          </ListItem>
+        </div>
+
         <a href="http://localhost:5173/home" className=" font-medium text-fifth_color_theme ">
-          <ListItem className="flex justify-center" onClick={signOut}>
+          <ListItem className="flex justify-center hover:bg-black_first_theme hover:text-fifth_color_theme"  onClick={signOut}>
             <ListItemPrefix>
             <i className="fa-solid fa-arrow-right-from-bracket text-forth_color_theme"></i>
             </ListItemPrefix>
