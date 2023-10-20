@@ -1,13 +1,17 @@
 # AnimeJourney
 ## Project Descriptoin
- It's a solo project, where you can track you favorite animes, newest anime and upcoming anime. If you make an account you will be able to make your own anime list by marking them as watching, on-hold, drop and plan to watch, you can give it a score from 1-10 and leave a review if you want. It's not a streaming application, but maybe in the future will be, this project is still work in progress.
+ It's a solo project, where you can track you favorite animes, newest anime and upcoming anime. If you make an account you will be able to make your own anime list by marking them as watching, on-hold, drop and plan to watch, you can give it a score from 1-10 and leave a review if you want. It's not a streaming application, but in the future will be, this project is still work in progress.
 
 ![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/7ffbb2af-cc30-4dfe-9a2f-7682486e25a6)
 
  ## Tehnologies Used : 
  
- - Spring: Accelerated Java application development, creating necessary APIs and database repositories.
- - PostgreSQL : A local relational database for storing the anime and the users and thier anime lists
+ - SpringBoot : Accelerated Java application development, creating necessary APIs and database repositories.
+ - SpringSecurity : It provides protection against attacks like session fixation, clickjacking, cross site request forgery, etc.
+ - ![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/d27542bf-575c-4300-8aac-0d89534335e5)
+
+ - Supabase : A remote relational database, you can use it for a fast setup to visit the site !
+ - PostgreSQL : A local relational database for storing the anime and the users and thier anime lists (OPTIONAL for a better performance)
  - React :  A popular web application library known for its effectiveness in creating interactive and dynamic UI components.
  - Tailwind: Used for impressive and responsive styling, in addition to custom CSS.
  - CSS: Additional custom styling.
@@ -20,9 +24,9 @@
 ## Future Plans
 
 - for now, finishing the detailed page of an anime
- ![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/1270ac60-e807-498c-9e43-4e455642898e)
+ ![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/cde1e33c-8b20-428e-bdc5-125185ee2dd7)
 
-- implementing users with spring security
+
 - making the search page and adding filters for searching the anime
 
   ![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/7474b41a-4c02-4265-87e5-bdb3d93afb25)
