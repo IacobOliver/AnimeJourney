@@ -33,13 +33,20 @@ export default function ProfileDropdown() {
           </Typography>
     </PopoverHandler>
 
-    <PopoverContent className="w-72 bg-black_second_theme border-black_first_theme border-2">
+    <PopoverContent className="w-72 bg-black_second_theme border-black_first_theme border-2 z-30">
       <div className="mb-4 flex items-center gap-4 border-b-2 border-b-third_color_theme  pb-4">
         <Avatar src="/icons/9.jpg"/>
         <div>
           <Typography variant="h6" color="white">
           {user ?  user.memberName : ""}
           </Typography>
+          <Typography
+              variant="small"
+              color="gray"
+              className="font-medium text-blue-gray-500"
+            >
+             {user ?  user.email : ""}
+            </Typography>
           
         </div>
       </div>

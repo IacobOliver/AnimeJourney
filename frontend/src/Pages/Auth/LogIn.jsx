@@ -47,7 +47,6 @@ export default function LogIn() {
         localStorage.setItem("token", data.response)
         console.log(localStorage.getItem("token"))
         
-        setIsLoggedIn(true);
         Utils.logInWithToken({setUser, setIsLoggedIn});
 
         navigate("/home")
