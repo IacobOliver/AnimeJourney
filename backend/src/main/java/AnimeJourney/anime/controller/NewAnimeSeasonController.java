@@ -23,7 +23,6 @@ public class NewAnimeSeasonController {
     @CrossOrigin("http://localhost:5173/")
     @PostMapping("/getAnime")
     public ResponseEntity<List<NewAnimeSeason>> getNewAnimeSeasons(@RequestBody PaginationResponse parameters){
-        System.out.println(parameters.toString() + "-----------------------------------------------------------------------");
         return ResponseEntity.ok(newAnimeSeasonService.getAnimeForPagination(parameters));
     }
 

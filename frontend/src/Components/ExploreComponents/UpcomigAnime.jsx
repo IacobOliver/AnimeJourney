@@ -13,7 +13,6 @@ export default function UpcomingAnime() {
         fetch(`https://api.jikan.moe/v4/seasons/upcoming?page=${nextPage}`)
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 setLast_visible_page(data.pagination.last_visible_page)
                 let random = Utils.giveRandomDistinctIndexes(data.data.length, 9)
                 setUpcomingAnime(data.data.filter((anime, index) => random.includes(index)))
@@ -40,8 +39,7 @@ export default function UpcomingAnime() {
 
                 <div className="flex flex-col w-28 rounded-t-lg rounded-b-xl ">
 
-                    <p className=" text-fifth_color_theme coolGradient font-serif font-semibold text-sm h-2/3 flex items-center justify-evenly tracking-widest rounded-lg">
-                        <div className="w-3"></div>
+                    <p className=" text-fifth_color_theme coolGradient font-serif font-semibold text-sm h-2/3 flex items-center justify-evenly tracking-widest rounded-lg">                 
                         {anime.type? anime.type : "Unknown"}
                     </p>
                 </div>

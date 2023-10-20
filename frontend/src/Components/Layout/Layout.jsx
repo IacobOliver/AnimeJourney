@@ -1,19 +1,33 @@
 import React from "react";
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import { useAtom } from "jotai";
-import state from "./Atom"
+import state from "../Atom"
+import ProfileDropdown from "./ProfileDropdown";
+import { Utils } from "../Utils";
+
 
 
 export default function Layout() {
     const [items, setItems] = useState([])
     const [refresh, setRefresh] = useAtom(state.refreshAnime)
+    const [isLoggedIn, setIsLoggedIn] = useAtom(state.isLoggedIn)
     const [play, setPlay] = useAtom(state.play);
-    const [mute , setMute] = useAtom(state.mute)
-    
+    const [mute, setMute] = useAtom(state.mute)
+    const [user, setUser] = useAtom(state.user)
+
+   
+
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if(!isLoggedIn){
+        Utils.logInWithToken({setUser, setIsLoggedIn});
+        console.log("autoLogin")
+        }
+    }, [])
 
 
     const handleOnSearch = (string, results) => {
@@ -30,7 +44,7 @@ export default function Layout() {
     }
 
     const handleOnSelect = (item) => {
-        setRefresh( refresh + 1)
+        setRefresh(refresh + 1)
         setPlay(true)
         setMute(false)
         navigate(`/anime/${item.mal_id}`)
@@ -51,7 +65,7 @@ export default function Layout() {
 
                     <div className=" text-gray-500 text-xs h-1/2 text-left mt-1 flex items-center font-bold">
                         <p>{anime.type}</p>
-                         <p className="mx-2 text-lg">•</p>
+                        <p className="mx-2 text-lg">•</p>
                         <i className="fa-solid fa-star text-forth_color_theme"></i>
                         <p>{anime.score} </p>
                         <p className="mx-2 text-lg">•</p>
@@ -111,14 +125,21 @@ export default function Layout() {
 
 
                 <div className="flex items-center h-full w-1/4 justify-end">
-                    <button onClick={() => navigate("/logIn")} className="relative inline-flex items-center justify-center mr-2 overflow-hidden font-medium rounded-lg group 
+                    {isLoggedIn ? <ProfileDropdown />
+                        :
+
+                        <button onClick={() => navigate("/logIn")} className="relative inline-flex items-center justify-center mr-2 overflow-hidden font-medium rounded-lg group 
                                 bg-gradient-to-br from-orange-500 to-red-600 group-hover:from-orange-500 group-hover:to-red-600
                                  hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 text-black_first_theme text-md ">
-                        <span className=" flex items-center relative px-5 py-1.5 transition-all ease-in duration-75 dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 bg-forth_color_theme font-medium">
-                            <p aria-disabled="true"> Sign in </p>
-                            <i className="fa-solid fa-arrow-right-to-bracket ml-2 text-xl"></i>
-                        </span>
-                    </button>
+                            <span className=" flex items-center relative px-5 py-1.5 transition-all ease-in duration-75 dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 bg-forth_color_theme font-medium">
+                                <p aria-disabled="true"> Sign in </p>
+                                <i className="fa-solid fa-arrow-right-to-bracket ml-2 text-xl"></i>
+                            </span>
+                        </button>
+
+
+                    }
+
                 </div>
 
             </div>

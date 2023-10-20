@@ -16,7 +16,6 @@ export default function AnimeRecomandation() {
         fetch(`https://api.jikan.moe/v4/anime/${params.id}/recommendations`)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 setAnimeRec(data.data)
             })
 
