@@ -3,10 +3,7 @@ package AnimeJourney.anime.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -28,7 +25,11 @@ public class SavedFrontAnimeDetails {
     private String image;
     private int episodesCount;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "savedAnimeFrontDetails", fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "savedAnimeFrontDetails",cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
     private List<SavedUserAnimeDetails> savedAnimeUserDetails;
+
+    public void addAnime(SavedUserAnimeDetails animeDetails){
+        savedAnimeUserDetails.add(animeDetails);
+    }
 }

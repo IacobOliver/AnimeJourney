@@ -2,6 +2,7 @@ package AnimeJourney.anime.model;
 
 import AnimeJourney.auth.model.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,10 +30,20 @@ public class SavedUserAnimeDetails {
     @JoinColumn
     private SavedFrontAnimeDetails savedAnimeFrontDetails;
 
-//    @JsonManagedReference
-    @ManyToOne(fetch = FetchType.EAGER)
+
+    @ManyToOne
     @JoinColumn
     private User user;
 
 
+    @Override
+    public String toString() {
+        return "SavedUserAnimeDetails{" +
+                "id=" + id +
+                ", status='" + status + '\'' +
+                ", myScore=" + myScore +
+                ", watchedEpisodes=" + watchedEpisodes +
+                " , user = " + user +
+                '}';
+    }
 }
