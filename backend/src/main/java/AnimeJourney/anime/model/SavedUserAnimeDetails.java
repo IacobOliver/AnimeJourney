@@ -26,13 +26,15 @@ public class SavedUserAnimeDetails {
     private int watchedEpisodes;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
+    @JsonBackReference(value = "savedAnimeFrontDetails")
     private SavedFrontAnimeDetails savedAnimeFrontDetails;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
+    @JsonBackReference(value = "user")
     private User user;
 
 

@@ -49,7 +49,7 @@ export default function LogIn() {
         
         Utils.logInWithToken({setUser, setIsLoggedIn});
 
-        navigate("/home")
+        // navigate("/home")
       })
       .catch( err => {
         checking.invalidField(emailRef)

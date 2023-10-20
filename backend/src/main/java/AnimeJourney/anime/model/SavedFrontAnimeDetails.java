@@ -2,6 +2,8 @@ package AnimeJourney.anime.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,6 +28,7 @@ public class SavedFrontAnimeDetails {
     private int episodesCount;
 
 
+    @JsonManagedReference(value = "savedAnimeFrontDetails")
     @OneToMany(mappedBy = "savedAnimeFrontDetails",cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
     private List<SavedUserAnimeDetails> savedAnimeUserDetails;
 
