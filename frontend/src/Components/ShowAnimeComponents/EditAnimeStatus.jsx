@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 
-export default function EditAnimeStatus({ numberOfEpisodes }) {
+export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
     const [score, setScore] = useState(0)
     const [status, setStatus] = useState(0)
     const [effect, setEffect] = useState(false);
@@ -16,6 +16,7 @@ export default function EditAnimeStatus({ numberOfEpisodes }) {
 
     const [isLoggedIn, setIsLoggedIn] = useAtom(state.isLoggedIn)
     const [refresh , setRefresh] = useAtom(state.refreshAnime)
+    const [user ,setUser] = useAtom(state.user);
 
     const navigate = useNavigate();
     const params = useParams();
@@ -25,10 +26,7 @@ export default function EditAnimeStatus({ numberOfEpisodes }) {
         return (<option value={id} className=" bg-black_second_theme p-2">{text}</option>)
     }
 
-
-
     useEffect(() => {
-        
             fetch(`http://localhost:8080/savedAnimeUserDetails/userHaveAnime/${params.id}`, {
                 method: "GET",
                 headers: {
@@ -40,8 +38,42 @@ export default function EditAnimeStatus({ numberOfEpisodes }) {
                 .then(data => {
                     setIsUserAnime(data);
                 })
-        
     }, [refresh])
+
+    const addToListEvent = () =>{
+        let animeObj = {
+            "animeId" : params.id,
+            "title" : anime.title,
+            "animeScore" : anime.score,
+            "type" : anime.type,
+            "image" : anime.images.jpg.image_url,
+            "episodesCount" : anime.episodes,
+            "savedAnimeUserDetails" : [
+                {
+                 "status" : "Plan To Watch",
+                 "myScore" : 0,
+                "watchedEpisodes" : 0,
+                "user" : {
+                   "id" : user.id
+                }
+            }
+            ]    
+        }
+        // console.log(animeObj)
+        fetch(`http://localhost:8080/savedAnimeFrontDetails/postAnime`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                },
+                body : JSON.stringify(animeObj)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    setIsUserAnime(true)
+                })
+    }
 
 
     return (
@@ -61,7 +93,7 @@ export default function EditAnimeStatus({ numberOfEpisodes }) {
                         <Option id={4} text={"Dropped"} />
                     </select>
                     :
-                    <div className="flex justify-center mb-1">
+                    <div onClick={addToListEvent} className="flex justify-center mb-1">
                         <button className="relative inline-flex items-center justify-center mr-2 overflow-hidden font-medium rounded-lg group 
                                 bg-gradient-to-br from-orange-500 to-red-600 group-hover:from-orange-500 group-hover:to-red-600
                                  hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 text-black_first_theme text-md ">

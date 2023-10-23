@@ -39,7 +39,7 @@ export default function FastDetails({anime, className}){
         </div>
 
 
-         <EditAnimeStatus numberOfEpisodes={anime.episodes} />
+         <EditAnimeStatus numberOfEpisodes={anime.episodes} anime = {anime} />
 
     </div>
     )

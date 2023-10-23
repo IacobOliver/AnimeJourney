@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class SavedFrontAnimeDetailsController {
     private final SavedFrontAnimeDetailsService savedFrontAnimeDetailsService;
 
+    @CrossOrigin("http://localhost:5173/")
     @PostMapping ("/postAnime")
     public FetchResponse saveAnime(@RequestBody SavedFrontAnimeDetails savedFrontAnimeDetails){
         String response =  savedFrontAnimeDetailsService.saveAnime(savedFrontAnimeDetails);
