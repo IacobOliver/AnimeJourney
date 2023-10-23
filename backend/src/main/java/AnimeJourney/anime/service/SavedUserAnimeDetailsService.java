@@ -29,4 +29,18 @@ public class SavedUserAnimeDetailsService {
     public List<SavedUserAnimeDetails> getUserAnimeList(Long userId){
         return savedUserAnimeDetailsRepository.findAllByUserId(userId).orElse(null);
     }
+
+    public boolean userHaveAnime( Long animeId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        User user = (User) authentication.getPrincipal();
+
+        List<SavedUserAnimeDetails> savedUserAnimeDetails = savedUserAnimeDetailsRepository.findAllByUserId(user.getId()).orElse(null);
+        for (int i = 0; i < savedUserAnimeDetails.size(); i++) {
+            if(savedUserAnimeDetails.get(i).getSavedAnimeFrontDetails().getAnimeId() == animeId){
+                return true;
+            }
+        }
+        return false;
+    }
 }

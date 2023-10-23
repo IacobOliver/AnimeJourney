@@ -32,4 +32,10 @@ public class SavedUserAnimeDetailsController {
         return ResponseEntity.ok( savedUserAnimeDetailsService.getUserAnimeList(userId));
     }
 
+    @CrossOrigin("http://localhost:5173/")
+    @GetMapping("userHaveAnime/{animeId}")
+    public ResponseEntity<Boolean> userHaveAnime( @PathVariable Long animeId){
+        return ResponseEntity.ok( savedUserAnimeDetailsService.userHaveAnime( animeId));
+    }
+
 }

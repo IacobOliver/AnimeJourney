@@ -4,6 +4,7 @@ import EditAnimeStatus from "./EditAnimeStatus";
 
 
 export default function FastDetails({anime, className}){
+  
 
     const DetailComp = ({ detail }) => {
         return (
@@ -38,7 +39,7 @@ export default function FastDetails({anime, className}){
         </div>
 
 
-        <EditAnimeStatus numberOfEpisodes={anime.episodes} />
+         <EditAnimeStatus numberOfEpisodes={anime.episodes} />
 
     </div>
     )
