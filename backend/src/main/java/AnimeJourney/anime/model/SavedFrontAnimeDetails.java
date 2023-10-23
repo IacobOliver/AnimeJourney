@@ -1,9 +1,7 @@
 package AnimeJourney.anime.model;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,6 +12,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class SavedFrontAnimeDetails {
 
     @Id
@@ -28,8 +27,8 @@ public class SavedFrontAnimeDetails {
     private int episodesCount;
 
 
-    @JsonManagedReference(value = "savedAnimeFrontDetails")
-    @OneToMany(mappedBy = "savedAnimeFrontDetails",cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
+    @JsonBackReference
+    @OneToMany(mappedBy = "savedAnimeFrontDetails" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<SavedUserAnimeDetails> savedAnimeUserDetails;
 
     public void addAnime(SavedUserAnimeDetails animeDetails){

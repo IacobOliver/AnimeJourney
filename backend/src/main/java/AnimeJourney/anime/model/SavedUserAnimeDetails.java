@@ -1,9 +1,7 @@
 package AnimeJourney.anime.model;
 
 import AnimeJourney.auth.model.User;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class SavedUserAnimeDetails {
     @Id
     @GeneratedValue
@@ -26,15 +25,14 @@ public class SavedUserAnimeDetails {
     private int watchedEpisodes;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn
-    @JsonBackReference(value = "savedAnimeFrontDetails")
     private SavedFrontAnimeDetails savedAnimeFrontDetails;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn
-    @JsonBackReference(value = "user")
+    @JsonBackReference
     private User user;
 
 

@@ -36,3 +36,6 @@ root.render(<App />);
 //LOGO SITE
 //https://app.logo.com/dashboard/logo_6e0425c2-abc0-430f-959a-e9326506b76b/your-logo-files
 
+//componets site
+//https://www.material-tailwind.com/docs/react/guide/cra
+
