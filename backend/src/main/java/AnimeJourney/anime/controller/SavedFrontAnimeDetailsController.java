@@ -1,6 +1,7 @@
 package AnimeJourney.anime.controller;
 
 import AnimeJourney.anime.model.SavedFrontAnimeDetails;
+import AnimeJourney.anime.model.SavedUserAnimeDetails;
 import AnimeJourney.anime.service.FetchResponse;
 import AnimeJourney.anime.service.SavedFrontAnimeDetailsService;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +15,8 @@ public class SavedFrontAnimeDetailsController {
 
     @PostMapping ("/postAnime")
     public FetchResponse saveAnime(@RequestBody SavedFrontAnimeDetails savedFrontAnimeDetails){
-        savedFrontAnimeDetailsService.saveAnime(savedFrontAnimeDetails);
-        return FetchResponse.builder().response("ok").build();
+        String response =  savedFrontAnimeDetailsService.saveAnime(savedFrontAnimeDetails);
+        return FetchResponse.builder().response(response).build();
     }
 
 }

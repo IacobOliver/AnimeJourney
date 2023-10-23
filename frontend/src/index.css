@@ -51,7 +51,10 @@ body {
   background: linear-gradient(0deg, rgba(5,5,5,1) 39%, rgb(240, 125, 17) 100%); */
   background: rgb(5,5,5);
 background: linear-gradient(90deg, rgba(5,5,5,1) 18%, rgba(241,139,12,1) 100%);
+}
 
+.transparentBackground{
+  background-color: rgba(0,0,0,0.8);
 }
 
 input::-webkit-outer-spin-button,
