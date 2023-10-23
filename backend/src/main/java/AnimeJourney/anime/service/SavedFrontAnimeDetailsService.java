@@ -15,7 +15,7 @@ public class SavedFrontAnimeDetailsService {
     private final SavedUserAnimeDetailsRepository savedUserAnimeDetailsRepository;
 
 
-    public String saveAnime(SavedFrontAnimeDetails anime) {
+    public SavedUserAnimeDetails saveAnime(SavedFrontAnimeDetails anime) {
         SavedFrontAnimeDetails savedFrontAnimeDetails = savedFrontAnimeDetailsRepository.findByAnimeId(anime.getAnimeId());
 
         System.out.println(anime);
@@ -25,7 +25,7 @@ public class SavedFrontAnimeDetailsService {
          if(savedFrontAnimeDetails == null){
              savedUserAnimeDetails.setSavedAnimeFrontDetails(anime);
              savedFrontAnimeDetailsRepository.save(anime);
-             return "saved";
+             return savedUserAnimeDetails;
          }
 
         savedUserAnimeDetails.setSavedAnimeFrontDetails(savedFrontAnimeDetails);
@@ -38,7 +38,7 @@ public class SavedFrontAnimeDetailsService {
 //        savedFrontAnimeDetailsRepository.save(savedFrontAnimeDetails);
 
 
-        return "already exists";
+        return savedUserAnimeDetails;
 
     }
 }

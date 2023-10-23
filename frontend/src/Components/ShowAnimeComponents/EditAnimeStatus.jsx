@@ -6,17 +6,22 @@ import { useNavigate } from "react-router-dom";
 import state from "../Atom";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Spinner } from "@material-tailwind/react";
+import Loading from "../Loading";
 
 
 export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
     const [score, setScore] = useState(0)
     const [status, setStatus] = useState(0)
+    const [watchedEpisodes, setWatchedEpisodes] = useState(0);
+
     const [effect, setEffect] = useState(false);
-    const [isUserAnime, setIsUserAnime] = useState(false);
+    const [userAnime, setUserAnime] = useAtom(state.userAnime);
+    const [loading, setLoading] = useState(true);
 
     const [isLoggedIn, setIsLoggedIn] = useAtom(state.isLoggedIn)
-    const [refresh , setRefresh] = useAtom(state.refreshAnime)
-    const [user ,setUser] = useAtom(state.user);
+    const [refresh, setRefresh] = useAtom(state.refreshAnime)
+    const [user, setUser] = useAtom(state.user);
 
     const navigate = useNavigate();
     const params = useParams();
@@ -27,52 +32,91 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
     }
 
     useEffect(() => {
-            fetch(`http://localhost:8080/savedAnimeUserDetails/userHaveAnime/${params.id}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`
-                }
+        fetch(`http://localhost:8080/savedAnimeUserDetails/userHaveAnime/${params.id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                setUserAnime(data);
+                setLoading(false)
+
+                setScore(data.myScore);
+                setWatchedEpisodes(data.watchedEpisodes);
+                setStatus(data.status);
             })
-                .then(res => res.json())
-                .then(data => {
-                    setIsUserAnime(data);
-                })
+            .catch(err => {
+                console.error("ERRRRRRRRRRRRRRORRRRRRRRRRRRR DIDNT FIND ALL VALUES TO 0")
+                setLoading(false);
+                setUserAnime(false);
+                setScore(0);
+                setWatchedEpisodes(0);
+                setStatus(0);
+            })
     }, [refresh])
 
-    const addToListEvent = () =>{
+    const addToListEvent = () => {
+        setLoading(true)
         let animeObj = {
-            "animeId" : params.id,
-            "title" : anime.title,
-            "animeScore" : anime.score,
-            "type" : anime.type,
-            "image" : anime.images.jpg.image_url,
-            "episodesCount" : anime.episodes,
-            "savedAnimeUserDetails" : [
+            "animeId": params.id,
+            "title": anime.title,
+            "animeScore": anime.score,
+            "type": anime.type,
+            "image": anime.images.jpg.image_url,
+            "episodesCount": anime.episodes,
+            "savedAnimeUserDetails": [
                 {
-                 "status" : "Plan To Watch",
-                 "myScore" : 0,
-                "watchedEpisodes" : 0,
-                "user" : {
-                   "id" : user.id
+                    "status": 0,
+                    "myScore": 0,
+                    "watchedEpisodes": 0,
+                    "user": {
+                        "id": user.id
+                    }
                 }
-            }
-            ]    
+            ]
         }
-        // console.log(animeObj)
         fetch(`http://localhost:8080/savedAnimeFrontDetails/postAnime`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`
-                },
-                body : JSON.stringify(animeObj)
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            },
+            body: JSON.stringify(animeObj)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log("user have anime :", data)
+                setUserAnime(data)
+                setLoading(false)
             })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                    setIsUserAnime(true)
-                })
+    }
+
+    const onStatusChange = (e) =>{
+        if(e.target.id == "myScore"){
+            console.log(e.target.id)
+            setEffect(true)
+            setScore(e.target.value)
+        }
+        
+        fetch(`http://localhost:8080/savedAnimeUserDetails/editAnimeStatus/${userAnime.id}/${e.target.id}/${e.target.value}`,{
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            },
+        })
+        .then(res => res.json())
+        .then(data =>{
+            console.log(data);
+        })
+        .catch(err =>{
+            console.error(err);
+        })
+
     }
 
 
@@ -80,12 +124,17 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
         <div className="flex flex-col  mt-4 text-fifth_color_theme relative">
             {!isLoggedIn && <div onClick={() => navigate("/logIn")} className="absolute h-full w-full z-10"></div>}
 
+            {loading &&
+                <div className="absolute w-full h-full transparentBackground flex justify-center items-center top-0">
+                    <Loading />
+                </div>
+            }
 
 
             <div className="flex flex-col">
 
-                {isUserAnime ?
-                    <select value={status} onChange={(e) => setStatus(e.target.value)} className="mr-1 hover:bg-black_first_theme bg-black_second_theme mb-1 border border-black_second_theme rounded-lg h-14 focus:border-black_second_theme focus:ring-0 w-full">
+                {userAnime ?
+                    <select id="status" defaultValue={status} onChange={onStatusChange} className="mr-1 hover:bg-black_first_theme bg-black_second_theme mb-1 border border-black_second_theme rounded-lg h-14 focus:border-black_second_theme focus:ring-0 w-full">
                         <Option id={0} text={"Plan To Watch"} />
                         <Option id={1} text={"Watching"} />
                         <Option id={2} text={"Completed"} />
@@ -108,7 +157,7 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
 
                 <div className="bg-black_second_theme group mb-1 hover:bg-black_first_theme flex w-full h-14 items-center border border-black_second_theme rounded-xl px-3 ">
                     <p>Episodes : </p>
-                    <input className="bg-black_second_theme group-hover:bg-black_first_theme borber border-0 focus:border-none focus:ring-0 w-12 text-right p-1" type="number" defaultValue={0} />
+                    <input id="watchedEpisodes" defaultValue={userAnime.watchedEpisodes} onBlur={onStatusChange} className="bg-black_second_theme group-hover:bg-black_first_theme borber border-0 focus:border-none focus:ring-0 w-12 text-right p-1" type="number"  />
                     <p className="flex"> / {numberOfEpisodes ? numberOfEpisodes : "?"}</p>
                     {/* <i class="fa-solid fa-video"></i> */}
                 </div>
@@ -116,7 +165,7 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
 
             <div className="flex items-center justify-center w-full" >
                 <div className={` bg-center bg-cover h-14 w-14 rounded-l-lg ${effect && "animate-icon-pop-in"}`} onAnimationEnd={() => setEffect(false)} style={{ backgroundImage: `url(../../../public/icons/${score}.jpg)` }}></div>
-                <select value={score} onChange={(e) => { setScore(e.target.value), setEffect(true) }} className="bg-black_second_theme hover:bg-black_first_theme duration-300 w-full border border-black_second_theme rounded-r-lg h-14 focus:border-black_second_theme focus:ring-0">
+                <select id="myScore" value={score} onChange={onStatusChange} className="bg-black_second_theme hover:bg-black_first_theme duration-300 w-full border border-black_second_theme rounded-r-lg h-14 focus:border-black_second_theme focus:ring-0">
                     <Option id={0} text={"SELECT"} />
                     <Option id={1} text={"1 ( Appalling )"} />
                     <Option id={2} text={"2 ( Horrible )"} />

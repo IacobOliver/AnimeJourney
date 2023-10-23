@@ -5,6 +5,7 @@ const state = {
 user : atom(null),
 isLoggedIn : atom(false),
 
+userAnime : atom(false),
 
 refreshAnime : atom(0),
 

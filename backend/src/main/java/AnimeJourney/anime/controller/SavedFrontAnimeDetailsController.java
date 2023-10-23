@@ -15,9 +15,8 @@ public class SavedFrontAnimeDetailsController {
 
     @CrossOrigin("http://localhost:5173/")
     @PostMapping ("/postAnime")
-    public FetchResponse saveAnime(@RequestBody SavedFrontAnimeDetails savedFrontAnimeDetails){
-        String response =  savedFrontAnimeDetailsService.saveAnime(savedFrontAnimeDetails);
-        return FetchResponse.builder().response(response).build();
+    public SavedUserAnimeDetails saveAnime(@RequestBody SavedFrontAnimeDetails savedFrontAnimeDetails){
+        return  savedFrontAnimeDetailsService.saveAnime(savedFrontAnimeDetails);
     }
 
 }

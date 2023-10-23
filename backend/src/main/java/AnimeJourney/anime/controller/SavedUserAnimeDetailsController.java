@@ -16,16 +16,6 @@ import java.util.List;
 public class SavedUserAnimeDetailsController {
     private final SavedUserAnimeDetailsService savedUserAnimeDetailsService;
 
-//    @PostMapping("/postAnime")
-//    public FetchResponse saveAnimeDetails(SavedUserAnimeDetails savedUserAnimeDetails){
-//        String response = savedUserAnimeDetailsService.saveAnimeDetails(savedUserAnimeDetails);
-//        return FetchResponse.builder().response(response).build();
-//    }
-
-    @GetMapping("getAll")
-    public ResponseEntity<List<SavedUserAnimeDetails>> getAnimeUserDetails(){
-        return ResponseEntity.ok( savedUserAnimeDetailsService.getAll());
-    }
 
     @GetMapping("getUserAnimeList/{userId}")
     public ResponseEntity<List<SavedUserAnimeDetails>> getAnimeUserDetails(@PathVariable Long userId){
@@ -34,8 +24,15 @@ public class SavedUserAnimeDetailsController {
 
     @CrossOrigin("http://localhost:5173/")
     @GetMapping("userHaveAnime/{animeId}")
-    public ResponseEntity<Boolean> userHaveAnime( @PathVariable Long animeId){
+    public ResponseEntity<SavedUserAnimeDetails> userHaveAnime( @PathVariable Long animeId){
         return ResponseEntity.ok( savedUserAnimeDetailsService.userHaveAnime( animeId));
+    }
+
+    @CrossOrigin("http://localhost:5173/")
+    @PatchMapping("editAnimeStatus/{id}/{option}/{value}")
+    public FetchResponse modifyAnimeDetails(@PathVariable Long id, @PathVariable String option, @PathVariable int value){
+        System.out.println("hello");
+        return savedUserAnimeDetailsService.modifyAnimeDetails(id, option, value);
     }
 
 }
