@@ -56,7 +56,7 @@ export default function Layout() {
 
     const formatResult = (anime) => {
         return (
-            <div className="h-16 my-1 px-2 rounded-lg flex group-hover relative">
+            <div className="h-16 my-1 px-2 rounded-lg flex group-hover relative z-40">
 
                 <div className="h-full w-16 rounded-lg bg-center bg-cover p-2" style={{ backgroundImage: `url(${anime.images.jpg.image_url})` }}></div>
 
@@ -110,7 +110,7 @@ export default function Layout() {
                             resultStringKeyName="title"
                             fuseOptions={{ keys: ["title", "title_english"] }}
                             placeholder="Search anime... "
-                            className=" rounded-xl w-full z-30"
+                            className=" rounded-xl w-full z-40"
                             styling={{
                                 backgroundColor: "black",
                                 border: "0px",

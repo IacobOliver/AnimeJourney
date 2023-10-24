@@ -19,8 +19,10 @@ public class SavedUserAnimeDetails {
     @Id
     @GeneratedValue
     private long id;
+    private long animeId;
 
-    private String status;
+    private int status;
+
     private int myScore;
     private int watchedEpisodes;
 

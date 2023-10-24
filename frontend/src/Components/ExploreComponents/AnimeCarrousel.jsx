@@ -15,8 +15,8 @@ export default function CarouselCustomNavigation() {
 
   useEffect(() => {
     fetch("http://localhost:8080/topAnime/getRandomAnime/10", {
-      method : "GET",
-      headers : {
+      method: "GET",
+      headers: {
         "Content-Type": "application/json",
       }
     })
@@ -35,25 +35,28 @@ export default function CarouselCustomNavigation() {
 
 
     return (
-      <div className="h-full w-full grid grid-cols-10">
+      <div className="h-full  grid grid-cols-10 ">
         {/* Left Image */}
-        <div className=" w-full h-full col-span-3 flex justify-center overflow-hidden">
-          <div className="w-96 h-9,9/10 rounded-3xl bg-cover bg-center bg-brown-500" style={{ backgroundImage: `url(${firstAnimeImage})` }}> </div>
+        <div className=" w-full h-full grid-cols-none flex justify-center overflow-hidden md:col-span-4 xl:col-span-3">
+          <div className="w-0 h-0 rounded-3xl bg-cover bg-center md:w-96 md:h-9,9/10 " style={{ backgroundImage: `url(${firstAnimeImage})` }}> </div>
         </div>
 
 
         {/* Center */}
-        <div className="text-fifth_color_theme w-full h-full col-span-4 pt-4 flex flex-col justify-around ">
-          <div>
-            <h1 className="titleSize text-center font-fantasy line-clamp-3" >{anime.name}</h1>
+        <div className="text-fifth_color_theme h-full col-span-10 pt-4 flex flex-col bg-center bg-cover relative
+                         md:justify-around md:w-full md:h-full md:col-span-6 md:!bg-none
+                        xl:col-span-4" style={{ backgroundImage: `url(${firstAnimeImage})` }}>
+          <div className="w-full h-full absolute top-0 transparentBackground z-0 md:hidden"></div>
+          <div className="z-30">
+            <h1 className="text-5xl mt-10 px-3 text-left font-fantasy line-clamp-3 md:mt-0 md:px-0 md:text-center xl:text-6xl" >{anime.name}</h1>
 
             <RatingStarts rating={anime.rating} members={anime.numberOfReviews} />
 
-            <p className="text-center text-lg mt-8 font-serif px-2 line-clamp-5">{anime.animeDescription}</p>
+            <p className="text-left text-lg mt-8 font-serif px-3 line-clamp-5 md:text-center">{anime.animeDescription}</p>
           </div>
 
 
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-7 md:mt-0">
             <button
               onClick={() => handleTravel(anime.animeId)}
               className="relative inline-flex items-center justify-center mr-2 overflow-hidden font-medium rounded-lg group 
@@ -71,8 +74,8 @@ export default function CarouselCustomNavigation() {
 
 
         {/* Right Image */}
-        <div className="w-full h-full col-span-3 flex justify-center overflow-hidden">
-          <div className="w-96 h-9,9/10 rounded-3xl bg-cover bg-center bg-brown-500" style={{ backgroundImage: `url(${secondtAnimeImage})` }}> </div>
+        <div className="w-full h-full grid-cols-none flex justify-center overflow-hidden xl:col-span-3">
+          <div className="h-0 w-0 rounded-3xl bg-cover bg-center xl:w-96 xl:h-9,9/10 " style={{ backgroundImage: `url(${secondtAnimeImage})` }}> </div>
         </div>
 
       </div>
@@ -88,7 +91,7 @@ export default function CarouselCustomNavigation() {
 
 
   return (
-    topAnime ? <div className="w-screen h-134 px-5 flex justify-center mt-4">
+    topAnime ? <div className="w-screen h-134 px-0  flex justify-center mt-4 md:px-5">
       <Carousel
         className="rounded-xl w-9,9/10"
         autoplay={true}
@@ -160,6 +163,6 @@ export default function CarouselCustomNavigation() {
         {topAnime ? topAnime.map((item, index) => <CarouselItem key={index} anime={item} />) : <Loading />}
 
       </Carousel>
-    </div> : <Loading/>
+    </div> : <Loading />
   );
 }
