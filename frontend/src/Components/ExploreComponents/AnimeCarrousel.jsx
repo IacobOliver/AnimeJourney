@@ -33,18 +33,24 @@ export default function CarouselCustomNavigation() {
     let firstAnimeImage = anime.images[imagesIndexes[0]]
     let secondtAnimeImage = anime.images[imagesIndexes[1]]
 
+    //sm : 540px
+    //md : 720px
+    //lg : 960px
+    //xl : 1140px
+    //2xl : 1320px
 
     return (
-      <div className="h-full  grid grid-cols-10 ">
+      <div className="h-full grid grid-cols-10 relative">
         {/* Left Image */}
-        <div className=" w-full h-full grid-cols-none flex justify-center overflow-hidden md:col-span-4 xl:col-span-3">
-          <div className="w-0 h-0 rounded-3xl bg-cover bg-center md:w-96 md:h-9,9/10 " style={{ backgroundImage: `url(${firstAnimeImage})` }}> </div>
+        <div className="h-full grid-cols-none flex justify-center overflow-hidden md:h-134 md:col-span-4 xl:col-span-3 relative">
+          <div className="w-0 h-0 rounded-3xl bg-cover bg-center md:w-96 md:h-full " style={{ backgroundImage: `url(${firstAnimeImage})` }}> </div>
         </div>
 
+        {/* md:w-96 md:h-9,9/10 */}
 
         {/* Center */}
-        <div className="text-fifth_color_theme h-full col-span-10 pt-4 flex flex-col bg-center bg-cover relative
-                         md:justify-around md:w-full md:h-full md:col-span-6 md:!bg-none
+        <div className="text-fifth_color_theme h-134 col-span-10 pt-4 flex flex-col bg-center bg-cover relative
+                         md:justify-around  md:h-full md:col-span-6 md:!bg-none
                         xl:col-span-4" style={{ backgroundImage: `url(${firstAnimeImage})` }}>
           <div className="w-full h-full absolute top-0 transparentBackground z-0 md:hidden"></div>
           <div className="z-30">
@@ -52,7 +58,7 @@ export default function CarouselCustomNavigation() {
 
             <RatingStarts rating={anime.rating} members={anime.numberOfReviews} />
 
-            <p className="text-left text-lg mt-8 font-serif px-3 line-clamp-5 md:text-center">{anime.animeDescription}</p>
+            <p className="text-left text-lg mt-8 font-serif px-14 line-clamp-5 md:text-center sm:px-10 md:px-5">{anime.animeDescription}</p>
           </div>
 
 
