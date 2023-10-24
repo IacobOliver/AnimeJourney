@@ -1,6 +1,5 @@
 package AnimeJourney.anime.repository;
 
-import AnimeJourney.anime.model.AnimeStatus;
 import AnimeJourney.anime.model.SavedUserAnimeDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -13,11 +12,12 @@ import java.util.Optional;
 
 public interface SavedUserAnimeDetailsRepository extends JpaRepository<SavedUserAnimeDetails, Long> {
     Optional<List<SavedUserAnimeDetails>> findAllByUserId(Long userId);
+    Optional<List<SavedUserAnimeDetails>> findAllByUserIdAndAnimeId(Long userId, Long animeId);
 
     @Query("UPDATE SavedUserAnimeDetails s SET s.status = :value WHERE s.id = :id")
     @Modifying
     @Transactional
-    void updateAnimeStatus(@Param("id") Long id, @Param("value") AnimeStatus value);
+    void updateAnimeStatus(@Param("id") Long id, @Param("value") int value);
 
     @Query("UPDATE SavedUserAnimeDetails s SET s.watchedEpisodes = :value WHERE s.id = :id")
     @Modifying

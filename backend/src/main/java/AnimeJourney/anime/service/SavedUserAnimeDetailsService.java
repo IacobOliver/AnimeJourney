@@ -1,12 +1,10 @@
 package AnimeJourney.anime.service;
 
 
-import AnimeJourney.anime.model.AnimeStatus;
 import AnimeJourney.anime.model.SavedUserAnimeDetails;
 import AnimeJourney.anime.repository.SavedUserAnimeDetailsRepository;
 import AnimeJourney.auth.model.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -32,12 +30,12 @@ public class SavedUserAnimeDetailsService {
 
         User user = (User) authentication.getPrincipal();
 
-        List<SavedUserAnimeDetails> savedUserAnimeDetails = savedUserAnimeDetailsRepository.findAllByUserId(user.getId()).orElse(null);
-        for (int i = 0; i < savedUserAnimeDetails.size(); i++) {
-            if(savedUserAnimeDetails.get(i).getSavedAnimeFrontDetails().getAnimeId() == animeId){
-                return savedUserAnimeDetails.get(i);
-            }
+        List<SavedUserAnimeDetails> savedUserAnimeDetails = savedUserAnimeDetailsRepository.findAllByUserIdAndAnimeId(user.getId(), animeId).orElse(null);
+
+        if(savedUserAnimeDetails.size() > 0){
+            return savedUserAnimeDetails.get(0);
         }
+
         return null;
     }
 
@@ -46,7 +44,7 @@ public class SavedUserAnimeDetailsService {
         System.out.println(id);
 
         if(option.equals("status")){
-            savedUserAnimeDetailsRepository.updateAnimeStatus(id, AnimeStatus.values()[value]);
+            savedUserAnimeDetailsRepository.updateAnimeStatus(id, value);
         }else if(option.equals("watchedEpisodes")){
             savedUserAnimeDetailsRepository.updateAnimeWatchedEpisodes(id, value);
         }else if(option.equals("myScore")){

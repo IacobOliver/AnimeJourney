@@ -19,9 +19,9 @@ public class SavedUserAnimeDetails {
     @Id
     @GeneratedValue
     private long id;
+    private long animeId;
 
-    @Enumerated(EnumType.ORDINAL)
-    private AnimeStatus status;
+    private int status;
 
     private int myScore;
     private int watchedEpisodes;

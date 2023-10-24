@@ -6,17 +6,15 @@ import { useNavigate } from "react-router-dom";
 import state from "../Atom";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Spinner } from "@material-tailwind/react";
 import Loading from "../Loading";
 
 
 export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
     const [score, setScore] = useState(0)
     const [status, setStatus] = useState(0)
-    const [watchedEpisodes, setWatchedEpisodes] = useState(0);
 
     const [effect, setEffect] = useState(false);
-    const [userAnime, setUserAnime] = useAtom(state.userAnime);
+    const [userAnime, setUserAnime] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const [isLoggedIn, setIsLoggedIn] = useAtom(state.isLoggedIn)
@@ -26,6 +24,9 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
     const navigate = useNavigate();
     const params = useParams();
 
+    const inputEpisodesRef = useRef(null);
+    const statusRef = useRef(null);
+ 
 
     const Option = ({ text, id }) => {
         return (<option value={id} className=" bg-black_second_theme p-2">{text}</option>)
@@ -45,16 +46,18 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
                 setUserAnime(data);
                 setLoading(false)
 
+                inputEpisodesRef.current.value = data.watchedEpisodes;
+               
                 setScore(data.myScore);
-                setWatchedEpisodes(data.watchedEpisodes);
                 setStatus(data.status);
             })
             .catch(err => {
                 console.error("ERRRRRRRRRRRRRRORRRRRRRRRRRRR DIDNT FIND ALL VALUES TO 0")
                 setLoading(false);
-                setUserAnime(false);
+                setUserAnime(null);
+                inputEpisodesRef.current.value = 0;
+               
                 setScore(0);
-                setWatchedEpisodes(0);
                 setStatus(0);
             })
     }, [refresh])
@@ -70,6 +73,7 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
             "episodesCount": anime.episodes,
             "savedAnimeUserDetails": [
                 {
+                    "animeId": params.id,
                     "status": 0,
                     "myScore": 0,
                     "watchedEpisodes": 0,
@@ -97,9 +101,14 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
 
     const onStatusChange = (e) =>{
         if(e.target.id == "myScore"){
-            console.log(e.target.id)
+            console.log("in my score")
             setEffect(true)
             setScore(e.target.value)
+        }
+
+        if(e.target.id == "status"){
+            console.log(e.target.value + " status")
+            setStatus(e.target.value)
         }
         
         fetch(`http://localhost:8080/savedAnimeUserDetails/editAnimeStatus/${userAnime.id}/${e.target.id}/${e.target.value}`,{
@@ -123,7 +132,7 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
     return (
         <div className="flex flex-col  mt-4 text-fifth_color_theme relative">
             {!isLoggedIn && <div onClick={() => navigate("/logIn")} className="absolute h-full w-full z-10"></div>}
-
+          
             {loading &&
                 <div className="absolute w-full h-full transparentBackground flex justify-center items-center top-0">
                     <Loading />
@@ -134,7 +143,7 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
             <div className="flex flex-col">
 
                 {userAnime ?
-                    <select id="status" defaultValue={status} onChange={onStatusChange} className="mr-1 hover:bg-black_first_theme bg-black_second_theme mb-1 border border-black_second_theme rounded-lg h-14 focus:border-black_second_theme focus:ring-0 w-full">
+                    <select id="status" ref = {statusRef} value={status} onChange={onStatusChange} className="mr-1 hover:bg-black_first_theme bg-black_second_theme mb-1 border border-black_second_theme rounded-lg h-14 focus:border-black_second_theme focus:ring-0 w-full">
                         <Option id={0} text={"Plan To Watch"} />
                         <Option id={1} text={"Watching"} />
                         <Option id={2} text={"Completed"} />
@@ -157,7 +166,8 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
 
                 <div className="bg-black_second_theme group mb-1 hover:bg-black_first_theme flex w-full h-14 items-center border border-black_second_theme rounded-xl px-3 ">
                     <p>Episodes : </p>
-                    <input id="watchedEpisodes" defaultValue={userAnime.watchedEpisodes} onBlur={onStatusChange} className="bg-black_second_theme group-hover:bg-black_first_theme borber border-0 focus:border-none focus:ring-0 w-12 text-right p-1" type="number"  />
+                      <input id="watchedEpisodes" ref={inputEpisodesRef} onBlur={onStatusChange} className="bg-black_first_theme group-hover:bg-black_first_theme borber border-0 rounded-xl mx-1 focus:border-none focus:ring-0 w-12 text-right p-1" type="number"  />
+    
                     <p className="flex"> / {numberOfEpisodes ? numberOfEpisodes : "?"}</p>
                     {/* <i class="fa-solid fa-video"></i> */}
                 </div>
