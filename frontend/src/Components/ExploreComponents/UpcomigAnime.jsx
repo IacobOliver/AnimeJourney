@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 export default function UpcomingAnime() {
     const [upcomingAnime, setUpcomingAnime] = useState(null);
     const [nextPage, setNextPage] = useState(1)
-    const [last_visible_page , setLast_visible_page] = useState(0)
+    const [last_visible_page, setLast_visible_page] = useState(0)
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -19,7 +19,7 @@ export default function UpcomingAnime() {
             })
     }, [nextPage])
 
-    const moreAnime = () =>{
+    const moreAnime = () => {
 
         setNextPage(Math.floor(Math.random() * last_visible_page + 1))
     }
@@ -27,10 +27,11 @@ export default function UpcomingAnime() {
     const AnimeCard = ({ anime }) => {
 
         return (
-            <div className="h-16 my-2 rounded-lg flex relative">
-                 <div className="w-full h-full top-0 left-0 absolute hover:bg-[rgba(0,0,0,0.5)]"  onClick={() => navigate(`/anime/${anime.mal_id}`)}/>
+            <div className=" h-[4.5rem] px1450:h-16 my-2 rounded-lg flex relative">
+                <div className="w-full h-full top-0 left-0 absolute hover:bg-[rgba(0,0,0,0.5)]" onClick={() => navigate(`/anime/${anime.mal_id}`)} />
 
-                <div className="h-full w-16 rounded-lg bg-center bg-cover p-2" style={{ backgroundImage: `url(${anime.images.jpg.image_url})` }}></div>
+                {/* <div className="h-full w-16 rounded-lg bg-center bg-cover p-2" style={{ backgroundImage: `url(${anime.images.jpg.image_url})` }}></div> */}
+                <img className="rounded-lg min-w-[3rem] max-w-[3.2rem]" src={anime.images.jpg.image_url}/>
 
                 <div className="text-fifth_color_theme font-serif text-left text-md  w-72 mx-2 mt-1 ">
                     <div className=" line-clamp-1 font-fantasy tracking-wide">{anime.title}</div>
@@ -39,14 +40,14 @@ export default function UpcomingAnime() {
 
                 <div className="flex flex-col w-28 rounded-t-lg rounded-b-xl ">
 
-                    <p className=" text-fifth_color_theme coolGradient font-serif font-semibold text-sm h-2/3 flex items-center justify-evenly tracking-widest rounded-lg">                 
-                        {anime.type? anime.type : "Unknown"}
+                    <p className=" text-fifth_color_theme coolGradient font-serif font-semibold text-sm h-2/3 flex items-center justify-evenly tracking-widest rounded-lg">
+                        {anime.type ? anime.type : "Unknown"}
                     </p>
                 </div>
             </div>)
     }
 
-    return (<div className="col-span-3 max-h-full ">
+    return (<div className="col-span-4 2xl:col-span-3 max-h-full ">
         <div className="flex items-center justify-center text-fifth_color_theme font-fantasy tracking-wide">
             <p className="text-2xl p-4">Upcoming Anime</p>
             <button className="p-1 text-lg hover:animate-spin" onClick={moreAnime}><i className="fa-solid fa-arrows-rotate"></i></button>
