@@ -25,7 +25,7 @@ export default function AnimeRecomandation() {
 
     return (
         
-        <div className=" grid grid-cols-8 text-fifth_color_theme mt-5">
+        <div className=" grid grid-cols-8 gap-4 text-fifth_color_theme mt-5">
             
 
             <p className="col-span-8 text-3xl font-fantasy mb-3 ml-3">Recommended if you like this anime ♥</p>
