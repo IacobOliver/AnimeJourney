@@ -27,8 +27,8 @@ export default function ProfileDropdown() {
     <Popover placement="bottom-end">
     <PopoverHandler>
     
-    <Typography variant="h6" color="white" className="">
-            {/* <p className="mr-3">{user ?  user.memberName : ""}</p> */}
+    <Typography variant="h6" color="white" className="flex items-center">
+            <p className="mr-3 text-lg  hidden lg:visible lg:flex ">{user ?  user.memberName : ""}</p>
           
             <Avatar src="/icons/9.jpg"/>
    </Typography>
