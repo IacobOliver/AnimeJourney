@@ -19,7 +19,8 @@ module.exports = withMT({
 
     extend: {
       screens : {
-        px1730 : "1730px"
+        px1000 : "1000px",
+        px1450 : "1450px"
       },
       colors:{
         black_first_theme : "#050505",
