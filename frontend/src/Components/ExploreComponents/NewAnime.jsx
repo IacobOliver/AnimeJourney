@@ -96,7 +96,7 @@ export default function AnimeList() {
             </div>
 
 
-            <div className="h-full w-full grid grid-cols-6 xl:grid-cols-4 px1450:grid-cols-6 gap-4 mt-2">
+            <div className="h-full w-full grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-4 px1450:grid-cols-6 gap-4 mt-2">
 
                 {animeNewSeasons?.map((anime, index) => <AnimeCard key={index} image={anime.image} title={anime.name} airedFrom={anime.airedFrom} type={anime.animeType} animeId={anime.animeId} />)}
 

@@ -22,7 +22,7 @@ export default function AnimeCard({ image, title, airedFrom, type, animeId }) {
     return (
         <div className="rounded-lg flex flex-col relative overflow-hidden max-w-[14rem] min-h-[5rem]">
             <div className="w-full h-full top-0 left-0 absolute hover:bg-[rgba(0,0,0,0.5)]" onClick={() => handleAnimeCardEvent(animeId)} />
-            <img className="min-h-[13rem]" src = {image}/>
+            <img className="min-h-[9rem]" src = {image}/>
             <div className="text-gray-400 bg-black_second_theme font-semibold tracking-wide font-serif text-center text-xs mt-0 rounded-b-lg flex justify-around">
                 <div> {airedFrom}</div>
                 <div>•</div>
