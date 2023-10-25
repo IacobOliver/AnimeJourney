@@ -14,7 +14,7 @@ const StartElement = () => {
 const HalfStartElement = () => {
     return (
         <div className="h-5 w-5 relative ">
-            <div className="h-full w-full flex items-center justify-center">  <i class="fa-solid fa-star-half"></i></div>
+            <div className="h-full w-full flex items-center justify-center"> <i className ="fa-solid fa-star-half"></i></div>
            
         </div>
     )

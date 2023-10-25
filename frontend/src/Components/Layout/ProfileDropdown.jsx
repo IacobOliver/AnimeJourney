@@ -23,18 +23,20 @@ export default function ProfileDropdown() {
 
 
   return (
-    <div className="mr-10">
+    <div className="md:mr-10 col-span-1 lg:col-span-2">
     <Popover placement="bottom-end">
     <PopoverHandler>
     
-    <Typography variant="h6" color="white" className="flex items-center">
-            <p className="mr-3">{user ?  user.memberName : ""}</p>
+    <Typography variant="h6" color="white" className="">
+            {/* <p className="mr-3">{user ?  user.memberName : ""}</p> */}
+          
             <Avatar src="/icons/9.jpg"/>
-          </Typography>
+   </Typography>
     </PopoverHandler>
 
-    <PopoverContent className="w-72 transparentBackground backdrop-blur-md border-black_first_theme border-2 z-30">
-      <div className="mb-4 flex items-center gap-4 border-b-2 border-b-black_second_theme  pb-4">
+    <PopoverContent className="w-72 transparentBackground backdrop-blur-md border-black_first_theme border-2 z-30 relative">
+     
+      <div className="mb-4 flex items-center gap-4 border-b-2 border-b-black_second_theme pb-4">
         <Avatar src="/icons/9.jpg"/>
         <div>
           <Typography variant="h6" color="white">
@@ -49,8 +51,10 @@ export default function ProfileDropdown() {
             </Typography>
           
         </div>
+       
       </div>
       <List className="p-0 ">
+      
         <div className="text-initial font-medium text-fifth_color_theme  rounded-lg">
           <ListItem className="hover:bg-black_first_theme hover:text-fifth_color_theme">
             <ListItemPrefix>
@@ -112,6 +116,8 @@ export default function ProfileDropdown() {
         </a>
       </List>
     </PopoverContent>
+
+    
   </Popover>
   </div>
   )
