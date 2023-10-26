@@ -83,7 +83,7 @@ export default function AnimeList() {
 
     return (
         <div className="text-white h-auto col-span-10 xl:col-span-6 2xl:col-span-7 p-3 ">
-            <div className="  h-14 flex items-center justify-between">
+            <div className="  h-14 flex items-center justify-between bg-[rgb(15,15,15)] rounded-xl">
                 <div className="flex items-center">
 
                     <p className="text-xl xl:text-2xl text-fifth_color_theme font-fantasy tracking-wide p-4">New Anime Seasons</p>
@@ -101,7 +101,7 @@ export default function AnimeList() {
                             }}
                         >
                             <MenuHandler>
-                                <Button className=" bg-forth_color_theme text-black_first_theme font-fantasy font-thin tracking-wider text-base hover:bg-third_color_theme hover:text-fifth_color_theme"> Filters</Button>
+                                <Button className=" bg-forth_color_theme text-black_first_theme font-fantasy font-thin tracking-wider text-base hover:bg-third_color_theme hover:text-fifth_color_theme py-2"> Filters</Button>
                             </MenuHandler>
                             <MenuList className="transparentBackground backdrop-blur-md border-0 ">
                                 <MenuItem className="p-0 focus:bg-black_second_theme hover:bg-black_second_theme"> <FilterButton name="All" /> </MenuItem>
@@ -125,7 +125,7 @@ export default function AnimeList() {
             </div>
 
 
-            <div className="h-full w-full grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-4 px1450:grid-cols-6 gap-4 mt-2">
+            <div className=" grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-4 px1450:grid-cols-6 gap-4 mt-2">
 
                 {animeNewSeasons?.map((anime, index) => <AnimeCard key={index} image={anime.image} title={anime.name} airedFrom={anime.airedFrom} type={anime.animeType} animeId={anime.animeId} />)}
 

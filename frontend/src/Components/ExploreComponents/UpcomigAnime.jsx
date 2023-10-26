@@ -14,7 +14,7 @@ export default function UpcomingAnime() {
             .then(res => res.json())
             .then(data => {
                 setLast_visible_page(data.pagination.last_visible_page)
-                let random = Utils.giveRandomDistinctIndexes(data.data.length, 9)
+                let random = Utils.giveRandomDistinctIndexes(data.data.length, 10)
                 setUpcomingAnime(data.data.filter((anime, index) => random.includes(index)))
             })
     }, [nextPage])
@@ -27,7 +27,7 @@ export default function UpcomingAnime() {
     const AnimeCard = ({ anime }) => {
 
         return (
-            <div className=" h-[4.5rem] px1450:h-16 my-2 rounded-lg flex relative">
+            <div className=" h-[4.5rem] px1450:h-16 my-2 rounded-lg flex relative mx-2 xl:mx-0">
                 <div className="w-full h-full top-0 left-0 absolute hover:bg-[rgba(0,0,0,0.5)]" onClick={() => navigate(`/anime/${anime.mal_id}`)} />
 
                 {/* <div className="h-full w-16 rounded-lg bg-center bg-cover p-2" style={{ backgroundImage: `url(${anime.images.jpg.image_url})` }}></div> */}
@@ -47,13 +47,13 @@ export default function UpcomingAnime() {
             </div>)
     }
 
-    return (<div className="col-span-4 2xl:col-span-3 max-h-full ">
-        <div className="flex items-center justify-center text-fifth_color_theme font-fantasy tracking-wide">
+    return (<div className="col-span-10 xl:col-span-4 2xl:col-span-3  max-h-full mt-10 xl:mt-3 ">
+        <div className="flex items-center justify-center text-fifth_color_theme font-fantasy tracking-wide bg-[rgb(15,15,15)] rounded-xl">
             <p className="text-2xl p-4">Upcoming Anime</p>
             <button className="p-1 text-lg hover:animate-spin" onClick={moreAnime}><i className="fa-solid fa-arrows-rotate"></i></button>
         </div>
 
-        <div className="px-7 border-l-4 border-l-black_second_theme">
+        <div className="grid grid-cols-1 px600:grid-cols-2 xl:!grid-cols-1 px-7 border-l-4 border-l-black_second_theme">
             {upcomingAnime?.map((item, index) => <AnimeCard key={index} anime={item} />)}
         </div>
     </div>)

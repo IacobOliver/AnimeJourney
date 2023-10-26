@@ -15,12 +15,11 @@ import { PopoverStylesType } from "@material-tailwind/react";
 module.exports = withMT({
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}",  "./node_modules/flowbite/**/*.jsx", "./node_modules/flowbite/**/*.js"],
   theme: {
-   
-
     extend: {
       screens : {
-        px1000 : "1000px",
-        px1450 : "1450px"
+        'px600' : '600px',
+        'px1000' : '1000px',
+        'px1450 ': '1450px'
       },
       colors:{
         black_first_theme : "#050505",
