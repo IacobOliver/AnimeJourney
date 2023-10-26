@@ -40,7 +40,7 @@ export default function UpcomingAnime() {
 
                 <div className="flex flex-col w-28 rounded-t-lg rounded-b-xl ">
 
-                    <p className=" text-fifth_color_theme coolGradient font-serif font-semibold text-sm h-2/3 flex items-center justify-evenly tracking-widest rounded-lg">
+                    <p className=" text-fifth_color_theme coolGradient text-sm font-serif font-semibold  h-2/3 flex items-center justify-evenly tracking-widest rounded-lg">
                         {anime.type ? anime.type : "Unknown"}
                     </p>
                 </div>

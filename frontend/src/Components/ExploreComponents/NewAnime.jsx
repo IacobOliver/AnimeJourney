@@ -4,6 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import state from "../Atom";
 import AnimeCard from "./AnimeCard";
+import {
+    Menu,
+    MenuHandler,
+    MenuList,
+    MenuItem,
+    Button,
+} from "@material-tailwind/react";
 
 export default function AnimeList() {
     const [animeNewSeasons, setAnimeNewSeasons] = useState(null)
@@ -32,7 +39,7 @@ export default function AnimeList() {
 
 
     const FilterButton = ({ name }) => {
-        return <button onClick={(e) => selectFilter(e.target.textContent)} className={`${filterValue == name ? "bg-black_second_theme text-white" : ""} text-sm lg:text-base text-gray-500 hover:text-fifth_color_theme font-fantasy tracking-wide p-2 lg:p-3 mx-1 rounded-lg`}>{name}</button>
+        return <button onClick={(e) => selectFilter(e.target.textContent)} className={`${filterValue == name ? "bg-black_second_theme md:text-white" : ""} w-full md:w-auto text-sm lg:text-base text-fifth_color_theme md:text-gray-500 hover:text-forth_color_theme md:hover:text-fifth_color_theme font-fantasy tracking-wide p-2 lg:p-3 mx-0 md:mx-1 rounded-lg`}>{name}</button>
     }
 
     const selectFilter = (fValue) => {
@@ -86,12 +93,34 @@ export default function AnimeList() {
                 </div>
 
                 <div className="flex items-center mr-5">
-                    <FilterButton name="All" />
-                    <FilterButton name="Special" />
-                    <FilterButton name="ONA" />
-                    <FilterButton name="TV" />
-                    <FilterButton name="Movie" />
-                    <FilterButton name="Most Recent" />
+                    <div className=" md:hidden">
+                        <Menu
+                            animate={{
+                                mount: { y: 0 },
+                                unmount: { y: 25 },
+                            }}
+                        >
+                            <MenuHandler>
+                                <Button className=" bg-forth_color_theme text-black_first_theme font-fantasy font-thin tracking-wider text-base hover:bg-third_color_theme hover:text-fifth_color_theme"> Filters</Button>
+                            </MenuHandler>
+                            <MenuList className="transparentBackground backdrop-blur-md border-0 ">
+                                <MenuItem className="p-0 focus:bg-black_second_theme hover:bg-black_second_theme"> <FilterButton name="All" /> </MenuItem>
+                                <MenuItem className="p-0 focus:bg-black_second_theme hover:bg-black_second_theme"> <FilterButton name="Special" /> </MenuItem>
+                                <MenuItem className="p-0 focus:bg-black_second_theme hover:bg-black_second_theme"> <FilterButton name="ONA" /> </MenuItem>
+                                <MenuItem className="p-0 focus:bg-black_second_theme hover:bg-black_second_theme"> <FilterButton name="TV" /> </MenuItem>
+                                <MenuItem className="p-0 focus:bg-black_second_theme hover:bg-black_second_theme"> <FilterButton name="Movie" /> </MenuItem>
+                                <MenuItem className="p-0 focus:bg-black_second_theme hover:bg-black_second_theme"> <FilterButton name="Most Recent" /></MenuItem>
+                            </MenuList>
+                        </Menu>
+                    </div>
+                    <div className="hidden md:flex items-center">
+                        <FilterButton name="All" />
+                        <FilterButton name="Special" />
+                        <FilterButton name="ONA" />
+                        <FilterButton name="TV" />
+                        <FilterButton name="Movie" />
+                        <FilterButton name="Most Recent" />
+                    </div>
                 </div>
             </div>
 

@@ -65,7 +65,7 @@ export default function Layout() {
                     >
                         <Tooltip content="Search" placement="left-end" >
                             <PopoverHandler>
-                                <div className="w-10 h-10 ml-5 sm:ml-10 group hover:bg-black rounded-full flex items-center justify-center col-span-1 lg:grid-cols-none lg:hidden"> <i className="fa-solid fa-magnifying-glass text-xl group-hover:text-third_color_theme "></i></div>
+                                <div className="text-md sm:text-xl group-hover:text-third_color_theme w-10 h-10 ml-5 sm:ml-10 group hover:bg-black rounded-full flex items-center justify-center col-span-1 lg:grid-cols-none lg:hidden"> <i className="fa-solid fa-magnifying-glass  "></i></div>
                             </PopoverHandler>
                         </Tooltip>
                         <PopoverContent className="w-screen bg-[rgba(0,0,0,0.8)] backdrop-blur-md z-40 border-0">

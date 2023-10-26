@@ -16,8 +16,6 @@ export default function AnimeCard({ image, title, airedFrom, type, animeId }) {
         setRefresh(refresh + 1)
         navigate(`/anime/${animeId}`)
     }
-    console.log(image, title)
-
 
     return (
         <div className="rounded-lg flex flex-col relative overflow-hidden max-w-[14rem] min-h-[5rem]">
