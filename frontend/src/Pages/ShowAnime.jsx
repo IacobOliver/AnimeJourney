@@ -60,10 +60,10 @@ export default function ShowAnime() {
 
                     {/* IMAGE INFO AND TRAILER */}
                     <div className="grid grid-cols-10 p-2">
-                        <div className="col-span-5 px850:!col-span-4 px1600:!col-span-2 xl:hidden px1600:!flex h-134 min-w-[15rem] bg-cover bg-center rounded-l-lg " style={{ backgroundImage: `url(${anime.images.jpg.large_image_url})` }}></div>
+                        <div className="hidden md:flex col-span-5 px850:!col-span-4 px1600:!col-span-2 xl:hidden px1600:!flex h-134 min-w-[15rem] bg-cover bg-center rounded-l-lg " style={{ backgroundImage: `url(${anime.images.jpg.large_image_url})` }}></div>
                        
-                        <FastDetails anime={anime} className={"z-10 h-134 col-span-5 px850:col-span-6 xl:!col-span-3 px1600:!col-span-2 w-full xl:w-96 bg-cover bg-center rounded-lg px1600:!rounded-r-lg relative flex flex-col font-fantasy text-fifth_color_theme tracking-wide ml-3 p-2  "} />
-                        {/* xl:bg-inherit px1600:!bg-none */}
+                        <FastDetails anime={anime} className={'z-10 h-134 col-span-10 md:col-span-5 px850:col-span-6 xl:!col-span-3 px1600:!col-span-2 w-full xl:w-96 bg-cover bg-center md:!bg-none rounded-lg  px1600:!rounded-r-lg relative flex flex-col font-fantasy text-fifth_color_theme tracking-wide ml-3 p-2  '} />
+                        
                         <TrailerComponent anime={anime} />
                     </div>
 

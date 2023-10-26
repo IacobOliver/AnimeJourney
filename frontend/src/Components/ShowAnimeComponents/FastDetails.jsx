@@ -15,9 +15,9 @@ export default function FastDetails({ anime, className }) {
 
 
     return (
-        <div className={className} >
-            {/* style={{ backgroundImage: `url(${anime.images.jpg.large_image_url})` }} */}
-            {/* <div className="z-0 h-full w-full absolute transparentBackground  top-0 left-0 rounded-lg px1600:hidden"></div> */}
+        <div className={className} style={{ backgroundImage: `url(${anime.images.jpg.large_image_url})` }}  >
+           
+            <div className="z-0 h-full w-full absolute transparentBackground  top-0 left-0 rounded-lg md:hidden"></div>
 
             <p className="z-10 font-fantasy text-3xl tracking-wide text-center mt-3 line-clamp-3">{anime.title}</p>
             <div className="z-10 my-1"><RatingStarts rating={anime.score} members={anime.scored_by} /></div>
