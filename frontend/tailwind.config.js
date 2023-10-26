@@ -15,12 +15,11 @@ import { PopoverStylesType } from "@material-tailwind/react";
 module.exports = withMT({
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}",  "./node_modules/flowbite/**/*.jsx", "./node_modules/flowbite/**/*.js"],
   theme: {
-   
-
     extend: {
       screens : {
-        px1000 : "1000px",
-        px1450 : "1450px"
+        'px600' : '600px',
+        'px1000' : '1000px',
+        'px1450 ': '1450px'
       },
       colors:{
         black_first_theme : "#050505",
@@ -40,9 +39,6 @@ module.exports = withMT({
       fontFamily: {
         'sans': ['ui-sans-serif', 'system-ui', 'Helvetica', 'Arial', 'sans'],
         'serif': ['ui-serif', 'Georgia', 'Times', 'serif'],
-        'mono': ['ui-monospace', 'SFMono-Regular', 'Monaco', 'monospace'],
-        'display': ['Oswald', 'sans'],
-        'body': ['"Open Sans"', 'sans'],
         'thick': ['semibold♦', 'sans'], // Add your thick font here
         'cursive': ['"Pacifico"', 'cursive'], // Add a cursive font
         'fantasy': ['"Impact"', 'fantasy'], // Add a fantasy font
