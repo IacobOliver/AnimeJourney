@@ -25,10 +25,10 @@ export default function AnimeRecomandation() {
 
     return (
         
-        <div className=" grid grid-cols-8 gap-4 text-fifth_color_theme mt-5">
+        <div className=" grid grid-cols-8 gap-4 text-fifth_color_theme mt-5 px-3">
             
 
-            <p className="col-span-8 text-3xl font-fantasy mb-3 ml-3">Recommended if you like this anime ♥</p>
+            <p className="col-span-8 text-3xl font-fantasy ml-3">Recommended if you like this anime ♥</p>
 
             {animeRec.length != 0 ? 
            animeRec.map((anime, index) => <AnimeCard key={index} image={anime.entry.images.jpg.image_url} title={anime.entry.title} animeId={anime.entry.mal_id}/>)
