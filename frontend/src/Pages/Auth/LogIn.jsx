@@ -57,6 +57,8 @@ export default function LogIn() {
         alertRef.current.firstChild.textContent = "The email or password is wrong"
       
         console.error(err)})
+    }else{
+      alertRef.current.firstChild.textContent = "Some fields are invalid, check the red ones !"
     }
     }
 

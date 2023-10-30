@@ -49,26 +49,23 @@ export default function TrailerComponent({anime}){
         }
       }
 
-    return (<div className="flex flex-col items-center w-1/2 justify-center relative mx-44 border border-black_second_theme rounded-xl">
+    return (<div className="col-span-10 xl:col-span-7 mt-16 xl:mt-0 px1600:!col-span-6 flex flex-col items-center justify-center relative mx-44 border border-black_second_theme rounded-xl">
         <div className=" w-full h-full z-30 absolute"></div>
         {anime.trailer.embed_url ?
             <>
                 <iframe
                 ref={trailerBack}
-                    width="1060"
-                    height="540"
                     src={`${anime.trailer.embed_url}&mute=1&loop=1&playlist=${anime.trailer.youtube_id}`}
                     allow="accelerometer;  picture-in-picture; autoplay"
-                    className="z-0 absolute blur-2xl overflow-hidden"
+                    className="z-0 absolute blur-2xl overflow-hidden 2xl:w-[1060px] 2xl:h-[540px] w-[860px] h-[340px]"
                 ></iframe>
-                <div className=" w-[1060px] h-[540px] absolute"></div>
+               
+                <div className=" w-[1060px] h-[540px] 2xl:w-[880px] 2xl:h-[360px] absolute"></div>
                 <iframe
                     ref={trailer}
-                    width="716"
-                    height="403"
                     src={`${anime.trailer.embed_url}&mute=1&controls=0&loop=1&playlist=${anime.trailer.youtube_id}`}
                     allow="accelerometer; picture-in-picture; autoplay;"
-                    className="z-20 rounded-xl"
+                    className="z-20 rounded-xl 2xl:w-[716px] 2xl:h-[403px] w-[525px] h-[295px]"
                     
                 ></iframe>
                 <div className="flex bg-[rgba(0,0,0,0.5)] text-forth_color_theme z-30 rounded-b-lg">

@@ -29,7 +29,7 @@ export default function SignIn() {
     alertRef.current.classList.add("animate-jump-in")
 
     let authResponse = {
-      memberName : userNameRef.current.value,
+      memberName : userNameRef.current.value.trim(),
       email: emailRef.current.value,
       password: passwordRef.current.value,
     }
@@ -75,6 +75,8 @@ export default function SignIn() {
           }
         })
         .catch(err => console.error(err))
+    }else{
+      alertRef.current.firstChild.textContent = "Some fields are invalid, check the red ones !"
     }
   }
 
