@@ -36,23 +36,24 @@ export default function ShowAnime() {
 
 
     const MoreDetailsComp = ({ title, contextString, optionalUrl }) => {
-        return optionalUrl != undefined ? <div className="my-1 "><b>{title}</b> : <a className=" text-third_color_theme" target="_blank" href={optionalUrl}>{contextString}</a></div>
-            : <p className="my-1 "><b>{title}</b> : {contextString}</p>
+        return optionalUrl != undefined ? <div className="text-xl"><b>{title}</b> : <a className=" text-third_color_theme" target="_blank" href={optionalUrl}>{contextString}</a></div>
+            : <p ><b className="text-xl ">{title}</b> : {contextString}</p>
     }
 
     const MoreDetailsCompArray = ({ title, info }) => {
-        return <div>
-            <b>{title} : </b>
+        return <div className="">
+            <b className="text-xl">{title}</b> : 
             {info.length != 0 ?
                 info.map((producer, index) => <a key={index} className=" text-third_color_theme" target="_blank" href={producer.url}>{index >= 1 ? " , " : ""} {producer.name}</a>)
                 :
-                <p>Unknown...</p>
+                <a> Unknown...</a>
             }
         </div>
 
     }
 
-
+    
+    
     return (
         <>
             {anime ?
@@ -67,9 +68,9 @@ export default function ShowAnime() {
                         <TrailerComponent anime={anime} />
                     </div>
 
-                    <div className="mt-7 p-2 grid grid-cols-10 text-fifth_color_theme">
-                        <div className="col-span-2 border-0 border-r-[0.25rem] border-r-black_second_theme rounded-md  mr-2 font-semibold">
-                            <p className="text-3xl mb-3 font-fantasy font-normal">More Details</p>
+                    <div className="mt-7 p-2  text-fifth_color_theme">
+                        <div className=" grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3  border-0 border-r-[0.25rem] border-l-[0.25rem] border-black_second_theme rounded-md  font-semibold px-3">
+                            <p className="text-3xl col-span-1 sm:col-span-2 xl:col-span-3 mb-3 font-fantasy font-normal">More Details</p>
                             <MoreDetailsComp title={"Rating"} contextString={anime.rating ? anime.rating : " - "} />
 
                             <MoreDetailsComp title={"Status"} contextString={anime.status ? anime.status : "Unknown"} />
@@ -78,22 +79,20 @@ export default function ShowAnime() {
 
                             <MoreDetailsComp title={"Season"} contextString={anime.season ? anime.season.toUpperCase() : "Unknown"} />
 
+                            <MoreDetailsComp title={"Source"} contextString={anime.source ? anime.source : "Unknown"} />
+
+                            <MoreDetailsComp title={"Duration"} contextString={anime.duration ? anime.duration : "Unknown"} />
+
                             <MoreDetailsCompArray title={"Studios"} info={anime.studios} />
 
                             <MoreDetailsCompArray title={"Licensors"} info={anime.licensors} />
 
                             <MoreDetailsCompArray title={"Producers"} info={anime.producers} />
-
-                            <MoreDetailsComp title={"Source"} contextString={anime.source ? anime.source : "Unknown"} />
-
-                            <MoreDetailsComp title={"Duration"} contextString={anime.duration ? anime.duration : "Unknown"} />
                         </div>
 
-                        <div className="col-span-8">
+                        <div className="mt-4">
                             <p className="ml-3 mb-1 text-3xl font-fantasy col-span-8" >Description </p>
                             <p className=" text-md font-bold col-span-8">{anime.synopsis}</p>
-
-                            {/* <hr className="col-span-8 my-7 border-0 h-1 bg-black_second_theme rounded-lg" /> */}
 
                         </div>
                     </div>
