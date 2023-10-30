@@ -3,14 +3,16 @@ import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useAtom } from "jotai";
 import state from "../Components/Atom";
-import RatingStarts from "../Components/ExploreComponents/RatingStars";
 import TrailerComponent from "../Components/ShowAnimeComponents/TrailerComponent"
-import EditAnimeStatus from "../Components/ShowAnimeComponents/EditAnimeStatus";
 import AnimeRecomandation from "../Components/ShowAnimeComponents/AnimeRecomandation";
 import FastDetails from "../Components/ShowAnimeComponents/FastDetails";
+import Characters from "../Components/ShowAnimeComponents/Characters";
+import { Spinner } from "@material-tailwind/react";
+import { Button } from "@material-tailwind/react";
 
 export default function ShowAnime() {
     const [anime, setAnime] = useState(null);
+    const [characters, setCharacters] = useState(null);
     const params = useParams();
     const [refresh, setRefresh] = useAtom(state.refreshAnime)
 
@@ -18,16 +20,24 @@ export default function ShowAnime() {
     useEffect(() => {
         Promise.all([
             fetch(`https://api.jikan.moe/v4/anime/${params.id}/full`),
-            fetch(`https://api.jikan.moe/v4/anime/${params.id}/characters`),
+            fetch(`https://api.jikan.moe/v4/anime/${params.id}/characters?limit=5`),
         ])
             .then(([anime, characters]) =>
                 Promise.all([anime.json(), characters.json()])
             )
             .then(([anime, characters]) => {
                 setAnime(anime.data);
-                console.log(anime)
-                console.log("Characters : ", characters)
 
+                let neededCharacters = [];
+                for (let i = 0; i < characters.data.length; i++) {
+                    if (i == 15) {
+                        setCharacters(neededCharacters)
+                        break;
+                    }
+                    neededCharacters.push(characters.data[i])
+                }
+
+                console.log(anime)
             });
     }, [refresh]);
 
@@ -42,7 +52,7 @@ export default function ShowAnime() {
 
     const MoreDetailsCompArray = ({ title, info }) => {
         return <div className="">
-            <b className="text-xl">{title}</b> : 
+            <b className="text-xl">{title}</b> :
             {info.length != 0 ?
                 info.map((producer, index) => <a key={index} className=" text-third_color_theme" target="_blank" href={producer.url}>{index >= 1 ? " , " : ""} {producer.name}</a>)
                 :
@@ -52,8 +62,8 @@ export default function ShowAnime() {
 
     }
 
-    
-    
+
+
     return (
         <>
             {anime ?
@@ -62,9 +72,9 @@ export default function ShowAnime() {
                     {/* IMAGE INFO AND TRAILER */}
                     <div className="grid grid-cols-10 p-2">
                         <div className="hidden md:flex col-span-5 px850:!col-span-4 px1600:!col-span-2 xl:hidden px1600:!flex h-134 min-w-[15rem] bg-cover bg-center rounded-l-lg " style={{ backgroundImage: `url(${anime.images.jpg.large_image_url})` }}></div>
-                       
+
                         <FastDetails anime={anime} className={'z-10 h-134 col-span-10 md:col-span-5 px850:col-span-6 xl:!col-span-3 px1600:!col-span-2 w-full xl:w-96 bg-cover bg-center md:!bg-none rounded-lg  px1600:!rounded-r-lg relative flex flex-col font-fantasy text-fifth_color_theme tracking-wide md:ml-3 p-2  '} />
-                        
+
                         <TrailerComponent anime={anime} />
                     </div>
 
@@ -96,6 +106,36 @@ export default function ShowAnime() {
 
                         </div>
                     </div>
+
+
+                    <div className="mx-3 mt-4">
+                        <div className="text-3xl text-fifth_color_theme font-fantasy font-normal ml-2 mb-2 flex items-center">
+                            <p> Characters</p>
+                            <Button variant="text" className="flex items-center gap-2 text-third_color_theme hover:bg-black_second_theme ml-3 duration-300 font-extrabold">
+                                See all characters{" "}
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={2}
+                                    stroke="currentColor"
+                                    className="h-5 w-5"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                                    />
+                                </svg>
+                            </Button>
+                        </div>
+                        {characters ?
+                            <Characters characters={characters} />
+                            :
+                            <Spinner />
+                        }
+                    </div>
+
 
                     <AnimeRecomandation />
 
