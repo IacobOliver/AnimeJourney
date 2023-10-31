@@ -1,8 +1,9 @@
 # AnimeJourney
-## Project Descriptoin
+## Project Description
  It's a solo project, where you can track you favorite animes, newest anime and upcoming anime. If you make an account you will be able to make your own anime list by marking them as watching, on-hold, drop and plan to watch, you can give it a score from 1-10 and leave a review if you want. It's not a streaming application, but in the future will be, this project is still work in progress.
 
-![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/7ffbb2af-cc30-4dfe-9a2f-7682486e25a6)
+![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/e998cbf0-0bf3-4fd0-a625-5d70c8d25df0)
+
 
  ## Tehnologies Used : 
  
@@ -24,7 +25,8 @@
 ## Future Plans
 
 - for now, finishing the detailed page of an anime
- ![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/cde1e33c-8b20-428e-bdc5-125185ee2dd7)
+ ![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/2354d096-831d-47f3-8641-d65b19f19b35)
+
 
 
 - making the search page and adding filters for searching the anime
@@ -34,6 +36,12 @@
   
 - if i have the resouces, I'll stream some anime on it
 - implementing some premium options that you will ne to pay for
+- a page to see what anime you added to your list along with filter and others
+- a page to contact the developer for bugs or reviews
+- a page for profile, to edit user details and profile image or if you want an avatar image
+- a settings page
+  ![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/9137570b-582c-48e4-9d6f-a7d9a8322937)
+
 
 ## Setup 
 
@@ -62,6 +70,7 @@
       (Alternatively, you can use `pnpm install`.)
     
 3. Populate the database on local db (OPTIONAL)
+IMPORTANT !!! -> If the site won't load if you did everything right, it's very possible for the SupabaseDB to be down due to inactivity, mail me at olialexander08@gmail.com and I will get it back up again!
 - For a beeter performance you can save the animes on your local db, you need to have postgreSQL installed and create a db in pgAdmin, then in the project in backend/src/main/resources/application.properties
 - you need to modify this with your info
    ```
