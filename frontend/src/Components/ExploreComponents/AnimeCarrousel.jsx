@@ -56,7 +56,7 @@ export default function CarouselCustomNavigation() {
           <div className="z-30">
             <h1 className="text-5xl mt-10 px-3 text-left font-fantasy line-clamp-3 md:mt-0 md:px-0 md:text-center xl:text-6xl" >{anime.name}</h1>
 
-            <RatingStarts rating={anime.rating} members={anime.numberOfReviews} />
+            <RatingStarts rating={anime.rating} members={anime.numberOfReviews} positionClass="items-start md:items-center" pClass="text-gray-500"/>
 
             <p className="text-left text-lg mt-8 font-serif px-14 line-clamp-5 md:text-center sm:px-10 md:px-5">{anime.animeDescription}</p>
           </div>

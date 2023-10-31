@@ -20,21 +20,21 @@ const HalfStartElement = () => {
     )
 }
 
-export default function RatingStarts({ rating, members }) {
+export default function RatingStarts({ rating, members, positionClass, pClass }) {
     let ratingArray = []
     for (let i = 1; i <= Math.floor(rating); i++) {
         ratingArray.push(i)
     }
     let pointDifference = (ratingArray.length - rating) * (-1)
 
-    return (<div className="flex items-start my-5 px-3 font-sans flex-col md:my-2 md:items-center">
+    return (<div className={`flex  my-5 px-3 font-sans flex-col md:my-2 ${positionClass}`}>
 
         <div className="text-forth_color_theme flex">
             {ratingArray.map(item => <StartElement key={item} />)}
             {pointDifference >= 0.5 ? <HalfStartElement /> : null}
         </div>
 
-        <p className="text-gray-500 font-semibold">{rating ? rating : "N/A"} from {members ? members : " - "} reviews</p>
+        <p className={` font-semibold ${pClass}`}>{rating ? rating : "N/A"} from {members ? members : " - "} reviews</p>
       
 
     </div>)

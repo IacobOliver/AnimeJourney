@@ -8,6 +8,7 @@ import Redirect from "./Components/Redirect";
 import ShowAnime from "./Pages/ShowAnime";
 import SignIn from "./Pages/Auth/SignIn";
 import LogIn from "./Pages/Auth/LogIn";
+import AllAnimeCharacters from "./Pages/AllAnimeCharacters";
 
 
 
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/" element={<Redirect/>}> </Route>
         <Route path="/home" element={<Explore />}> </Route>
         <Route path="/anime/:id" element ={<ShowAnime/>}/>
+        <Route path="/anime/:id/characters" element ={<AllAnimeCharacters/>}/>
 
         <Route path="/singIn" element = {<SignIn/>}/>
         <Route path="/logIn" element = {<LogIn/>}/>

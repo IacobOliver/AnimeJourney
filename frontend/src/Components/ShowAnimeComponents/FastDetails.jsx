@@ -8,7 +8,7 @@ export default function FastDetails({ anime, className }) {
 
     const DetailComp = ({ detail }) => {
         return (
-            <div className=" bg-black_second_theme rounded-lg w-full flex items-center justify-center">
+            <div className="bg-[rgba(0,0,0,0.7)] md:bg-black_second_theme backdrop-blur-sm rounded-lg w-full flex items-center justify-center">
                 <p className="text-center">{detail}</p>
             </div>)
     }
@@ -17,10 +17,10 @@ export default function FastDetails({ anime, className }) {
     return (
         <div className={className} style={{ backgroundImage: `url(${anime.images.jpg.large_image_url})` }}  >
            
-            <div className="z-0 h-full w-full absolute transparentBackground  top-0 left-0 rounded-lg md:hidden"></div>
+            <div className="z-0 h-full w-full absolute bg-[rgba(0,0,0,0.6)]  top-0 left-0 rounded-lg md:hidden"></div>
 
             <p className="z-10 font-fantasy text-3xl tracking-wide text-center mt-3 line-clamp-3">{anime.title}</p>
-            <div className="z-10 my-1"><RatingStarts rating={anime.score} members={anime.scored_by} /></div>
+            <div className="z-10 my-1"><RatingStarts rating={anime.score} members={anime.scored_by} positionClass="items-center" pClass="bg-[rgba(0,0,0,0.5)] backdrop-blur-sm mt-1 p-2 rounded-lg md:bg-transparent md:mt-0 md:p-0  md:text-[rgb(100,100,100)]"/></div>
 
             <div className="flex justify-around z-10 my-3">
                 <DetailComp detail={anime.type ? anime.type : "Unknown"} />

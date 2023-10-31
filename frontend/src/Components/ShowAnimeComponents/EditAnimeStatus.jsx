@@ -143,7 +143,7 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
             <div className="flex flex-col">
 
                 {userAnime ?
-                    <select id="status" ref = {statusRef} value={status} onChange={onStatusChange} className="mr-1 hover:bg-black_first_theme bg-black_second_theme mb-1 border border-black_second_theme rounded-lg h-14 focus:border-black_second_theme focus:ring-0 w-full">
+                    <select id="status" ref = {statusRef} value={status} onChange={onStatusChange} className="mr-1 hover:bg-black_first_theme md:bg-black_second_theme bg-[rgba(0,0,0,0.7)] backdrop-blur-sm mb-1 border border-black_second_theme rounded-lg h-14 focus:border-black_second_theme focus:ring-0 w-full">
                         <Option id={0} text={"Plan To Watch"} />
                         <Option id={1} text={"Watching"} />
                         <Option id={2} text={"Completed"} />
@@ -164,9 +164,9 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
                     </div>
                 }
 
-                <div className="bg-black_second_theme group mb-1 hover:bg-black_first_theme flex w-full h-14 items-center border border-black_second_theme rounded-xl px-3 ">
+                <div className="bg-[rgba(0,0,0,0.7)] backdrop-blur-sm md:bg-black_second_theme group mb-1 hover:bg-black_first_theme flex w-full h-14 items-center border border-black_second_theme rounded-xl px-3 ">
                     <p>Episodes : </p>
-                      <input id="watchedEpisodes" ref={inputEpisodesRef} onBlur={onStatusChange} className="bg-black_first_theme group-hover:bg-black_first_theme borber border-0 rounded-xl mx-1 focus:border-none focus:ring-0 w-12 text-right p-1" type="number"  />
+                      <input id="watchedEpisodes" ref={inputEpisodesRef} onBlur={onStatusChange} className=" md:bg-black_first_theme bg-transparent group-hover:bg-black_first_theme borber border-[0.5px] md:border-0 rounded-xl mx-1 focus:border-none focus:ring-0 w-12 text-right p-1" type="number"  />
     
                     <p className="flex"> / {numberOfEpisodes ? numberOfEpisodes : "?"}</p>
                     {/* <i class="fa-solid fa-video"></i> */}
@@ -175,7 +175,7 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
 
             <div className="flex items-center justify-center w-full" >
                 <div className={` bg-center bg-cover h-14 w-14 rounded-l-lg ${effect && "animate-icon-pop-in"}`} onAnimationEnd={() => setEffect(false)} style={{ backgroundImage: `url(../../../public/icons/${score}.jpg)` }}></div>
-                <select id="myScore" value={score} onChange={onStatusChange} className="bg-black_second_theme hover:bg-black_first_theme duration-300 w-full border border-black_second_theme rounded-r-lg h-14 focus:border-black_second_theme focus:ring-0">
+                <select id="myScore" value={score} onChange={onStatusChange} className="bg-[rgba(0,0,0,0.7)] backdrop-blur-sm md:bg-black_second_theme hover:bg-black_first_theme duration-300 w-full border border-black_second_theme rounded-r-lg h-14 focus:border-black_second_theme focus:ring-0">
                     <Option id={0} text={"SELECT"} />
                     <Option id={1} text={"1 ( Appalling )"} />
                     <Option id={2} text={"2 ( Horrible )"} />
