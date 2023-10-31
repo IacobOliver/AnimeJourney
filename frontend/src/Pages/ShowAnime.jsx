@@ -48,13 +48,13 @@ export default function ShowAnime() {
 
 
     const MoreDetailsComp = ({ title, contextString, optionalUrl }) => {
-        return optionalUrl != undefined ? <div className="text-xl"><b>{title}</b> : <a className=" text-third_color_theme" target="_blank" href={optionalUrl}>{contextString}</a></div>
-            : <p ><b className="text-xl ">{title}</b> : {contextString}</p>
+        return optionalUrl != undefined ? <div className="text-lg sm:text-xl"><b>{title}</b> : <a className=" text-third_color_theme" target="_blank" href={optionalUrl}>{contextString}</a></div>
+            : <p ><b className="text-lg sm:text-xl ">{title}</b> : {contextString}</p>
     }
 
     const MoreDetailsCompArray = ({ title, info }) => {
         return <div className="">
-            <b className="text-xl">{title}</b> :
+            <b className="text-lg sm:text-xl">{title}</b> :
             {info.length != 0 ?
                 info.map((producer, index) => <a key={index} className=" text-third_color_theme" target="_blank" href={producer.url}>{index >= 1 ? " , " : ""} {producer.name}</a>)
                 :
@@ -82,7 +82,7 @@ export default function ShowAnime() {
 
                     <div className="mt-7 p-2  text-fifth_color_theme">
                         <div className=" grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3  border-0 border-r-[0.25rem] border-l-[0.25rem] border-black_second_theme rounded-md  font-semibold px-3">
-                            <p className="text-3xl col-span-1 sm:col-span-2 xl:col-span-3 mb-3 font-fantasy font-normal">More Details</p>
+                            <p className=" text-2xl sm:text-3xl col-span-1 sm:col-span-2 xl:col-span-3 mb-3 font-fantasy font-normal">More Details</p>
                             <MoreDetailsComp title={"Rating"} contextString={anime.rating ? anime.rating : " - "} />
 
                             <MoreDetailsComp title={"Status"} contextString={anime.status ? anime.status : "Unknown"} />
@@ -103,7 +103,7 @@ export default function ShowAnime() {
                         </div>
 
                         <div className="mt-4">
-                            <p className="ml-3 mb-1 text-3xl font-fantasy col-span-8" >Description </p>
+                            <p className="ml-3 mb-1 text-2xl sm:text-3xl font-fantasy col-span-8" >Description </p>
                             <p className=" text-md font-bold col-span-8">{anime.synopsis}</p>
 
                         </div>
@@ -111,9 +111,9 @@ export default function ShowAnime() {
 
 
                     <div className="mx-3 mt-4">
-                        <div className="text-3xl text-fifth_color_theme font-fantasy font-normal ml-2 mb-2 flex items-center">
+                        <div className=" text-2xl sm:text-3xl text-fifth_color_theme font-fantasy font-normal ml-2 mb-2 flex items-center">
                             <p> Characters</p>
-                            <Button onClick = {() => navigate("characters")} variant="text" className="flex items-center gap-2 text-black_first_theme bg-forth_color_theme hover:bg-third_color_theme hover:text-fifth_color_theme ml-3 duration-300 font-fantasy font-normal tracking-wide text-lg py-2 px-3">
+                            <Button onClick = {() => navigate("characters")} variant="text" className="flex items-center gap-2 text-black_first_theme bg-forth_color_theme hover:bg-third_color_theme hover:text-fifth_color_theme ml-3 duration-300 font-fantasy font-normal tracking-wide text-sm sm:text-lg py-2 px-3">
                                 See all characters{" "}
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
