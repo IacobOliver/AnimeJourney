@@ -6,9 +6,10 @@ import state from "../Components/Atom";
 import TrailerComponent from "../Components/ShowAnimeComponents/TrailerComponent"
 import AnimeRecomandation from "../Components/ShowAnimeComponents/AnimeRecomandation";
 import FastDetails from "../Components/ShowAnimeComponents/FastDetails";
-import Characters from "../Components/ShowAnimeComponents/Characters";
+import Characters from "../Components/ShowAnimeComponents/SomeCharacters";
 import { Spinner } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 
 export default function ShowAnime() {
     const [anime, setAnime] = useState(null);
@@ -16,6 +17,7 @@ export default function ShowAnime() {
     const params = useParams();
     const [refresh, setRefresh] = useAtom(state.refreshAnime)
 
+    const navigate = useNavigate();
 
     useEffect(() => {
         Promise.all([
@@ -111,7 +113,7 @@ export default function ShowAnime() {
                     <div className="mx-3 mt-4">
                         <div className="text-3xl text-fifth_color_theme font-fantasy font-normal ml-2 mb-2 flex items-center">
                             <p> Characters</p>
-                            <Button variant="text" className="flex items-center gap-2 text-third_color_theme hover:bg-black_second_theme ml-3 duration-300 font-extrabold">
+                            <Button onClick = {() => navigate("characters")} variant="text" className="flex items-center gap-2 text-black_first_theme bg-forth_color_theme hover:bg-third_color_theme hover:text-fifth_color_theme ml-3 duration-300 font-fantasy font-normal tracking-wide text-lg py-2 px-3">
                                 See all characters{" "}
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
