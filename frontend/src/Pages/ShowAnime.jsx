@@ -20,7 +20,7 @@ export default function ShowAnime() {
     useEffect(() => {
         Promise.all([
             fetch(`https://api.jikan.moe/v4/anime/${params.id}/full`),
-            fetch(`https://api.jikan.moe/v4/anime/${params.id}/characters?limit=5`),
+            fetch(`https://api.jikan.moe/v4/anime/${params.id}/characters`),
         ])
             .then(([anime, characters]) =>
                 Promise.all([anime.json(), characters.json()])
@@ -31,11 +31,11 @@ export default function ShowAnime() {
                 let neededCharacters = [];
                 for (let i = 0; i < characters.data.length; i++) {
                     if (i == 15) {
-                        setCharacters(neededCharacters)
                         break;
                     }
                     neededCharacters.push(characters.data[i])
                 }
+                setCharacters(neededCharacters)
 
                 console.log(anime)
             });
