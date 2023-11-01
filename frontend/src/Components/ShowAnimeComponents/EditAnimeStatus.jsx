@@ -26,7 +26,7 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
 
     const inputEpisodesRef = useRef(null);
     const statusRef = useRef(null);
- 
+
 
     const Option = ({ text, id }) => {
         return (<option value={id} className=" bg-black_second_theme p-2">{text}</option>)
@@ -47,7 +47,7 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
                 setLoading(false)
 
                 inputEpisodesRef.current.value = data.watchedEpisodes;
-               
+
                 setScore(data.myScore);
                 setStatus(data.status);
             })
@@ -56,7 +56,7 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
                 setLoading(false);
                 setUserAnime(null);
                 inputEpisodesRef.current.value = 0;
-               
+
                 setScore(0);
                 setStatus(0);
             })
@@ -99,32 +99,32 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
             })
     }
 
-    const onStatusChange = (e) =>{
-        if(e.target.id == "myScore"){
+    const onStatusChange = (e) => {
+        if (e.target.id == "myScore") {
             console.log("in my score")
             setEffect(true)
             setScore(e.target.value)
         }
 
-        if(e.target.id == "status"){
+        if (e.target.id == "status") {
             console.log(e.target.value + " status")
             setStatus(e.target.value)
         }
-        
-        fetch(`http://localhost:8080/savedAnimeUserDetails/editAnimeStatus/${userAnime.id}/${e.target.id}/${e.target.value}`,{
+
+        fetch(`http://localhost:8080/savedAnimeUserDetails/editAnimeStatus/${userAnime.id}/${e.target.id}/${e.target.value}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             },
         })
-        .then(res => res.json())
-        .then(data =>{
-            console.log(data);
-        })
-        .catch(err =>{
-            console.error(err);
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(err => {
+                console.error(err);
+            })
 
     }
 
@@ -132,7 +132,7 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
     return (
         <div className="flex flex-col  mt-4 text-fifth_color_theme relative">
             {!isLoggedIn && <div onClick={() => navigate("/logIn")} className="absolute h-full w-full z-10"></div>}
-          
+
             {loading &&
                 <div className="absolute w-full h-full transparentBackground flex justify-center items-center top-0">
                     <Loading />
@@ -143,7 +143,7 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
             <div className="flex flex-col">
 
                 {userAnime ?
-                    <select id="status" ref = {statusRef} value={status} onChange={onStatusChange} className="mr-1 hover:bg-black_first_theme md:bg-black_second_theme bg-[rgba(0,0,0,0.7)] backdrop-blur-sm mb-1 border border-black_second_theme rounded-lg h-14 focus:border-black_second_theme focus:ring-0 w-full">
+                    <select id="status" ref={statusRef} value={status} onChange={onStatusChange} className="mr-1 hover:bg-black_first_theme md:bg-black_second_theme bg-[rgba(0,0,0,0.7)] backdrop-blur-sm mb-1 border border-black_second_theme rounded-lg h-14 focus:border-black_second_theme focus:ring-0 w-full">
                         <Option id={0} text={"Plan To Watch"} />
                         <Option id={1} text={"Watching"} />
                         <Option id={2} text={"Completed"} />
@@ -162,12 +162,13 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
                             </span>
                         </button>
                     </div>
+                    
                 }
 
                 <div className="bg-[rgba(0,0,0,0.7)] backdrop-blur-sm md:bg-black_second_theme group mb-1 hover:bg-black_first_theme flex w-full h-14 items-center border border-black_second_theme rounded-xl px-3 ">
                     <p>Episodes : </p>
-                      <input id="watchedEpisodes" ref={inputEpisodesRef} onBlur={onStatusChange} className=" md:bg-black_first_theme bg-transparent group-hover:bg-black_first_theme borber border-[0.5px] md:border-0 rounded-xl mx-1 focus:border-none focus:ring-0 w-12 text-right p-1" type="number"  />
-    
+                    <input id="watchedEpisodes" ref={inputEpisodesRef} onBlur={onStatusChange} className=" md:bg-black_first_theme bg-transparent group-hover:bg-black_first_theme borber border-[0.5px] md:border-0 rounded-xl mx-1 focus:border-none focus:ring-0 w-12 text-right p-1" type="number" />
+
                     <p className="flex"> / {numberOfEpisodes ? numberOfEpisodes : "?"}</p>
                     {/* <i class="fa-solid fa-video"></i> */}
                 </div>

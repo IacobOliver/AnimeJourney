@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import CostumInput from "./CostumInput";
+import CostumInput from "../../Components/Auth/CostumInput";
 import { useRef } from "react";
 import state from "../../Components/Atom";
 import { useAtom } from "jotai";
 import { checking, Utils } from "../../Components/Utils";
-import Alert from "./Alert";
+import Alert from "../../Components/Auth/Alert";
 
 
 export default function LogIn() {

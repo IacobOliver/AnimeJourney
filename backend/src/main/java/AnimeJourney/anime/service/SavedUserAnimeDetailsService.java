@@ -5,6 +5,8 @@ import AnimeJourney.anime.model.SavedUserAnimeDetails;
 import AnimeJourney.anime.repository.SavedUserAnimeDetailsRepository;
 import AnimeJourney.auth.model.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -21,8 +23,13 @@ public class SavedUserAnimeDetailsService {
        return savedUserAnimeDetailsRepository.findAll();
     }
 
-    public List<SavedUserAnimeDetails> getUserAnimeList(Long userId){
-        return savedUserAnimeDetailsRepository.findAllByUserId(userId).orElse(null);
+    public List<SavedUserAnimeDetails> getUserAnimeList(Long userId, Integer pageNr, Integer quantity){
+        if( pageNr == null || quantity == null) {
+            return savedUserAnimeDetailsRepository.findAllByUserId(userId).orElse(null);
+        }
+
+        Pageable pageable = PageRequest.of(pageNr, quantity);
+        return savedUserAnimeDetailsRepository.findAllByUserId(userId, pageable).orElse(null);
     }
 
     public SavedUserAnimeDetails userHaveAnime( Long animeId) {

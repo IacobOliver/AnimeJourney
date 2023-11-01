@@ -50,7 +50,7 @@ export default function AllAnimeCharacters(){
 
 
     return(
-        <div className="grid grid-cols-2 px600:grid-cols-4 md:!grid-cols-2 xl:!grid-cols-3 place-items-center px600:place-items-stretch gap-y-6 md:gap-y-2 gap-2 p-3 mt-2">
+        <div className="grid grid-cols-2 px600:grid-cols-4 md:!grid-cols-2 xl:!grid-cols-3 place-items-center px600:place-items-stretch gap-y-6 md:gap-y-2 gap-2 p-3 mt-2 cursor-pointer">
 
             {characters ? 
             characters.map((character, index) => <AllVoiceActorsPopOver key={index} character={character}/>) 

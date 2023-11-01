@@ -16,19 +16,23 @@ import java.util.List;
 public class SavedUserAnimeDetailsController {
     private final SavedUserAnimeDetailsService savedUserAnimeDetailsService;
 
-
-    @GetMapping("getUserAnimeList/{userId}")
-    public ResponseEntity<List<SavedUserAnimeDetails>> getAnimeUserDetails(@PathVariable Long userId){
-        return ResponseEntity.ok( savedUserAnimeDetailsService.getUserAnimeList(userId));
+    @GetMapping
+    public ResponseEntity<List<SavedUserAnimeDetails>> getUserAnimeList(@RequestParam (name = "userId") Long userId,
+                                                                        @RequestParam (name = "pageNr", required = false) Integer pageNr,
+                                                                        @RequestParam (name = "quantity", required = false) Integer quantity){
+        return ResponseEntity.ok( savedUserAnimeDetailsService.getUserAnimeList(userId, pageNr, quantity));
     }
 
-    @CrossOrigin("http://localhost:5173/")
+
+
+
     @GetMapping("userHaveAnime/{animeId}")
     public ResponseEntity<SavedUserAnimeDetails> userHaveAnime( @PathVariable Long animeId){
         return ResponseEntity.ok( savedUserAnimeDetailsService.userHaveAnime( animeId));
     }
 
-    @CrossOrigin("http://localhost:5173/")
+
+
     @PatchMapping("editAnimeStatus/{id}/{option}/{value}")
     public FetchResponse modifyAnimeDetails(@PathVariable Long id, @PathVariable String option, @PathVariable int value){
         System.out.println("hello");
