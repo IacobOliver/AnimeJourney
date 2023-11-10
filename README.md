@@ -4,6 +4,9 @@
  
 
 ![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/e998cbf0-0bf3-4fd0-a625-5d70c8d25df0)
+![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/d2b53c68-63df-4a24-8b9a-664caa9a39d9) ![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/d1f68ffc-d2c4-4a22-a2ec-39ac1aa11340)
+
+
 
 
  ## Tehnologies Used : 
@@ -26,7 +29,9 @@
 ## Future Plans
 
 - for now, finishing the detailed page of an anime
- ![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/2354d096-831d-47f3-8641-d65b19f19b35)
+ ![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/2354d096-831d-47f3-8641-d65b19f19b35) ![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/30dc7066-b4ff-40b5-9eab-3a06e0bc0102)
+![image](https://github.com/IacobOliver/AnimeJourney/assets/119490133/3f742354-8f38-43e8-9e0b-273dbf74e9fa)
+
 
 
 
