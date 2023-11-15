@@ -19,8 +19,9 @@ public class SavedUserAnimeDetailsController {
     @GetMapping
     public ResponseEntity<List<SavedUserAnimeDetails>> getUserAnimeList(@RequestParam (name = "userId") Long userId,
                                                                         @RequestParam (name = "pageNr", required = false) Integer pageNr,
-                                                                        @RequestParam (name = "quantity", required = false) Integer quantity){
-        return ResponseEntity.ok( savedUserAnimeDetailsService.getUserAnimeList(userId, pageNr, quantity));
+                                                                        @RequestParam (name = "quantity", required = false) Integer quantity,
+                                                                        @RequestParam (name = "statusFilter", required = false) Integer statusFilter){
+        return ResponseEntity.ok( savedUserAnimeDetailsService.getUserAnimeList(userId, pageNr, quantity, statusFilter));
     }
 
 
@@ -35,7 +36,6 @@ public class SavedUserAnimeDetailsController {
 
     @PatchMapping("editAnimeStatus/{id}/{option}/{value}")
     public FetchResponse modifyAnimeDetails(@PathVariable Long id, @PathVariable String option, @PathVariable int value){
-        System.out.println("hello");
         return savedUserAnimeDetailsService.modifyAnimeDetails(id, option, value);
     }
 

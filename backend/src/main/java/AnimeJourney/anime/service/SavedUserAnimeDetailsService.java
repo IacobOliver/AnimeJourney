@@ -23,13 +23,23 @@ public class SavedUserAnimeDetailsService {
        return savedUserAnimeDetailsRepository.findAll();
     }
 
-    public List<SavedUserAnimeDetails> getUserAnimeList(Long userId, Integer pageNr, Integer quantity){
-        if( pageNr == null || quantity == null) {
+    public List<SavedUserAnimeDetails> getUserAnimeList(Long userId, Integer pageNr, Integer quantity, Integer statusFilter){
+        System.out.println("pageNr "+ pageNr);
+        System.out.println("quantity " + quantity);
+        System.out.println("status " + statusFilter);
+
+
+
+        if( pageNr == null || quantity == null || statusFilter == null) {
             return savedUserAnimeDetailsRepository.findAllByUserId(userId).orElse(null);
         }
 
         Pageable pageable = PageRequest.of(pageNr, quantity);
-        return savedUserAnimeDetailsRepository.findAllByUserId(userId, pageable).orElse(null);
+        if(statusFilter == 6){
+            return savedUserAnimeDetailsRepository.findAllByUserIdOrderByStatus(userId, pageable).orElse(null);
+        }
+
+        return savedUserAnimeDetailsRepository.findAllByUserIdAndStatus(userId, statusFilter, pageable).orElse(null);
     }
 
     public SavedUserAnimeDetails userHaveAnime( Long animeId) {
@@ -37,10 +47,10 @@ public class SavedUserAnimeDetailsService {
 
         User user = (User) authentication.getPrincipal();
 
-        List<SavedUserAnimeDetails> savedUserAnimeDetails = savedUserAnimeDetailsRepository.findAllByUserIdAndAnimeId(user.getId(), animeId).orElse(null);
+        SavedUserAnimeDetails savedUserAnimeDetails = savedUserAnimeDetailsRepository.findByUserIdAndAnimeId(user.getId(), animeId).orElse(null);
 
-        if(savedUserAnimeDetails.size() > 0){
-            return savedUserAnimeDetails.get(0);
+        if(savedUserAnimeDetails != null){
+            return savedUserAnimeDetails;
         }
 
         return null;

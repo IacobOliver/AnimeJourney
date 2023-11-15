@@ -10,11 +10,14 @@ export default function AnimeList() {
     const [usersAnime, setUsersAnime] = useState([])
     const [page, setPage] = useState(0);
     const [hasMore, setHasMore] = useState(true);
+
+    const [statusFilter, setStatusFilter] = useState(6)
+
     const QUANTITY = 10;
 
     useEffect(() => {
         if (user)
-            fetch(`http://localhost:8080/savedAnimeUserDetails?userId=${user.id}&pageNr=${page}&quantity=${QUANTITY}`, {
+            fetch(`http://localhost:8080/savedAnimeUserDetails?userId=${user.id}&pageNr=${Math.floor(page)}&quantity=${QUANTITY}&statusFilter=${statusFilter}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -32,13 +35,20 @@ export default function AnimeList() {
     }, [page, user])
 
 
-    const CostumButton = ({ text }) => {
+    const CostumButton = ({ text, id, event }) => {
         return (
-            <button className=" mx-1  text-yellow-400 border border-yellow-400 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-150 hover:border-t-4 hover:border-b active:opacity-75 outline-none duration-300 group">
+            <button id={id} onClick={event} className=" mx-1  text-yellow-400 border border-yellow-400 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-150  active:opacity-75 outline-none duration-300 group">
                 <span className="bg-yellow-400 shadow-yellow-400 absolute -top-[150%] left-0 inline-flex w-80 h-[5px] rounded-md opacity-50 group-hover:top-[150%] duration-500 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)]"></span>
                 {text}
             </button>
         )
+    }
+
+    const filterCategoryEvent = (e) =>{
+        setUsersAnime([])
+         setStatusFilter(e.target.id)
+         setPage(Math.random());
+         setHasMore(true)
     }
 
 
@@ -76,7 +86,7 @@ export default function AnimeList() {
 
 
     return (
-        <InfiniteScroll className="mt-3 custom-scrollbar"
+        <InfiniteScroll className="mt-3 custom-scrollbar "
             style={{ height: "screen" }}
             dataLength={usersAnime.length}
             next={() => {
@@ -84,7 +94,7 @@ export default function AnimeList() {
             }}
             hasMore={hasMore} // Replace with a condition based on your data source
             height={""}
-            endMessage={<p className="bg-pink-400">No more data to load.</p>}
+            endMessage={<p className=" text-black_second_theme text-center text-2xl font-bold">No more data to load.</p>}
         >
             <div className="w-screen  flex flex-col justify-center items-center mt-5 p-3 font-fantasy tracking-wide">
 
@@ -93,19 +103,19 @@ export default function AnimeList() {
                     <img draggable={false} src="public\animejourney-low-resolution-logo-color-on-transparent-background.png" className=" w-5/6 my-5" />
                 </div>
                 <div className="my-3 ">
-                    <CostumButton text={"All Anime"} />
-                    <CostumButton text={"Completed"} />
-                    <CostumButton text={"Watching"} />
-                    <CostumButton text={"Plan To Watch"} />
-                    <CostumButton text={"On Hold"} />
-                    <CostumButton text={"Dropped"} />
+                    <CostumButton text={"All Anime"} event={filterCategoryEvent} id={6}/>
+                    <CostumButton text={"Completed"} event={filterCategoryEvent} id={2}/>
+                    <CostumButton text={"Watching"} event={filterCategoryEvent} id={1}/>
+                    <CostumButton text={"Plan To Watch"} event={filterCategoryEvent} id={0}/>
+                    <CostumButton text={"On Hold"} event={filterCategoryEvent} id={3}/>
+                    <CostumButton text={"Dropped"} event={filterCategoryEvent} id={4}/>
                 </div>
 
                 <div className="bg-[rgb(15,15,15)] flex items-center justify-center  w-5/6 h-24 text-5xl rounded-xl" >
                     All Anime
                 </div>
 
-                <div className="w-5/6">
+                <div className="w-5/6 ">
                     {usersAnime ?
                         usersAnime.map((anime, index) => <AnimeUserCard key={index} animeDetails={anime} index={index} />)
                         :
