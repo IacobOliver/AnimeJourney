@@ -47,7 +47,7 @@ const populateNewSesonAnime = () => {
             fetch("http://localhost:8080/newAnimeSeasons/addAnimes", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify(anime)
             })

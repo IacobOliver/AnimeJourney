@@ -9,6 +9,7 @@ import ShowAnime from "./Pages/ShowAnime";
 import SignIn from "./Pages/Auth/SignIn";
 import LogIn from "./Pages/Auth/LogIn";
 import AllAnimeCharacters from "./Pages/AllAnimeCharacters";
+import AnimeList from "./Pages/AnimeList";
 
 
 
@@ -19,6 +20,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Redirect/>}> </Route>
         <Route path="/home" element={<Explore />}> </Route>
+        <Route path="/animeList" element={<AnimeList />}> </Route>
         <Route path="/anime/:id" element ={<ShowAnime/>}/>
         <Route path="/anime/:id/characters" element ={<AllAnimeCharacters/>}/>
 

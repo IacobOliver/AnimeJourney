@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import CostumInput from "./CostumInput";
-import Alert from "./Alert";
+import CostumInput from "../../Components/Auth/CostumInput";
+import Alert from "../../Components/Auth/Alert";
 import { useRef } from "react";
 import { checking } from "../../Components/Utils";
 import state from "../../Components/Atom";

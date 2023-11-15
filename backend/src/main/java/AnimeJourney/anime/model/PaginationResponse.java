@@ -1,4 +1,4 @@
-package AnimeJourney.anime.controller;
+package AnimeJourney.anime.model;
 
 import lombok.Builder;
 import lombok.Data;

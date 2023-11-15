@@ -1,6 +1,7 @@
 package AnimeJourney.anime.repository;
 
 import AnimeJourney.anime.model.SavedUserAnimeDetails;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,6 +13,7 @@ import java.util.Optional;
 
 public interface SavedUserAnimeDetailsRepository extends JpaRepository<SavedUserAnimeDetails, Long> {
     Optional<List<SavedUserAnimeDetails>> findAllByUserId(Long userId);
+    Optional<List<SavedUserAnimeDetails>> findAllByUserId(Long userId, Pageable pageable);
     Optional<List<SavedUserAnimeDetails>> findAllByUserIdAndAnimeId(Long userId, Long animeId);
 
     @Query("UPDATE SavedUserAnimeDetails s SET s.status = :value WHERE s.id = :id")

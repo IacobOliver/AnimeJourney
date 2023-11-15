@@ -12,10 +12,12 @@ import {
   } from "@material-tailwind/react";
   import state from "../Atom";
   import { useAtom } from "jotai";
+import { useNavigate } from "react-router-dom";
 
 
 export default function ProfileDropdown() {
     const [user, setUset] = useAtom(state.user)
+    const navigate = useNavigate();
 
   const signOut = () =>{
     localStorage.removeItem("token");
@@ -64,7 +66,7 @@ export default function ProfileDropdown() {
           </ListItem>
         </div>
 
-        <div className="text-initial font-medium text-fifth_color_theme  rounded-lg">
+        <div onClick={() => navigate("animeList")} className="text-initial font-medium text-fifth_color_theme  rounded-lg">
           <ListItem className="hover:bg-black_first_theme hover:text-fifth_color_theme">
             <ListItemPrefix>
             <i class="fa-solid fa-list  text-forth_color_theme"></i>

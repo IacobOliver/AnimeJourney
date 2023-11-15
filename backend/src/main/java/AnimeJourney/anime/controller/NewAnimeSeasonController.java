@@ -1,6 +1,7 @@
 package AnimeJourney.anime.controller;
 
 import AnimeJourney.anime.model.NewAnimeSeason;
+import AnimeJourney.anime.model.PaginationResponse;
 import AnimeJourney.anime.service.FetchResponse;
 import AnimeJourney.anime.service.NewAnimeSeasonService;
 import lombok.RequiredArgsConstructor;
@@ -14,13 +15,12 @@ import java.util.List;
 public class NewAnimeSeasonController {
     private final NewAnimeSeasonService newAnimeSeasonService;
 
-    @CrossOrigin("http://localhost:5173/")
+
     @PostMapping("/addAnimes")
     public ResponseEntity<FetchResponse> addAnimeList(@RequestBody List<NewAnimeSeason> newAnimeSeasons){
         return ResponseEntity.ok(newAnimeSeasonService.addNewAnimeList(newAnimeSeasons));
     }
 
-    @CrossOrigin("http://localhost:5173/")
     @PostMapping("/getAnime")
     public ResponseEntity<List<NewAnimeSeason>> getNewAnimeSeasons(@RequestBody PaginationResponse parameters){
         return ResponseEntity.ok(newAnimeSeasonService.getAnimeForPagination(parameters));
