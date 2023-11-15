@@ -13,8 +13,15 @@ import java.util.Optional;
 
 public interface SavedUserAnimeDetailsRepository extends JpaRepository<SavedUserAnimeDetails, Long> {
     Optional<List<SavedUserAnimeDetails>> findAllByUserId(Long userId);
-    Optional<List<SavedUserAnimeDetails>> findAllByUserId(Long userId, Pageable pageable);
-    Optional<List<SavedUserAnimeDetails>> findAllByUserIdAndAnimeId(Long userId, Long animeId);
+
+    // getting user anime's for pageable with status
+    Optional<List<SavedUserAnimeDetails>> findAllByUserIdAndStatus(Long userId, Integer status ,Pageable pageable);
+
+    // get all pageable order by status
+    Optional<List<SavedUserAnimeDetails>> findAllByUserIdOrderByStatus(Long userId ,Pageable pageable);
+
+    // verify if user have anime
+    Optional<SavedUserAnimeDetails> findByUserIdAndAnimeId(Long userId, Long animeId);
 
     @Query("UPDATE SavedUserAnimeDetails s SET s.status = :value WHERE s.id = :id")
     @Modifying
