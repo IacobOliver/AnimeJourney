@@ -1,6 +1,7 @@
 package AnimeJourney.anime.controller;
 
 import AnimeJourney.anime.model.NewAnimeSeason;
+import AnimeJourney.anime.model.PaginationResponse;
 import AnimeJourney.anime.service.FetchResponse;
 import AnimeJourney.anime.service.NewAnimeSeasonService;
 import lombok.RequiredArgsConstructor;

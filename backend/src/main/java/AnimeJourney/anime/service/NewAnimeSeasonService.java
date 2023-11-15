@@ -1,6 +1,6 @@
 package AnimeJourney.anime.service;
 
-import AnimeJourney.anime.controller.PaginationResponse;
+import AnimeJourney.anime.model.PaginationResponse;
 import AnimeJourney.anime.repository.NewAnimeSeasonRepository;
 import AnimeJourney.anime.model.NewAnimeSeason;
 import lombok.RequiredArgsConstructor;
