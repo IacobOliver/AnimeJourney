@@ -60,14 +60,30 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
                 setLoading(false);
                 setUserAnime(null);
                 inputEpisodesRef.current.value = 0;
-
                 setScore(0);
                 setStatus(0);
             })
     }, [refresh])
 
-    const addToListEvent = () => {
+    const addToListEvent = (inputEpisodes) => {
+        let status = 0
+        let myScore = 0;
+        let watchedEpisodes = 0
+       
+
+        if(inputEpisodes){
+            watchedEpisodes = inputEpisodes;
+            status = 1
+
+            if(inputEpisodes == anime.episodes){
+               status = 2
+            }else if(inputEpisodes > anime.episodes){
+                watchedEpisodes = 0;
+            }
+        }
+
         setLoading(true)
+        setStatus(status)
         let animeObj = {
             "animeId": params.id,
             "title": anime.title,
@@ -78,9 +94,9 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
             "savedAnimeUserDetails": [
                 {
                     "animeId": params.id,
-                    "status": 0,
-                    "myScore": 0,
-                    "watchedEpisodes": 0,
+                    "status": status,
+                    "myScore": myScore,
+                    "watchedEpisodes": watchedEpisodes,
                     "user": {
                         "id": user.id
                     }
@@ -117,7 +133,7 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
             <div className="flex flex-col">
 
                 {userAnime ?
-                    <select id="status" ref={statusRef} value={status} onChange={(e) => Utils.onStatusChange({e, animeDetailsId, setStatus})} className="mr-1 hover:bg-black_first_theme md:bg-black_second_theme bg-[rgba(0,0,0,0.7)] backdrop-blur-sm mb-1 border border-black_second_theme rounded-lg h-14 focus:border-black_second_theme focus:ring-0 w-full">
+                    <select id="status" ref={statusRef} value={status} onChange={(e) => Utils.onStatusChange({e, animeDetailsId, setStatus, setEffect})} className="mr-1 hover:bg-black_first_theme md:bg-black_second_theme bg-[rgba(0,0,0,0.7)] backdrop-blur-sm mb-1 border border-black_second_theme rounded-lg h-14 focus:border-black_second_theme focus:ring-0 w-full">
                         <Option id={0} text={"Plan To Watch"} />
                         <Option id={1} text={"Watching"} />
                         <Option id={2} text={"Completed"} />
@@ -141,7 +157,10 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
 
                 <div className="bg-[rgba(0,0,0,0.7)] backdrop-blur-sm md:bg-black_second_theme group mb-1 hover:bg-black_first_theme flex w-full h-14 items-center border border-black_second_theme rounded-xl px-3 ">
                     <p>Episodes : </p>
-                    <input id="watchedEpisodes" ref={inputEpisodesRef} onBlur={(e) => Utils.onStatusChange({e, animeDetailsId})} className=" md:bg-black_first_theme bg-transparent group-hover:bg-black_first_theme borber border-[0.5px] md:border-0 rounded-xl mx-1 focus:border-none focus:ring-0 w-12 text-right p-1" type="number" />
+                    <input id="watchedEpisodes" 
+                    ref={inputEpisodesRef}
+                     onBlur={(e) =>userAnime ? Utils.onStatusChange({e, animeDetailsId}) : addToListEvent(e.target.value)} 
+                     className=" md:bg-black_first_theme bg-transparent group-hover:bg-black_first_theme borber border-[0.5px] md:border-0 rounded-xl mx-1 focus:border-none focus:ring-0 w-12 text-right p-1" type="number" />
 
                     <p className="flex"> / {numberOfEpisodes ? numberOfEpisodes : "?"}</p>
                     {/* <i class="fa-solid fa-video"></i> */}
@@ -150,7 +169,7 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
 
             <div className="flex items-center justify-center w-full" >
                 <div className={` bg-center bg-cover h-14 w-14 rounded-l-lg ${effect && "animate-icon-pop-in"}`} onAnimationEnd={() => setEffect(false)} style={{ backgroundImage: `url(../../../public/icons/${score}.jpg)` }}></div>
-                <select id="myScore" value={score} onChange={(e) => Utils.onStatusChange({e, animeDetailsId, setScore})} className="bg-[rgba(0,0,0,0.7)] backdrop-blur-sm md:bg-black_second_theme hover:bg-black_first_theme duration-300 w-full border border-black_second_theme rounded-r-lg h-14 focus:border-black_second_theme focus:ring-0">
+                <select id="myScore" value={score} onChange={(e) =>userAnime ? Utils.onStatusChange({e, animeDetailsId, setScore}) : console.log("heh")} className="bg-[rgba(0,0,0,0.7)] backdrop-blur-sm md:bg-black_second_theme hover:bg-black_first_theme duration-300 w-full border border-black_second_theme rounded-r-lg h-14 focus:border-black_second_theme focus:ring-0">
                     <Option id={0} text={"SELECT"} />
                     <Option id={1} text={"1 ( Appalling )"} />
                     <Option id={2} text={"2 ( Horrible )"} />
