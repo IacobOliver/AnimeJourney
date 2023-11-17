@@ -45,6 +45,7 @@ export const Utils = {
 
 //update details about userAnimeDetails
   onStatusChange: ({e , animeDetailsId, setStatus, setScore, setEffect}) => {
+    console.log("in update anime")
 
     if (e.target.id == "myScore") {
       console.log("in my score")

@@ -66,12 +66,14 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
     }, [refresh])
 
     const addToListEvent = (inputEpisodes, selectScore) => {
+        console.log("in add to list")
         let status = 0
         let myScore = 0;
         let watchedEpisodes = 0
        
 
         if(inputEpisodes){
+            console.log("in input episodes if")
             watchedEpisodes = inputEpisodes;
             status = 1
 
@@ -79,10 +81,12 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
                status = 2
             }else if(inputEpisodes > anime.episodes){
                 watchedEpisodes = anime.episodes;
+                status = 2
             }
         }
 
         if(selectScore){
+            console.log("in selectScore if")
             myScore = selectScore;
             status = 1;
             setEffect(true)
@@ -121,6 +125,7 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
             .then(res => res.json())
             .then(data => {
                 console.log("user have anime :", data)
+                animeDetailsId = data.id
                 setUserAnime(data)
                 setLoading(false)
             })
@@ -148,18 +153,16 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
                         <Option id={4} text={"Dropped"} />
                     </select>
                     :
-                    <div onClick={addToListEvent} className="flex justify-center mb-1">
+                    <div onClick={() => addToListEvent(null, null)} className="flex justify-center mb-1">
                         <button className="relative inline-flex items-center justify-center mr-2 overflow-hidden font-medium rounded-lg group 
                                 bg-gradient-to-br from-orange-500 to-red-600 group-hover:from-orange-500 group-hover:to-red-600
                                  hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 text-black_first_theme text-md ">
                             <span className=" flex items-center relative px-5 py-1.5 transition-all ease-in duration-75 dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 bg-forth_color_theme font-medium">
                                 <p className="text-2xl mr-2"> + </p>
                                 <p aria-disabled="true"> Add to list </p>
-
                             </span>
                         </button>
-                    </div>
-                    
+                    </div> 
                 }
 
                 <div className="bg-[rgba(0,0,0,0.7)] backdrop-blur-sm md:bg-black_second_theme group mb-1 hover:bg-black_first_theme flex w-full h-14 items-center border border-black_second_theme rounded-xl px-3 ">
@@ -167,12 +170,12 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
                     <input id="watchedEpisodes" 
                     ref={inputEpisodesRef}
                      onBlur={(e) =>userAnime ? 
-                        // if exists update, but if inputEpisodes > animeEpisodes , set inputEpisodesMAX and after save
-                        (e.target.value <= anime.episodes ? Utils.onStatusChange({e, animeDetailsId}) : (e.target.value = anime.episodes, Utils.onStatusChange({e, animeDetailsId}) ) ) 
+                        Utils.onStatusChange({e, animeDetailsId})
                         :
                         //else add to list
                          addToListEvent(e.target.value, null)} 
-                     className=" md:bg-black_first_theme bg-transparent group-hover:bg-black_first_theme borber border-[0.5px] md:border-0 rounded-xl mx-1 focus:border-none focus:ring-0 w-12 text-right p-1" type="number" />
+                     className=" md:bg-black_first_theme bg-transparent group-hover:bg-black_first_theme borber border-[0.5px] md:border-0 rounded-xl mx-1 focus:border-none focus:ring-0 w-12 text-right p-1" type="number" 
+                     />
 
                     <p className="flex"> / {numberOfEpisodes ? numberOfEpisodes : "?"}</p>
                 </div>
@@ -180,7 +183,10 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
 
             <div className="flex items-center justify-center w-full" >
                 <div className={` bg-center bg-cover h-14 w-14 rounded-l-lg ${effect && "animate-icon-pop-in"}`} onAnimationEnd={() => setEffect(false)} style={{ backgroundImage: `url(../../../public/icons/${score}.jpg)` }}></div>
-                <select id="myScore" value={score} onChange={(e) =>userAnime ? Utils.onStatusChange({e, animeDetailsId, setScore, setEffect}) : addToListEvent(null, e.target.value)} className="bg-[rgba(0,0,0,0.7)] backdrop-blur-sm md:bg-black_second_theme hover:bg-black_first_theme duration-300 w-full border border-black_second_theme rounded-r-lg h-14 focus:border-black_second_theme focus:ring-0">
+                <select id="myScore"
+                     value={score}
+                      onChange={(e) =>userAnime ? Utils.onStatusChange({e, animeDetailsId, setScore, setEffect}) : addToListEvent(null, e.target.value)}
+                       className="bg-[rgba(0,0,0,0.7)] backdrop-blur-sm md:bg-black_second_theme hover:bg-black_first_theme duration-300 w-full border border-black_second_theme rounded-r-lg h-14 focus:border-black_second_theme focus:ring-0">
                     <Option id={0} text={"SELECT"} />
                     <Option id={1} text={"1 ( Appalling )"} />
                     <Option id={2} text={"2 ( Horrible )"} />
