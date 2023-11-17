@@ -65,7 +65,7 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
             })
     }, [refresh])
 
-    const addToListEvent = (inputEpisodes) => {
+    const addToListEvent = (inputEpisodes, selectScore) => {
         let status = 0
         let myScore = 0;
         let watchedEpisodes = 0
@@ -78,8 +78,15 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
             if(inputEpisodes == anime.episodes){
                status = 2
             }else if(inputEpisodes > anime.episodes){
-                watchedEpisodes = 0;
+                watchedEpisodes = anime.episodes;
             }
+        }
+
+        if(selectScore){
+            myScore = selectScore;
+            status = 1;
+            setEffect(true)
+            setScore(selectScore)
         }
 
         setLoading(true)
@@ -133,7 +140,7 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
             <div className="flex flex-col">
 
                 {userAnime ?
-                    <select id="status" ref={statusRef} value={status} onChange={(e) => Utils.onStatusChange({e, animeDetailsId, setStatus, setEffect})} className="mr-1 hover:bg-black_first_theme md:bg-black_second_theme bg-[rgba(0,0,0,0.7)] backdrop-blur-sm mb-1 border border-black_second_theme rounded-lg h-14 focus:border-black_second_theme focus:ring-0 w-full">
+                    <select id="status" ref={statusRef} value={status} onChange={(e) => Utils.onStatusChange({e, animeDetailsId, setStatus})} className="mr-1 hover:bg-black_first_theme md:bg-black_second_theme bg-[rgba(0,0,0,0.7)] backdrop-blur-sm mb-1 border border-black_second_theme rounded-lg h-14 focus:border-black_second_theme focus:ring-0 w-full">
                         <Option id={0} text={"Plan To Watch"} />
                         <Option id={1} text={"Watching"} />
                         <Option id={2} text={"Completed"} />
@@ -159,17 +166,21 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
                     <p>Episodes : </p>
                     <input id="watchedEpisodes" 
                     ref={inputEpisodesRef}
-                     onBlur={(e) =>userAnime ? Utils.onStatusChange({e, animeDetailsId}) : addToListEvent(e.target.value)} 
+                     onBlur={(e) =>userAnime ? 
+                        // if exists update, but if inputEpisodes > animeEpisodes , set inputEpisodesMAX and after save
+                        (e.target.value <= anime.episodes ? Utils.onStatusChange({e, animeDetailsId}) : (e.target.value = anime.episodes, Utils.onStatusChange({e, animeDetailsId}) ) ) 
+                        :
+                        //else add to list
+                         addToListEvent(e.target.value, null)} 
                      className=" md:bg-black_first_theme bg-transparent group-hover:bg-black_first_theme borber border-[0.5px] md:border-0 rounded-xl mx-1 focus:border-none focus:ring-0 w-12 text-right p-1" type="number" />
 
                     <p className="flex"> / {numberOfEpisodes ? numberOfEpisodes : "?"}</p>
-                    {/* <i class="fa-solid fa-video"></i> */}
                 </div>
             </div>
 
             <div className="flex items-center justify-center w-full" >
                 <div className={` bg-center bg-cover h-14 w-14 rounded-l-lg ${effect && "animate-icon-pop-in"}`} onAnimationEnd={() => setEffect(false)} style={{ backgroundImage: `url(../../../public/icons/${score}.jpg)` }}></div>
-                <select id="myScore" value={score} onChange={(e) =>userAnime ? Utils.onStatusChange({e, animeDetailsId, setScore}) : console.log("heh")} className="bg-[rgba(0,0,0,0.7)] backdrop-blur-sm md:bg-black_second_theme hover:bg-black_first_theme duration-300 w-full border border-black_second_theme rounded-r-lg h-14 focus:border-black_second_theme focus:ring-0">
+                <select id="myScore" value={score} onChange={(e) =>userAnime ? Utils.onStatusChange({e, animeDetailsId, setScore, setEffect}) : addToListEvent(null, e.target.value)} className="bg-[rgba(0,0,0,0.7)] backdrop-blur-sm md:bg-black_second_theme hover:bg-black_first_theme duration-300 w-full border border-black_second_theme rounded-r-lg h-14 focus:border-black_second_theme focus:ring-0">
                     <Option id={0} text={"SELECT"} />
                     <Option id={1} text={"1 ( Appalling )"} />
                     <Option id={2} text={"2 ( Horrible )"} />
