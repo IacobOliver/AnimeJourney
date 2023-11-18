@@ -11,7 +11,7 @@ export default function Review({ userName, comment }) {
 
             <div id="userInfoAndImage" className="flex items-center justify-between">
                 <div className="flex">
-                    <img className="h-14 w-14 rounded-full" src={`/icons/0.jpg`} />
+                    <img className="h-14 w-14 rounded-full" src={`/icons/${Math.floor(Math.random() * 10 + 1)}.jpg`} />
 
                     <div className="flex flex-col ml-2">
                         <p className="text-xl">{userName}</p>
@@ -32,7 +32,7 @@ export default function Review({ userName, comment }) {
                 {comment}
             </p>
 
-            
+
 
 
         </div>

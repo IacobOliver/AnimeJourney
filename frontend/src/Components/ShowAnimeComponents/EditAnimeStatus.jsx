@@ -45,7 +45,7 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
         })
             .then(res => res.json())
             .then(data => {
-                console.log("User Anime ", data)
+                // console.log("User Anime ", data)
                 setUserAnime(data);
                 animeDetailsId = data.id
                 setLoading(false)
@@ -124,7 +124,7 @@ export default function EditAnimeStatus({ numberOfEpisodes, anime }) {
         })
             .then(res => res.json())
             .then(data => {
-                console.log("user have anime :", data)
+                // console.log("user have anime :", data)
                 animeDetailsId = data.id
                 setUserAnime(data)
                 setLoading(false)
