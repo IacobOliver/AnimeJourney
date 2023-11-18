@@ -10,6 +10,7 @@ import Characters from "../Components/ShowAnimeComponents/SomeCharacters";
 import { Spinner } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
+import FastReviews from "../Components/ShowAnimeComponents/Reviews/FastReviews";
 
 export default function ShowAnime() {
     const [anime, setAnime] = useState(null);
@@ -80,6 +81,7 @@ export default function ShowAnime() {
                         <TrailerComponent anime={anime} />
                     </div>
 
+                    {/* More details and description */}
                     <div className="mt-7 p-2  text-fifth_color_theme">
                         <div className=" grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3  border-0 border-r-[0.25rem] border-l-[0.25rem] border-black_second_theme rounded-md  font-semibold px-3">
                             <p className=" text-2xl sm:text-3xl col-span-1 sm:col-span-2 xl:col-span-3 mb-3 font-fantasy font-normal">More Details</p>
@@ -109,11 +111,11 @@ export default function ShowAnime() {
                         </div>
                     </div>
 
-
+                    {/* Characters and voice actors */}
                     <div className="mx-3 mt-4">
                         <div className=" text-2xl sm:text-3xl text-fifth_color_theme font-fantasy font-normal ml-2 mb-2 flex items-center">
                             <p> Characters</p>
-                            <Button onClick = {() => navigate("characters")} variant="text" className="flex items-center gap-2 text-black_first_theme bg-forth_color_theme hover:bg-third_color_theme hover:text-fifth_color_theme ml-3 duration-300 font-fantasy font-normal tracking-wide text-sm sm:text-lg py-2 px-3">
+                            <Button onClick={() => navigate("characters")} variant="text" className="flex items-center gap-2 text-black_first_theme bg-forth_color_theme hover:bg-third_color_theme hover:text-fifth_color_theme ml-3 duration-300 font-fantasy font-normal tracking-wide text-sm sm:text-lg py-2 px-3">
                                 See all characters{" "}
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -138,9 +140,11 @@ export default function ShowAnime() {
                         }
                     </div>
 
-
-                    <AnimeRecomandation />
-
+                    {/* Recomandation and Reviews */}
+                    <div className="grid grid-cols-5 mt-5 text-fifth_color_theme">
+                        <FastReviews />
+                        <AnimeRecomandation />
+                    </div>
 
 
                 </div> : null}
