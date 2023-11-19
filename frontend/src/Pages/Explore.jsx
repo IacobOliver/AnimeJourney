@@ -20,5 +20,6 @@ export default function Explore(){
     </div>
     <Footer/>
 
+
     </div>)
     }

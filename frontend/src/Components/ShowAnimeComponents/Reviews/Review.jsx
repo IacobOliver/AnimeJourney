@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
+
+
 export default function Review({ userName, comment, image, date, likes }) {
     const [likeReview, setLikeReview] = useState(0);
-
+    let imageIndex = Math.floor(Math.random() * 10 + 1)
 
     let currentDate = new Date()
 
@@ -11,7 +13,7 @@ export default function Review({ userName, comment, image, date, likes }) {
 
             <div id="userInfoAndImage" className="flex items-center justify-between">
                 <div className="flex">
-                    <img className="h-14 w-14 rounded-full" src={`${image ? image : `/icons/${Math.floor(Math.random() * 10 + 1)}.jpg`} `} />
+                    <img className="h-14 w-14 rounded-full" src={`${image ? image : `/icons/${imageIndex}.jpg`} `} />
 
                     <div className="flex flex-col ml-2">
                         <p className="text-xl">{userName}</p>
@@ -25,7 +27,7 @@ export default function Review({ userName, comment, image, date, likes }) {
                         <i className={`fa-regular fa-heart ${likeReview % 2 !== 0 ? "text-red-500" : ""}`} />
                         {likeReview % 2 !== 0 ? <i className="fa-solid fa-heart text-red-500 absolute animate-jump-in" /> : <></>}
                     </div>
-                    <p>{likes ? likes : "200"}</p>
+                    <p>{likes ? likes : likeReview}</p>
                 </div>
             </div>
 

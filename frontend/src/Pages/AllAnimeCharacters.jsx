@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import CharacterCard from "../Components/ShowAnimeComponents/CharacterCard";
+import CharacterCard from "../Components/ShowAnimeComponents/Characters/CharacterCard";
 import Loading from "../Components/Loading";
 import {
     Popover,

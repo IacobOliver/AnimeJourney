@@ -4,12 +4,16 @@ import { Button } from "@material-tailwind/react";
 import { useAtom } from "jotai";
 import state from "../../Atom";
 import { useNavigate, useParams } from "react-router-dom";
+import BackgroundHolder from "../../BackgroundHolder";
+import WriteReview from "./WriteReview";
 
 export default function FastReviews() {
     const [refresh , setRefresh] = useAtom(state.refreshAnime);
     const [reviews, setReviewes] = useState(null);
 
     const [isLoggedIn, setIsLoggedIn] = useAtom(state.isLoggedIn);
+
+    const [writeComment, setWriteComment] = useState(false);
 
      const params = useParams()
      const navigate = useNavigate();
@@ -31,31 +35,9 @@ export default function FastReviews() {
 
 
     const writeAReviewEvent = () =>{
-       if(!isLoggedIn){
-         navigate("/login")
-       }else{
-        fetch(`http://localhost:8080/reviews`, {
-            method : "POST",
-            headers : {
-                "Content-Type" : "application/json",
-                Authorization : `Bearer ${localStorage.getItem("token")}`
-            },
-            body : JSON.stringify({
-                "jikanAnimeId" : 20,
-                "image" : "nmk",
-                "username" : "oli",
-                "message" : "masterpiece anime",
-                "publishDate" : "Sun Nov 19 2023",
-                "likes" : 2040
-            })
-        })
-        .then(res => res.json())
-        .then(data =>{
-            console.log(data);
-            setReviewes([...reviews, data])
-        })
-       }
+       !isLoggedIn ? navigate("/login") : setWriteComment(true);
     }
+
 
     return (
         <div className=" col-span-2 px-3 ">
@@ -80,6 +62,18 @@ export default function FastReviews() {
                 See more
                 <i className="fa-solid fa-arrow-right"></i>
             </Button>
+
+            {writeComment ? <BackgroundHolder 
+            lateralColumns={6}
+             closeEvent={() => setWriteComment(false)}
+              content={<WriteReview 
+                        closeEvent={() => setWriteComment(false)} 
+                        jikanAnimeId={params.id}/>}
+                        reviews={reviews}
+                        setReviewes={setReviewes}/>
+                    
+            : <></>
+            }  
 
         </div>
     )
