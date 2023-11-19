@@ -1,6 +1,7 @@
 package AnimeJourney.anime.service;
 
 
+import AnimeJourney.anime.model.FetchResponse;
 import AnimeJourney.anime.model.SavedUserAnimeDetails;
 import AnimeJourney.anime.repository.SavedUserAnimeDetailsRepository;
 import AnimeJourney.auth.model.User;

@@ -1,5 +1,6 @@
 package AnimeJourney.anime.service;
 
+import AnimeJourney.anime.model.FetchResponse;
 import AnimeJourney.anime.repository.TopAnimeRepository;
 import AnimeJourney.anime.model.TopAnime;
 import lombok.RequiredArgsConstructor;

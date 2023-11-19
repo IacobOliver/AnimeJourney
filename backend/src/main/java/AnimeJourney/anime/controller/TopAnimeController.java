@@ -1,7 +1,7 @@
 package AnimeJourney.anime.controller;
 
 import AnimeJourney.anime.model.TopAnime;
-import AnimeJourney.anime.service.FetchResponse;
+import AnimeJourney.anime.model.FetchResponse;
 import AnimeJourney.anime.service.TopAnimeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

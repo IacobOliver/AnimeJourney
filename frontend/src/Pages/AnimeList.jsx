@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import state from "../Components/Atom";
 import Loading from "../Components/Loading";
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { useNavigate } from "react-router-dom";
+import { Utils } from "../Components/Utils";
 
 
 export default function AnimeList() {
@@ -15,6 +17,8 @@ export default function AnimeList() {
 
     const QUANTITY = 10;
     const statusTitle = useRef(null)
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (user)
@@ -55,6 +59,7 @@ export default function AnimeList() {
 
 
     const AnimeUserCard = ({ animeDetails, index }) => {
+        let animeDetailsId = animeDetails.id;
         let color;
         switch (animeDetails.status) {
             case 0: color = "bg-gray-500"; break;
@@ -66,7 +71,7 @@ export default function AnimeList() {
 
         return (
             <div className="flex justify-between  w-full h-24 bg-black_second_theme text-fifth_color_theme my-3 rounded-lg">
-                <div className="h-full flex items-center">
+                <div onClick={() => navigate(`/anime/${animeDetails.animeId}`)} className="h-full flex items-center cursor-pointer">
                     <div className={` flex items-center justify h-full w-3 p-1 rounded-l-lg ${color}`}></div>
                     <p className="mx-3" > {index + 1}</p>
                     <img className="h-full w-[4.5rem]" src={animeDetails.savedAnimeFrontDetails.image} />
@@ -79,7 +84,7 @@ export default function AnimeList() {
 
                     <div className="flex">
                         {animeDetails.status != 2 ?
-                            <input className="w-10" defaultValue={animeDetails.watchedEpisodes} />
+                            <input id="watchedEpisodes" onBlur={(e) => Utils.onStatusChange({e, animeDetailsId})} className="w-10" defaultValue={animeDetails.watchedEpisodes} />
                             :
                             <p> {animeDetails.watchedEpisodes}</p>
                         }

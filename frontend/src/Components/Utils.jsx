@@ -25,22 +25,54 @@ export const Utils = {
     return result;
   },
 
-  logInWithToken: ({setUser, setIsLoggedIn}) =>{
-    
+  logInWithToken: ({ setUser, setIsLoggedIn }) => {
+
     fetch("http://localhost:8080/users/getUserWithToken", {
-      method : "GET",
-      headers : {
-        "Content-Type" : "application/json",
-        Authorization : `Bearer ${localStorage.getItem("token")}`
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
       }
     })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      setUser(data);
-      setIsLoggedIn(true)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setUser(data);
+        setIsLoggedIn(true)
+      })
+      .catch(err => console.error(err))
+  },
+
+//update details about userAnimeDetails
+  onStatusChange: ({e , animeDetailsId, setStatus, setScore, setEffect}) => {
+    console.log("in update anime")
+
+    if (e.target.id == "myScore") {
+      console.log("in my score")
+      setEffect(true)
+      setScore(e.target.value)
+    }
+
+    if (e.target.id == "status") {
+      console.log(e.target.value + " status")
+      setStatus(e.target.value)
+    }
+
+    fetch(`http://localhost:8080/savedAnimeUserDetails/editAnimeStatus/${animeDetailsId}/${e.target.id}/${e.target.value}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      },
     })
-    .catch(err => console.error(err))
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(err => {
+        console.error(err);
+      })
+
   }
 }
 
@@ -49,7 +81,7 @@ const makeRed = (e) => {
   e.current.parentElement.parentElement.lastChild.classList.add("bg-red-500")
 }
 
-const makeGreen = (e) =>{
+const makeGreen = (e) => {
   e.current.parentElement.parentElement.lastChild.classList.remove("bg-red-500")
   e.current.parentElement.parentElement.lastChild.classList.add("bg-green-500")
 }
@@ -95,7 +127,7 @@ export const checking = {
     }
   },
 
-  invalidField : (e) =>{
+  invalidField: (e) => {
     makeRed(e)
   }
 
