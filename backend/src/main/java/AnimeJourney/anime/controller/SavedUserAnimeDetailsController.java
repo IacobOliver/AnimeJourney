@@ -2,7 +2,7 @@ package AnimeJourney.anime.controller;
 
 
 import AnimeJourney.anime.model.SavedUserAnimeDetails;
-import AnimeJourney.anime.service.FetchResponse;
+import AnimeJourney.anime.model.FetchResponse;
 import AnimeJourney.anime.service.SavedUserAnimeDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

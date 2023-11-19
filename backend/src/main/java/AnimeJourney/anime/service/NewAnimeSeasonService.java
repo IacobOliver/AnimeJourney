@@ -1,5 +1,6 @@
 package AnimeJourney.anime.service;
 
+import AnimeJourney.anime.model.FetchResponse;
 import AnimeJourney.anime.model.PaginationResponse;
 import AnimeJourney.anime.repository.NewAnimeSeasonRepository;
 import AnimeJourney.anime.model.NewAnimeSeason;

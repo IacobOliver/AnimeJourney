@@ -1,6 +1,5 @@
 package AnimeJourney.auth.controller;
 
-import AnimeJourney.anime.service.FetchResponse;
 import AnimeJourney.auth.model.AuthenticationRequest;
 import AnimeJourney.auth.model.AuthenticationResponse;
 import AnimeJourney.auth.model.RegisterRequest;
