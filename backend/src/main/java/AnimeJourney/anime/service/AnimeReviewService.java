@@ -33,4 +33,11 @@ public class AnimeReviewService {
         animeReviewRepository.deleteById(reviewId);
         return FetchResponse.builder().response("deleted").build();
     }
+
+    public AnimeReview updateReview(long jikanAnimeId, String contentReview, String currentDate) {
+        AnimeReview animeReview = animeReviewRepository.findByJikanAnimeId(jikanAnimeId).orElse(null);
+        animeReview.setMessage(contentReview);
+        animeReview.setPublishDate(currentDate);
+        return animeReviewRepository.save(animeReview);
+    }
 }

@@ -4,13 +4,13 @@ import {
     MenuHandler,
     MenuList,
     MenuItem,
-    Button,
 } from "@material-tailwind/react";
 
 
-export default function Review({ review, userName, loggedUserID }) {
+export default function Review({ review, userName, loggedUserID, setWriteComment, setReviewContent }) {
     const [likeReview, setLikeReview] = useState(0);
     const reviewRef = useRef(null)
+    const textReviewRef = useRef(null)
 
     let imageIndex = Math.floor(Math.random() * 10 + 1)
     let currentDate = new Date()
@@ -29,6 +29,11 @@ export default function Review({ review, userName, loggedUserID }) {
             .then(data => {
                 console.log(data);
             }).catch(err => console.log(err))
+    }
+
+    const onEditEvent = () =>{
+        setWriteComment(true)
+        setReviewContent(textReviewRef.current.textContent)
     }
 
     return (
@@ -51,7 +56,7 @@ export default function Review({ review, userName, loggedUserID }) {
                                 </MenuHandler>
                                 <MenuList className=" bg-black_second_theme bg-opacity-40 backdrop-blur-md border-0 text-fifth_color_theme">
                                     <MenuItem onClick={deleteReview}><i className="fa-solid fa-trash-can" /> Delete</MenuItem>
-                                    <MenuItem><i className="fa-solid fa-pen-to-square" /> Edit</MenuItem>
+                                    <MenuItem onClick={onEditEvent}><i className="fa-solid fa-pen-to-square" /> Edit</MenuItem>
                                 </MenuList>
                             </Menu>
                         </div>
@@ -67,7 +72,7 @@ export default function Review({ review, userName, loggedUserID }) {
                 </div>
             </div>
 
-            <p className="py-3 px-3">
+            <p ref={textReviewRef} className="py-3 px-3">
                 {review ? review.message : ""}
             </p>
 

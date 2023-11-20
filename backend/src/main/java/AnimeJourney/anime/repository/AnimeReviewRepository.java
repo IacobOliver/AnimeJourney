@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface AnimeReviewRepository extends JpaRepository<AnimeReview, Long> {
 
     Optional<List<AnimeReview>> findAllByJikanAnimeId(long animeId);
+    Optional<AnimeReview> findByJikanAnimeId(long animeId);
+
 }
