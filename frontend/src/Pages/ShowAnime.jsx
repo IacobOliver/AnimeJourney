@@ -6,7 +6,7 @@ import state from "../Components/Atom";
 import TrailerComponent from "../Components/ShowAnimeComponents/TrailerComponent"
 import AnimeRecomandation from "../Components/ShowAnimeComponents/AnimeRecomandation";
 import FastDetails from "../Components/ShowAnimeComponents/FastDetails";
-import Characters from "../Components/ShowAnimeComponents/SomeCharacters";
+import SomeCharacters from "../Components/ShowAnimeComponents/Characters/SomeCharacters";
 import { Spinner } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
@@ -121,7 +121,7 @@ export default function ShowAnime() {
                             </Button>
                         </div>
                         {characters ?
-                            <Characters characters={characters} />
+                            <SomeCharacters characters={characters} />
                             :
                             <Spinner />
                         }
