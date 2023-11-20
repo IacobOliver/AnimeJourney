@@ -1,6 +1,7 @@
 package AnimeJourney.auth.model;
 
 
+import AnimeJourney.anime.model.AnimeReview;
 import AnimeJourney.anime.model.SavedUserAnimeDetails;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
@@ -38,9 +39,13 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @JsonBackReference
+    @JsonBackReference(value = "animeList")
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<SavedUserAnimeDetails> animeList;
+
+    @JsonBackReference(value = "animeReviews")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AnimeReview> animeReviews;
 
 
     @Override

@@ -1,18 +1,10 @@
 import React from "react";
 
-export default function BackgroundHolder({ lateralColumns, closeEvent, content }) {
-    let middleColumn = 12 - lateralColumns
+export default function BackgroundHolder({ closeEvent, content }) {
 
     return (
-        <div className={`grid grid-cols-12 bg-[rgba(0,0,0,0.7)] backdrop-blur-sm w-screen h-screen fixed left-0 top-0 z-50`}>
-            <div onClick={closeEvent} className={`  col-span-${lateralColumns / 2}`}></div>
-
-            <div className={`col-span-${middleColumn} flex items-center justify-center`}>
-               {content}
-            </div>
-
-            <div onClick={closeEvent} className={`  col-span-${lateralColumns / 2}`}></div>
-
+        <div id="holder" onClick={(e) => e.target.id == "holder" ? closeEvent() : null} className="w-screen h-screen top-0 left-0 bg-[rgba(0,0,0,0.8)] backdrop-blur-sm fixed z-10 flex items-center justify-center">
+            {content}
         </div>
     )
 }

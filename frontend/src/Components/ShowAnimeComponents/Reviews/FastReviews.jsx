@@ -12,6 +12,7 @@ export default function FastReviews() {
     const [reviews, setReviewes] = useState(null);
 
     const [isLoggedIn, setIsLoggedIn] = useAtom(state.isLoggedIn);
+    const [user, setUser] = useAtom(state.user)
 
     const [writeComment, setWriteComment] = useState(false);
 
@@ -38,6 +39,33 @@ export default function FastReviews() {
        !isLoggedIn ? navigate("/login") : setWriteComment(true);
     }
 
+    const handlePost = (messageRef) => {
+        if (messageRef.current.value.length > 0) {
+            let body = {
+                "jikanAnimeId": params.id,
+                "user" :{id: user.id},
+                "image": "nmk",
+                "message": messageRef.current.value,
+                "publishDate": new Date().toDateString(),
+                "likes": 0
+            }
+
+            fetch(`http://localhost:8080/reviews`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                },
+                body: JSON.stringify(body)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                     setReviewes([...reviews, data])
+                })
+        }
+    }
+
 
     return (
         <div className=" col-span-2 px-3 ">
@@ -49,7 +77,7 @@ export default function FastReviews() {
             </Button>
             </div>
 
-            {reviews && reviews.map((review, index) => <Review key={index} image={review.image} userName={review.username} comment={review.message} date={review.publishDate} likes={review.likes}/>)}
+            {reviews && reviews.map((review, index) => <Review key={index} image={review.image} userName={review.user.memberName} comment={review.message} date={review.publishDate} likes={review.likes}/>)}
 
             <Review userName={"olii"} comment="This is the bag of my dreams. I took it on my last vacation and was able to fit an absurd amount of snacks for the many long and hungry flights." />
             <Review userName={"Andreiutu"} comment="Before getting the Ruck Snack, I struggled my whole life with pulverized snacks, endless crumbs, and other heartbreaking snack catastrophes. Now, I can stow my snacks with confidence and style!" />
@@ -63,15 +91,12 @@ export default function FastReviews() {
                 <i className="fa-solid fa-arrow-right"></i>
             </Button>
 
-            {writeComment ? <BackgroundHolder 
-            lateralColumns={6}
+            {writeComment && reviews !== undefined ? <BackgroundHolder 
              closeEvent={() => setWriteComment(false)}
               content={<WriteReview 
                         closeEvent={() => setWriteComment(false)} 
-                        jikanAnimeId={params.id}/>}
-                        reviews={reviews}
-                        setReviewes={setReviewes}/>
-                    
+                        handlePost={handlePost}/>}
+                        />
             : <></>
             }  
 

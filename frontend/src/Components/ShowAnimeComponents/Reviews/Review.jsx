@@ -2,14 +2,14 @@ import React, { useState } from "react";
 
 
 
-export default function Review({ userName, comment, image, date, likes }) {
+export default function Review({ userName, userId, comment, image, date, likes }) {
     const [likeReview, setLikeReview] = useState(0);
     let imageIndex = Math.floor(Math.random() * 10 + 1)
 
     let currentDate = new Date()
 
     return (
-        <div className="w-full my-5 font-semibold">
+        <div id={userId} className="w-full my-5 font-semibold">
 
             <div id="userInfoAndImage" className="flex items-center justify-between">
                 <div className="flex">
@@ -17,7 +17,6 @@ export default function Review({ userName, comment, image, date, likes }) {
 
                     <div className="flex flex-col ml-2">
                         <p className="text-xl">{userName}</p>
-                        {/* <p className="text-sm text-gray-500">{currentDate.toDateString()}</p> */}
                         <p className="text-sm text-gray-500">{date? date : currentDate.toDateString()}</p>
                     </div>
                 </div>
