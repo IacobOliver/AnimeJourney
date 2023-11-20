@@ -20,11 +20,10 @@ export default function FastReviews() {
      const navigate = useNavigate();
 
     useEffect(() =>{
-        fetch(`http://localhost:8080/reviews?animeId=${params.id}`, {
+        fetch(`http://localhost:8080/reviews/get?animeId=${params.id}`, {
             method : "GET",
             headers : {
                 "Content-Type" : "application/json",
-                Authorization : `Bearer ${localStorage.getItem("token")}`
             }
         })
         .then(res => res.json())
@@ -77,7 +76,7 @@ export default function FastReviews() {
             </Button>
             </div>
 
-            {reviews && reviews.map((review, index) => <Review key={index} review={review} loggedUserID={user.id}/>)}
+            {reviews && reviews.map((review, index) => <Review key={index} review={review} loggedUserID={user? user.id : ""}/>)}
 
 
 

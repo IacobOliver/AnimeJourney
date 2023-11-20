@@ -19,7 +19,7 @@ public class AnimeReviewController {
         this.animeReviewService = animeReviewService;
     }
 
-    @GetMapping()
+    @GetMapping("/get")
     public ResponseEntity<List<AnimeReview>> getAnimeReviews(@RequestParam (name = "animeId") long animeId){
         return ResponseEntity.ok(animeReviewService.getAnimeReviews(animeId));
     }

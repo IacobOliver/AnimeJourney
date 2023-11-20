@@ -29,7 +29,8 @@ public class SecurityConfig {
                         "users/auth/**",
                         "newAnimeSeasons/**",
                         "topAnime/getRandomAnime/**",
-                                "topAnime/addAnime"
+                                "topAnime/addAnime",
+                        "/reviews/get"
                         )
                         .permitAll()
                         .anyRequest()
