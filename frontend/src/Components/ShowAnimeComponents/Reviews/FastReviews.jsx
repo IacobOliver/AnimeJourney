@@ -44,7 +44,7 @@ export default function FastReviews() {
             let body = {
                 "jikanAnimeId": params.id,
                 "user" :{id: user.id},
-                "image": "nmk",
+                // "image": "nmk",
                 "message": messageRef.current.value,
                 "publishDate": new Date().toDateString(),
                 "likes": 0
@@ -77,12 +77,8 @@ export default function FastReviews() {
             </Button>
             </div>
 
-            {reviews && reviews.map((review, index) => <Review key={index} reviewId={review.id} image={review.image} userName={review.user.memberName} comment={review.message} date={review.publishDate} likes={review.likes}/>)}
+            {reviews && reviews.map((review, index) => <Review key={index} review={review} loggedUserID={user.id}/>)}
 
-            <Review userName={"olii"} comment="This is the bag of my dreams. I took it on my last vacation and was able to fit an absurd amount of snacks for the many long and hungry flights." />
-            <Review userName={"Andreiutu"} comment="Before getting the Ruck Snack, I struggled my whole life with pulverized snacks, endless crumbs, and other heartbreaking snack catastrophes. Now, I can stow my snacks with confidence and style!" />
-            <Review userName={"luffy "} comment="I love how versatile this bag is. It can hold anything ranging from cookies that come in trays to cookies that come in tins." />
-            <Review userName={"oljojoii"} comment="I love how versatile this bag is. It can hold anything ranging from cookies that come in trays to cookies that come in tins." />
 
 
 
