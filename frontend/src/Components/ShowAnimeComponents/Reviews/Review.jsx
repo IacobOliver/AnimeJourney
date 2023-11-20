@@ -1,15 +1,38 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import {
+    Menu,
+    MenuHandler,
+    MenuList,
+    MenuItem,
+    Button,
+} from "@material-tailwind/react";
 
 
-
-export default function Review({ userName, userId, comment, image, date, likes }) {
+export default function Review({reviewId, userName, userId, comment, image, date, likes }) {
     const [likeReview, setLikeReview] = useState(0);
-    let imageIndex = Math.floor(Math.random() * 10 + 1)
+    const reviewRef = useRef(null)
 
+    let imageIndex = Math.floor(Math.random() * 10 + 1)
     let currentDate = new Date()
 
+
+    const deleteReview = () =>{
+        reviewRef.current.remove()
+        fetch(`http://localhost:8080/reviews?reviewId=${reviewId}`, {
+            method : "DELETE",
+            headers : {
+                "Content-Type" : "application/json",
+                Authorization : `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+        .then(res => res.json())
+        .then(data =>{
+            console.log(data);
+        }).catch(err => console.log(err))
+    }
+
     return (
-        <div id={userId} className="w-full my-5 font-semibold">
+        <div ref={reviewRef} id={userId} className="w-full my-5 font-semibold">
 
             <div id="userInfoAndImage" className="flex items-center justify-between">
                 <div className="flex">
@@ -17,7 +40,19 @@ export default function Review({ userName, userId, comment, image, date, likes }
 
                     <div className="flex flex-col ml-2">
                         <p className="text-xl">{userName}</p>
-                        <p className="text-sm text-gray-500">{date? date : currentDate.toDateString()}</p>
+                        <p className="text-sm text-gray-500">{date ? date : currentDate.toDateString()}</p>
+                    </div>
+
+                    <div className="flex items-center ml-3 cursor-pointer">
+                        <Menu>
+                            <MenuHandler>
+                            <i class="fa-solid fa-pen"></i>
+                            </MenuHandler>
+                            <MenuList className=" bg-black_second_theme bg-opacity-40 backdrop-blur-md border-0 text-fifth_color_theme">
+                                <MenuItem id={reviewId} onClick={deleteReview}><i class="fa-solid fa-trash-can"/> Delete</MenuItem>
+                                <MenuItem><i class="fa-solid fa-pen-to-square"/> Edit</MenuItem>
+                            </MenuList>
+                        </Menu>
                     </div>
                 </div>
 

@@ -1,6 +1,7 @@
 package AnimeJourney.anime.controller;
 
 import AnimeJourney.anime.model.AnimeReview;
+import AnimeJourney.anime.model.FetchResponse;
 import AnimeJourney.anime.service.AnimeReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,5 +28,10 @@ public class AnimeReviewController {
     public ResponseEntity<AnimeReview> postAnimeReview(@RequestBody AnimeReview animeReview){
         System.out.println(animeReview.toString());
         return ResponseEntity.ok(animeReviewService.postAnimeReview(animeReview));
+    }
+
+    @DeleteMapping()
+    public ResponseEntity<FetchResponse> deleteAnimeReview(@RequestParam (name = "reviewId") long reviewId){
+        return ResponseEntity.ok(animeReviewService.deleteReview(reviewId));
     }
 }

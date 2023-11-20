@@ -1,6 +1,7 @@
 package AnimeJourney.anime.service;
 
 import AnimeJourney.anime.model.AnimeReview;
+import AnimeJourney.anime.model.FetchResponse;
 import AnimeJourney.anime.repository.AnimeReviewRepository;
 import AnimeJourney.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,5 +27,10 @@ public class AnimeReviewService {
     public AnimeReview postAnimeReview(AnimeReview animeReview) {
         animeReview.setUser(userRepository.findById(animeReview.getUser().getId()).orElse(null));
         return animeReviewRepository.save(animeReview);
+    }
+
+    public FetchResponse deleteReview(long reviewId) {
+        animeReviewRepository.deleteById(reviewId);
+        return FetchResponse.builder().response("deleted").build();
     }
 }
