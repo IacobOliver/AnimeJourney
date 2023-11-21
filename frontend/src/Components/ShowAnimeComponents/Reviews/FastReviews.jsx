@@ -14,8 +14,9 @@ export default function FastReviews() {
     const [isLoggedIn, setIsLoggedIn] = useAtom(state.isLoggedIn);
     const [user, setUser] = useAtom(state.user)
 
-    const [writeComment, setWriteComment] = useState(false);
+    const [writeReview, setwriteReview] = useState(false);
     const [reviewContent, setReviewContent] = useState("")
+    const [editReviewId, setEditReviewId] = useState(null);
 
     const params = useParams()
     const navigate = useNavigate();
@@ -36,7 +37,7 @@ export default function FastReviews() {
 
 
     const writeAReviewEvent = () => {
-        !isLoggedIn ? navigate("/login") : (setWriteComment(true), setReviewContent(""));
+        !isLoggedIn ? navigate("/login") : (setwriteReview(true), setReviewContent(""));
     }
 
     const handlePost = (messageRef) => {
@@ -66,8 +67,9 @@ export default function FastReviews() {
         }
     }
 
+
     const handleUpdate = (messageRef) => {
-        fetch(`http://localhost:8080/reviews?jikanAnimeId=${params.id}&contentReview=${messageRef.current.value}&currentDate=${new Date().toDateString()}`, {
+        fetch(`http://localhost:8080/reviews?reviewId=${editReviewId}&contentReview=${messageRef.current.value}&currentDate=${new Date().toDateString()}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -77,6 +79,7 @@ export default function FastReviews() {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
+                setRefresh(refresh + 1)
             })
     }
 
@@ -91,9 +94,7 @@ export default function FastReviews() {
                 </Button>
             </div>
 
-            {reviews && reviews.map((review, index) => <Review key={index} review={review} loggedUserID={user ? user.id : ""} setReviewContent={setReviewContent} setWriteComment={setWriteComment} />)}
-
-
+            {reviews && reviews.map((review, index) => <Review key={index} review={review} loggedUserID={user ? user.id : ""} setReviewContent={setReviewContent} setwriteReview={setwriteReview} setEditReviewId={setEditReviewId} />)}
 
 
             <Button variant="text" className="flex items-center gap-2 text-black_first_theme bg-forth_color_theme hover:bg-third_color_theme hover:text-fifth_color_theme ml-3 duration-300 font-fantasy font-normal tracking-wide text-sm sm:text-lg py-2 px-3">
@@ -101,10 +102,10 @@ export default function FastReviews() {
                 <i className="fa-solid fa-arrow-right"></i>
             </Button>
 
-            {writeComment && reviews !== undefined ? <BackgroundHolder
-                closeEvent={() => setWriteComment(false)}
+            {writeReview && reviews !== undefined ? <BackgroundHolder
+                closeEvent={() => setwriteReview(false)}
                 content={<WriteReview
-                    closeEvent={() => setWriteComment(false)}
+                    closeEvent={() => setwriteReview(false)}
                     handlePost={handlePost}
                     handleUpdate={handleUpdate}
                     reviewContent={reviewContent}

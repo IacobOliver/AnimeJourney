@@ -7,7 +7,7 @@ import {
 } from "@material-tailwind/react";
 
 
-export default function Review({ review, userName, loggedUserID, setWriteComment, setReviewContent }) {
+export default function Review({ review, userName, loggedUserID, setwriteReview, setReviewContent, setEditReviewId }) {
     const [likeReview, setLikeReview] = useState(0);
     const reviewRef = useRef(null)
     const textReviewRef = useRef(null)
@@ -32,12 +32,13 @@ export default function Review({ review, userName, loggedUserID, setWriteComment
     }
 
     const onEditEvent = () =>{
-        setWriteComment(true)
+        setwriteReview(true)
         setReviewContent(textReviewRef.current.textContent)
+        setEditReviewId(review.id)
     }
 
     return (
-        <div ref={reviewRef} className="w-full my-5 font-semibold">
+        <div id={review ? review.id : ""} ref={reviewRef} className="w-full my-5 font-semibold">
 
             <div id="userInfoAndImage" className="flex items-center justify-between">
                 <div className="flex">

@@ -36,10 +36,10 @@ public class AnimeReviewController {
     }
 
     @PatchMapping()
-        public ResponseEntity<AnimeReview> updateReview(@RequestParam (name = "jikanAnimeId") long jikanAnimeId,
+        public ResponseEntity<AnimeReview> updateReview(@RequestParam (name = "reviewId") long reviewId,
                                                         @RequestParam (name = "contentReview") String contentReview,
                                                         @RequestParam (name = "currentDate") String currentDate){
-           return ResponseEntity.ok(animeReviewService.updateReview(jikanAnimeId ,contentReview, currentDate));
+           return ResponseEntity.ok(animeReviewService.updateReview(reviewId ,contentReview, currentDate));
         }
     }
 

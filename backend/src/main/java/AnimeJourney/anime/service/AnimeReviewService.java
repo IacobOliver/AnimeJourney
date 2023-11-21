@@ -34,8 +34,8 @@ public class AnimeReviewService {
         return FetchResponse.builder().response("deleted").build();
     }
 
-    public AnimeReview updateReview(long jikanAnimeId, String contentReview, String currentDate) {
-        AnimeReview animeReview = animeReviewRepository.findByJikanAnimeId(jikanAnimeId).orElse(null);
+    public AnimeReview updateReview(long reviewId, String contentReview, String currentDate) {
+        AnimeReview animeReview = animeReviewRepository.findById(reviewId).orElse(null);
         animeReview.setMessage(contentReview);
         animeReview.setPublishDate(currentDate);
         return animeReviewRepository.save(animeReview);
